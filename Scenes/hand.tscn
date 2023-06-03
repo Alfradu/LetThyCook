@@ -1,7 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://b46fycpu36fr4"]
+[gd_scene load_steps=4 format=3 uid="uid://b46fycpu36fr4"]
 
 [ext_resource type="Script" path="res://Scripts/hand.gd" id="1_qfjvt"]
 [ext_resource type="Texture2D" uid="uid://dhtxs2fxpg4c5" path="res://Assets/hand/hand-open.png" id="2_ctyyd"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_k4y0s"]
 
 [node name="hand" type="Node2D"]
 script = ExtResource("1_qfjvt")
@@ -10,3 +12,9 @@ script = ExtResource("1_qfjvt")
 position = Vector2(-1.00024, 229)
 scale = Vector2(1.7, 1.7)
 texture = ExtResource("2_ctyyd")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+scale = Vector2(6.522, 6.522)
+shape = SubResource("CircleShape2D_k4y0s")
