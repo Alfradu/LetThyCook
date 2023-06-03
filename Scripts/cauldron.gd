@@ -13,7 +13,10 @@ func _process(delta):
 
 
 func _on_cauldron_area_area_entered(area):
-	ladle.pourable = true
+	print(area.name)
+	if (area.name == "SpoonPart"):
+		ladle.pourable = true
 
 func _on_cauldron_area_area_exited(area):
-	ladle.pourable = false
+	if (area.name == "SpoonPart"):
+		ladle.pourable = false

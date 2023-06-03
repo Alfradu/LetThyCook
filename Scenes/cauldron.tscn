@@ -50,9 +50,13 @@ position = Vector2(938, 532)
 script = ExtResource("1_vxttm")
 
 [node name="cauldronArea" type="Area2D" parent="."]
+collision_layer = 3
+collision_mask = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="cauldronArea"]
 visible = false
+light_mask = 3
+visibility_layer = 3
 scale = Vector2(39.336, 20.811)
 shape = SubResource("CircleShape2D_6tvo5")
 metadata/_edit_lock_ = true
