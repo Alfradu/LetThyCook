@@ -4,6 +4,8 @@
 [ext_resource type="Texture2D" uid="uid://csc8klbut3kvc" path="res://Assets/Soup/pixil-layer-2.png" id="2_ae612"]
 [ext_resource type="Texture2D" uid="uid://d2obvgln851sq" path="res://Assets/Soup/pixil-layer-5.png" id="3_7ndse"]
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_6tvo5"]
+
 [sub_resource type="Animation" id="Animation_mosuy"]
 length = 0.001
 tracks/0/type = "value"
@@ -42,16 +44,21 @@ _data = {
 "speen": SubResource("Animation_p5nk5")
 }
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_6tvo5"]
-
-[node name="Cauldron" type="StaticBody2D"]
+[node name="cauldron" type="Node2D"]
 position = Vector2(938, 532)
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+visible = false
+scale = Vector2(39.336, 20.811)
+shape = SubResource("CircleShape2D_6tvo5")
+metadata/_edit_lock_ = true
 
 [node name="cauldron back" type="Sprite2D" parent="."]
 position = Vector2(-9, 81)
 scale = Vector2(4.02958, 4.02958)
 texture = ExtResource("1_drmva")
-metadata/_edit_lock_ = true
 
 [node name="soup" type="Sprite2D" parent="."]
 position = Vector2(6, 296)
@@ -68,9 +75,3 @@ libraries = {
 position = Vector2(-7, 340)
 scale = Vector2(4.03, 4.03)
 texture = ExtResource("3_7ndse")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
-scale = Vector2(39.336, 20.811)
-shape = SubResource("CircleShape2D_6tvo5")
-metadata/_edit_lock_ = true
