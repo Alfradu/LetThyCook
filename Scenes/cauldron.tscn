@@ -49,9 +49,9 @@ _data = {
 position = Vector2(938, 532)
 script = ExtResource("1_vxttm")
 
-[node name="Area2D" type="Area2D" parent="."]
+[node name="cauldronArea" type="Area2D" parent="."]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="cauldronArea"]
 visible = false
 scale = Vector2(39.336, 20.811)
 shape = SubResource("CircleShape2D_6tvo5")
