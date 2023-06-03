@@ -1,0 +1,80 @@
+[gd_scene load_steps=5 format=3 uid="uid://cs655rh3twb2k"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_yw02l"]
+load_path = "res://.godot/imported/plums.png-c82e38093368b17bda3a1e667bee8075.ctex"
+
+[sub_resource type="Animation" id="Animation_ny585"]
+resource_name = "splash"
+length = 0.25
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:texture")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.25),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [SubResource("CompressedTexture2D_yw02l"), null]
+}
+
+[sub_resource type="Animation" id="Animation_73eh4"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:texture")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [SubResource("CompressedTexture2D_yw02l")]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_a1pgf"]
+_data = {
+"RESET": SubResource("Animation_73eh4"),
+"splash": SubResource("Animation_ny585")
+}
+
+[node name="plums" type="Node2D"]
+scale = Vector2(2, 2)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+self_modulate = Color(0.564706, 0.92549, 0.788235, 1)
+texture = SubResource("CompressedTexture2D_yw02l")
+hframes = 5
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+root_node = NodePath("../Sprite2D")
+libraries = {
+"": SubResource("AnimationLibrary_a1pgf")
+}

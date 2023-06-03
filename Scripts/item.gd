@@ -9,6 +9,7 @@ var sprite_carrot1 = load("res://Assets/Soup/Carrot/carrot1.png")
 var sprite_carrot2 = load("res://Assets/Soup/Carrot/carrot2.png")
 var sprite_carrot3 = load("res://Assets/Soup/Carrot/carrot3.png")
 
+
 @export var type = ItemType.NONE
 @onready var sprite = $Sprite2D
 @onready var hand = get_node("../hand")
@@ -54,3 +55,6 @@ func _souped():
 	self.visible = false
 	queue_free();
 
+func _plums():
+	$plums.visible = true
+	$plums/AnimationPlayer.play("splash")
