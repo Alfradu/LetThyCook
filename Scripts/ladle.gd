@@ -40,6 +40,7 @@ func _input(event):
 		if event.is_pressed() && hand.pickedItem == self: 
 			dragging = true;
 		elif hand.state == Globals.handState.OPEN:
+			print(pourable, state)
 			if pourable && state == ActionType.FULL:
 				state = ActionType.POURING
 			dragging = false;

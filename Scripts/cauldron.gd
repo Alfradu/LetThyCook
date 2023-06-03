@@ -12,8 +12,8 @@ func _process(delta):
 	pass
 
 
-func _on_area_2d_area_entered(area):
+func _on_cauldron_area_area_entered(area):
 	ladle.pourable = true
 
-func _on_area_2d_area_exited(area):
+func _on_cauldron_area_area_exited(area):
 	ladle.pourable = false
