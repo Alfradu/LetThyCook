@@ -1,0 +1,23 @@
+[gd_scene load_steps=3 format=3 uid="uid://64q1xapxe1i8"]
+
+[ext_resource type="PackedScene" uid="uid://b46fycpu36fr4" path="res://Scenes/hand.tscn" id="1_ib6nh"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_6tvo5"]
+
+[node name="Main" type="Node2D"]
+
+[node name="background" type="ColorRect" parent="."]
+offset_right = 1920.0
+offset_bottom = 1080.0
+color = Color(0.184314, 0.145098, 0.0784314, 1)
+
+[node name="Cauldron" type="StaticBody2D" parent="."]
+position = Vector2(938, 532)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Cauldron"]
+scale = Vector2(35.496, 28.564)
+shape = SubResource("CircleShape2D_6tvo5")
+metadata/_edit_lock_ = true
+
+[node name="hand" parent="." instance=ExtResource("1_ib6nh")]
+position = Vector2(3, 1)
