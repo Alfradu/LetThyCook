@@ -11,8 +11,8 @@ var sprite_carrot3 = load("res://Assets/Soup/Carrot/carrot3.png")
 
 @export var type =  ItemType.NONE
 @onready var sprite = $Sprite2D
+@onready var hand = get_node("../hand")
 
-var hovering = false
 var dragging = false
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -30,30 +30,12 @@ func _process(delta):
 		var mousepos = get_viewport().get_mouse_position()
 		self.position = Vector2(mousepos.x, mousepos.y)
 
-"""
 func _input(event):
 	if event is InputEventMouseButton && event.button_index == MOUSE_BUTTON_LEFT:
-		print(event.as_text())
-		if event.is_pressed() && hovering: 
+		if event.is_pressed() && hand.pickedItem == self: 
 			dragging = true;
-		elif hovering:
+		elif hand.state == Globals.handState.OPEN:
 			dragging = false; 
-"""
-func _input_event(viewport, event, shape_idx):
-	print(event.as_text())
-	if event is InputEventMouseButton && event.button_index == MOUSE_BUTTON_LEFT:
-		if event.is_pressed(): 
-			dragging = true;
-		else:
-			dragging = false;
 
-func _on_static_body_2d_mouse_entered():
-	print("TEST")
-	hovering = true
-
-func _on_static_body_2d_mouse_exited():
-	hovering = false
-
-
-func _on_area_2d_mouse_entered():
-	pass # Replace with function body.
+func _on_area_2d_area_entered(area):
+	hand.pickedItem = self
