@@ -1,9 +1,9 @@
 extends Node2D
 
 @onready var sprite = $Sprite2D
+
 var sprite_open = load("res://Assets/hand/hand-open.png")
 var sprite_closed = load("res://Assets/hand/hand-closed.png")
-
 
 var state = Globals.handState.OPEN
 var pickedItem

@@ -1,6 +1,7 @@
-[gd_scene load_steps=8 format=3 uid="uid://dso8a14l42uq6"]
+[gd_scene load_steps=9 format=3 uid="uid://dso8a14l42uq6"]
 
 [ext_resource type="Texture2D" uid="uid://dw7slyh67nwrk" path="res://Assets/Soup/pixil-layer-0.png" id="1_drmva"]
+[ext_resource type="Script" path="res://Scripts/cauldron.gd" id="1_vxttm"]
 [ext_resource type="Texture2D" uid="uid://csc8klbut3kvc" path="res://Assets/Soup/pixil-layer-2.png" id="2_ae612"]
 [ext_resource type="Texture2D" uid="uid://d2obvgln851sq" path="res://Assets/Soup/pixil-layer-5.png" id="3_7ndse"]
 
@@ -46,6 +47,7 @@ _data = {
 
 [node name="cauldron" type="Node2D"]
 position = Vector2(938, 532)
+script = ExtResource("1_vxttm")
 
 [node name="Area2D" type="Area2D" parent="."]
 
@@ -75,3 +77,6 @@ libraries = {
 position = Vector2(-7, 340)
 scale = Vector2(4.03, 4.03)
 texture = ExtResource("3_7ndse")
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
+[connection signal="area_exited" from="Area2D" to="." method="_on_area_2d_area_exited"]

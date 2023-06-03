@@ -1,0 +1,25 @@
+[gd_scene load_steps=4 format=3 uid="uid://boknxxs4unv80"]
+
+[ext_resource type="Script" path="res://Scripts/barrel.gd" id="1_halo5"]
+[ext_resource type="Texture2D" uid="uid://b6mxnixw00qa2" path="res://Assets/Barrel/barrel.png" id="1_y00vk"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_8l5m2"]
+radius = 32.0156
+
+[node name="barrel" type="Node2D"]
+script = ExtResource("1_halo5")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_y00vk")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0, -30)
+scale = Vector2(1, 0.3)
+shape = SubResource("CircleShape2D_8l5m2")
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
+[connection signal="area_exited" from="Area2D" to="." method="_on_area_2d_area_exited"]

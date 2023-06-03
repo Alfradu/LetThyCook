@@ -1,8 +1,10 @@
-[gd_scene load_steps=4 format=3 uid="uid://64q1xapxe1i8"]
+[gd_scene load_steps=6 format=3 uid="uid://64q1xapxe1i8"]
 
 [ext_resource type="PackedScene" uid="uid://b46fycpu36fr4" path="res://Scenes/hand.tscn" id="1_ib6nh"]
 [ext_resource type="PackedScene" uid="uid://dso8a14l42uq6" path="res://Scenes/cauldron.tscn" id="1_w0w7g"]
 [ext_resource type="PackedScene" uid="uid://bx8cooddov1t0" path="res://Scenes/item.tscn" id="3_1s3l6"]
+[ext_resource type="PackedScene" uid="uid://boknxxs4unv80" path="res://Scenes/barrel.tscn" id="4_184di"]
+[ext_resource type="PackedScene" uid="uid://bvgqynkydm4sp" path="res://Scenes/ladle.tscn" id="6_ypd41"]
 
 [node name="Main" type="Node2D"]
 
@@ -24,6 +26,14 @@ type = 2
 [node name="item3" parent="." instance=ExtResource("3_1s3l6")]
 position = Vector2(289, 824)
 type = 3
+
+[node name="barrel" parent="." instance=ExtResource("4_184di")]
+position = Vector2(1756, 896)
+scale = Vector2(6, 6)
+
+[node name="ladle" parent="." instance=ExtResource("6_ypd41")]
+position = Vector2(1496, 839)
+scale = Vector2(4, 4)
 
 [node name="hand" parent="." instance=ExtResource("1_ib6nh")]
 position = Vector2(-167, 517)
