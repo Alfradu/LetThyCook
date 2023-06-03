@@ -14,6 +14,7 @@ var sprite_carrot3 = load("res://Assets/Soup/Carrot/carrot3.png")
 @onready var hand = get_node("../hand")
 
 var dragging = false
+var overCauldron = false
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	if type==ItemType.CABBAGE:
@@ -31,11 +32,25 @@ func _process(delta):
 		self.position = Vector2(mousepos.x, mousepos.y)
 
 func _input(event):
-	if event is InputEventMouseButton && event.button_index == MOUSE_BUTTON_LEFT:
+	if event is InputEventMouseButton && event.button_index == MOUSE_BUTTON_LEFT && !$AnimationPlayer.is_playing():
 		if event.is_pressed() && hand.pickedItem == self: 
 			dragging = true;
 		elif hand.state == Globals.handState.OPEN:
-			dragging = false; 
+			dragging = false;
+			if overCauldron:
+				$AnimationPlayer.play("plums");
 
 func _on_area_2d_area_entered(area):
 	hand.pickedItem = self
+	if area.name == "cauldronArea":
+		overCauldron = true;
+
+func _on_area_2d_area_exited(area):
+	if area.name == "cauldronArea":
+		overCauldron = false;
+
+func _souped():
+	#add stats n point to soup
+	self.visible = false
+	queue_free();
+
