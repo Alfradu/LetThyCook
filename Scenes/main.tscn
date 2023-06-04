@@ -1,9 +1,12 @@
-[gd_scene load_steps=6 format=3 uid="uid://64q1xapxe1i8"]
+[gd_scene load_steps=9 format=3 uid="uid://64q1xapxe1i8"]
 
 [ext_resource type="PackedScene" uid="uid://b46fycpu36fr4" path="res://Scenes/hand.tscn" id="1_ib6nh"]
 [ext_resource type="Script" path="res://Scripts/main.gd" id="1_r782s"]
 [ext_resource type="PackedScene" uid="uid://dso8a14l42uq6" path="res://Scenes/cauldron.tscn" id="1_w0w7g"]
+[ext_resource type="Texture2D" uid="uid://cfypvk4tg780y" path="res://Assets/table/table-left.png" id="3_i8y3k"]
 [ext_resource type="PackedScene" path="res://Scenes/barrel.tscn" id="4_184di"]
+[ext_resource type="Texture2D" uid="uid://cq3t6tuoppjjq" path="res://Assets/table/table-right.png" id="4_d7h36"]
+[ext_resource type="Texture2D" uid="uid://xqjjow6xcu5x" path="res://Assets/icon.svg" id="4_xpdd1"]
 [ext_resource type="PackedScene" path="res://Scenes/ladle.tscn" id="6_ypd41"]
 
 [node name="Main" type="Node2D"]
@@ -15,24 +18,58 @@ offset_bottom = 1080.0
 color = Color(0.184314, 0.145098, 0.0784314, 1)
 
 [node name="cauldron" parent="." instance=ExtResource("1_w0w7g")]
+position = Vector2(926, 598)
 state = 3
 
+[node name="tableLeft" type="Node2D" parent="."]
+position = Vector2(224, 659)
+scale = Vector2(1.2, 1.4)
+
+[node name="Sprite2D" type="Sprite2D" parent="tableLeft"]
+texture = ExtResource("3_i8y3k")
+metadata/_edit_lock_ = true
+
+[node name="SpawnAreaVeggies" type="Sprite2D" parent="tableLeft"]
+self_modulate = Color(1, 1, 1, 0)
+position = Vector2(-132.5, -225)
+scale = Vector2(2.03776, 3.47656)
+texture = ExtResource("4_xpdd1")
+centered = false
+
+[node name="tableRight" type="Node2D" parent="."]
+position = Vector2(1679, 600)
+scale = Vector2(1.2, 1.2)
+
+[node name="Sprite2D" type="Sprite2D" parent="tableRight"]
+texture = ExtResource("4_d7h36")
+metadata/_edit_lock_ = true
+
+[node name="SpawnAreaHerbs" type="Sprite2D" parent="tableRight"]
+self_modulate = Color(1, 1, 1, 0)
+position = Vector2(-147.5, -252.5)
+scale = Vector2(2.51172, 2.55078)
+texture = ExtResource("4_xpdd1")
+centered = false
+
 [node name="ItemContainer" type="Node2D" parent="."]
+position = Vector2(0, 1)
 
 [node name="barrel" parent="." instance=ExtResource("4_184di")]
-position = Vector2(1756, 896)
+position = Vector2(1744, 983)
 scale = Vector2(6, 6)
 
 [node name="ladle" parent="." instance=ExtResource("6_ypd41")]
-position = Vector2(1496, 839)
+position = Vector2(1477, 915)
 scale = Vector2(4, 4)
 
 [node name="hand" parent="." instance=ExtResource("1_ib6nh")]
 position = Vector2(-167, 517)
 
 [node name="Filling" type="HSlider" parent="."]
-offset_right = 268.0
-offset_bottom = 99.0
+offset_left = 1.0
+offset_top = -2.0
+offset_right = 269.0
+offset_bottom = 97.0
 
 [node name="Label" type="Label" parent="Filling"]
 layout_mode = 0
