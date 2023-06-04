@@ -12,6 +12,9 @@
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_btphb"]
 radius = 172.047
+[ext_resource type="PackedScene" path="res://Scenes/ladle.tscn" id="6_ypd41"]
+[ext_resource type="PackedScene" uid="uid://cgr2rj03h2r5" path="res://Scenes/bookRecip.tscn" id="9_jo53x"]
+[ext_resource type="PackedScene" uid="uid://dqf4v0mcrnydu" path="res://Scenes/bookBuy.tscn" id="10_iclsw"]
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_r782s")
@@ -75,12 +78,18 @@ scale = Vector2(2.51172, 2.55078)
 texture = ExtResource("4_xpdd1")
 centered = false
 
-[node name="ItemContainer" type="Node2D" parent="."]
-position = Vector2(0, 1)
+[node name="bookRecip" parent="." instance=ExtResource("9_jo53x")]
+position = Vector2(90, 1003)
+
+[node name="bookRecip2" parent="." instance=ExtResource("10_iclsw")]
+position = Vector2(325, 1003)
 
 [node name="barrel" parent="." instance=ExtResource("4_184di")]
 position = Vector2(1744, 983)
 scale = Vector2(6, 6)
+
+[node name="ItemContainer" type="Node2D" parent="."]
+position = Vector2(0, 1)
 
 [node name="ladle" parent="." instance=ExtResource("6_ypd41")]
 position = Vector2(1477, 915)
