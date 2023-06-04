@@ -35,27 +35,27 @@ func getFoodItem(itemName, type, stats: Globals.FoodStats = null):
 	
 func getFilling(type):
 	if (type == Globals.FoodType.VEGETABLE):
-		return rng.randi_range(70, 100)
+		return rng.randi_range(20, 40)
 	if (type == Globals.FoodType.PROTEIN):
-		return rng.randi_range(30, 80)
+		return rng.randi_range(5, 30)
 	if (type == Globals.FoodType.HERB):
-		return rng.randi_range(0, 20)
+		return rng.randi_range(0, 15)
 
 func getPower(type):
 	if (type == Globals.FoodType.VEGETABLE):
-		return rng.randi_range(30, 50)
+		return rng.randi_range(0, 25)
 	if (type == Globals.FoodType.PROTEIN):
-		return rng.randi_range(60, 100)
+		return rng.randi_range(30, 50)
 	if (type == Globals.FoodType.HERB):
-		return rng.randi_range(20, 30)
+		return rng.randi_range(0, 15)
 
 func getTaste(type):
 	if (type == Globals.FoodType.VEGETABLE):
-		return rng.randi_range(10, 80)
+		return rng.randi_range(10, 30)
 	if (type == Globals.FoodType.PROTEIN):
-		return rng.randi_range(40, 100)
+		return rng.randi_range(40, 50)
 	if (type == Globals.FoodType.HERB):
-		return rng.randi_range(70, 100)
+		return rng.randi_range(40, 60)
 		
 func getHiddenCombo(itemName):
 	if (itemName == "Carrot"):

@@ -2,7 +2,6 @@ extends Node2D
 
 @onready var ladle = get_node("../ladle")
 
-enum cauldronLevels { EMPTY = 0, ALMOSTEMPTY = 1, PRETTYFULL = 2, FULL = 3} 
 var levelScales = [0.7, 2, 3.4, 4.7]
 var stateImages = [
 	load("res://Assets/Soup/pixil-layer-4.png"), 
@@ -12,7 +11,7 @@ var stateImages = [
  
 var levelupdate
 var stateupdate
-@export var level = cauldronLevels.EMPTY
+@export var level = Globals.cauldronLevels.EMPTY
 @export var state = Globals.cauldronState.PRETTYGOOD
 
 # Called when the node enters the scene tree for the first time.
@@ -48,11 +47,17 @@ func _on_cauldron_area_area_exited(area):
 		ladle.pourable = false
 
 func poured():
-	if level != cauldronLevels.FULL:
-		level = level+1 as cauldronLevels
+	if level != Globals.cauldronLevels.FULL:
+		level = level+1 as Globals.cauldronLevels
 		levelupdate = true
 
 func _changeCrossfadeSprite():
 	$soup.texture = stateImages[state]
 	$soup.self_modulate = Color(1, 1, 1, 1)
 	$tempSoup.self_modulate = Color(1, 1, 1, 0)
+
+func updateLevel(nr):
+	if (nr+level >= Globals.cauldronLevels.EMPTY && nr+level <= Globals.cauldronLevels.FULL):
+		level +=nr
+		Globals.soupLevel = level
+		levelupdate = true 

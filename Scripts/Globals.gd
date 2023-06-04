@@ -7,6 +7,7 @@ enum Hunger { ALMOSTDEAD, HUNGRY, CONTEMPT, FULL }
 enum HumanState { IDLE, WALKING_TO_CAULDRON, TAKING, WALKING_TO_END, DONE }
 enum TimeOfDay { MORNING, DAY, NIGHT }
 enum cauldronState { UNEATABLE = 0, BAD = 1, PRETTYGOOD = 2, AMAZING = 3}
+enum cauldronLevels { EMPTY = 0, ALMOSTEMPTY = 1, PRETTYFULL = 2, FULL = 3} 
 
 @export var SOUPSTATS = {
 	filling = 0,
@@ -20,6 +21,7 @@ enum cauldronState { UNEATABLE = 0, BAD = 1, PRETTYGOOD = 2, AMAZING = 3}
 var ToBePopulated = []
 
 var soupLevel
+var soupedPeople = 0
 
 class FoodStats:
 	var filling: int
@@ -56,6 +58,10 @@ class Human:
 
 		self.satisfaction = (Globals.SOUPSTATS.filling + Globals.SOUPSTATS.power + Globals.SOUPSTATS.taste) / 3 + (40 * partOfSoupWithpreference)
 		self.hunger += 2 
+		Globals.soupedPeople +=1
+		if (Globals.soupedPeople % 3 == 0 && Globals.soupLevel != cauldronLevels.EMPTY):
+			Globals.soupedPeople = 0
+			Globals.updateCauldronLevel(-1)
 	
 	func degradehuman():
 		self.hunger -= 1
@@ -100,3 +106,6 @@ func calculateSoup():
 	
 	if oldSoupState != SOUPSTATS.umami:
 		$/root/Main/cauldron.stateupdate = true
+
+func updateCauldronLevel(nr):
+	$/root/Main/cauldron.updateLevel(nr)
