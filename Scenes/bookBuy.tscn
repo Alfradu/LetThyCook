@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://dqf4v0mcrnydu"]
+
+[ext_resource type="Texture2D" uid="uid://cgjd73m3fay5v" path="res://Assets/books/book-buy.png" id="1_vth34"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_7tn2n"]
+radius = 16.43
+
+[node name="bookRecip" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(5, 11)
+scale = Vector2(4, 4)
+texture = ExtResource("1_vth34")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+scale = Vector2(4.93, 4.93)
+shape = SubResource("CircleShape2D_7tn2n")
