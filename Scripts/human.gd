@@ -3,6 +3,7 @@ extends Node2D
 @onready var body = $Body
 @onready var holding = $Holding
 @onready var bowl = load("res://Assets/People/Bowl.png")
+@onready var bowlFull = load("res://Assets/People/BowlFull.png")
 @onready var box = load("res://Assets/People/Box.png")
 @onready var peasant = load("res://Assets/People/Peasant.png")
 @onready var soldier = load("res://Assets/People/Soldier.png")
@@ -11,6 +12,7 @@ extends Node2D
 var state
 var targetPos
 var isHovered = false
+var hasEaten = false
 
 var human
 
@@ -64,15 +66,17 @@ func _process(delta):
 
 func _input(event):
 	if event is InputEventMouseButton && event.button_index == MOUSE_BUTTON_LEFT:
-		if event.is_pressed() && isHovered && state == Globals.HumanState.TAKING:
+		if event.is_pressed() && isHovered && state == Globals.HumanState.TAKING && !hasEaten:
 			$AnimationPlayer.play_backwards("dipbowl");
 		
 func _on_area_2d_area_entered(area):
 	if area.name == "HandCollision":
 		isHovered = true
 		print($/root/Main/hand.state)
-		if $/root/Main/hand.state == Globals.handState.CLOSED && state == Globals.HumanState.TAKING:
-			$AnimationPlayer.play_backwards("dipbowl");
+		if $/root/Main/hand.state == Globals.handState.CLOSED && state == Globals.HumanState.TAKING && !hasEaten:
+			$AnimationPlayer.speed_scale = 2
+			$AnimationPlayer.play_backwards("dipbowl")
+			
 
 func _on_area_2d_area_exited(area):
 	if area.name == "HandCollision":
@@ -81,7 +85,10 @@ func _on_area_2d_area_exited(area):
 func _on_animation_player_animation_finished(anim_name):
 	if (anim_name == "dipbowl"):
 		state = Globals.HumanState.WALKING_TO_END
+		holding.texture = bowl
 		targetPos = $/root/Main/RefPoints/humanEnd.position
 		
 func eat():
 	human.humandideat()
+	holding.texture = bowlFull
+	hasEaten = true
