@@ -3,8 +3,8 @@
 [ext_resource type="PackedScene" uid="uid://b46fycpu36fr4" path="res://Scenes/hand.tscn" id="1_ib6nh"]
 [ext_resource type="Script" path="res://Scripts/main.gd" id="1_r782s"]
 [ext_resource type="PackedScene" uid="uid://dso8a14l42uq6" path="res://Scenes/cauldron.tscn" id="1_w0w7g"]
-[ext_resource type="PackedScene" uid="uid://boknxxs4unv80" path="res://Scenes/barrel.tscn" id="4_184di"]
-[ext_resource type="PackedScene" uid="uid://bvgqynkydm4sp" path="res://Scenes/ladle.tscn" id="6_ypd41"]
+[ext_resource type="PackedScene" path="res://Scenes/barrel.tscn" id="4_184di"]
+[ext_resource type="PackedScene" path="res://Scenes/ladle.tscn" id="6_ypd41"]
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_r782s")
@@ -15,6 +15,8 @@ offset_bottom = 1080.0
 color = Color(0.184314, 0.145098, 0.0784314, 1)
 
 [node name="cauldron" parent="." instance=ExtResource("1_w0w7g")]
+level = 2
+state = 3
 
 [node name="ItemContainer" type="Node2D" parent="."]
 
