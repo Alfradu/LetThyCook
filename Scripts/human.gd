@@ -16,6 +16,8 @@ var human
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	$Body.texture = peasant
+	$Holding.texture = bowl
 	targetPos = cauldron.position
 	pass # Replace with function body.
 
@@ -40,7 +42,7 @@ func setBodyTexture(status):
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	print(state)
+	$Label.text = str(human.satisfaction)
 	if (state == Globals.HumanState.WALKING_TO_CAULDRON):
 		var collider = $RayCast2D.get_collider()
 		if collider == null || collider.name != "humanArea":
@@ -54,15 +56,23 @@ func _process(delta):
 		self.position = self.position.lerp(targetPos, delta)
 		if self.position == targetPos:
 			state = Globals.HumanState.DONE
+	if (state == Globals.HumanState.DONE):
+		human.degradehuman()
+		if(!human.isDead):
+			Globals.ToBePopulated.append(human)
+		queue_free()
 
 func _input(event):
-	if event is InputEventMouseButton && event.button_index == MOUSE_BUTTON_LEFT && !$AnimationPlayer.is_playing():
+	if event is InputEventMouseButton && event.button_index == MOUSE_BUTTON_LEFT:
 		if event.is_pressed() && isHovered && state == Globals.HumanState.TAKING:
 			$AnimationPlayer.play_backwards("dipbowl");
 		
 func _on_area_2d_area_entered(area):
 	if area.name == "HandCollision":
 		isHovered = true
+		print($/root/Main/hand.state)
+		if $/root/Main/hand.state == Globals.handState.CLOSED && state == Globals.HumanState.TAKING:
+			$AnimationPlayer.play_backwards("dipbowl");
 
 func _on_area_2d_area_exited(area):
 	if area.name == "HandCollision":
@@ -72,3 +82,6 @@ func _on_animation_player_animation_finished(anim_name):
 	if (anim_name == "dipbowl"):
 		state = Globals.HumanState.WALKING_TO_END
 		targetPos = $/root/Main/RefPoints/humanEnd.position
+		
+func eat():
+	human.humandideat()

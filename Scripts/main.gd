@@ -67,6 +67,7 @@ func setupPopulation(Population):
 		var human = Globals.Human.new()
 		human.name = "Jörgen"
 		human.status = Globals.Rank.PEASANT
+		human.foodType = Globals.FoodType.VEGETABLE
 		human.holdingBowl = true
 		human.hunger = Globals.Hunger.HUNGRY
 		Population.append(human)
@@ -74,6 +75,7 @@ func setupPopulation(Population):
 		var human = Globals.Human.new()
 		human.name = "Bengt"
 		human.status = Globals.Rank.SOLDIER
+		human.foodType = Globals.FoodType.PROTEIN
 		human.holdingBowl = true
 		human.hunger = Globals.Hunger.CONTEMPT
 		Population.append(human)
@@ -81,6 +83,7 @@ func setupPopulation(Population):
 		var human = Globals.Human.new()
 		human.name = "Gaylord"
 		human.status = Globals.Rank.NOBLE
+		human.foodType = Globals.FoodType.HERB
 		human.holdingBowl = true
 		human.hunger = Globals.Hunger.FULL
 		Population.append(human)
@@ -97,13 +100,11 @@ func _ready():
 		var instantiateditem = foodItem.instantiate()
 		$ItemContainer.add_child(instantiateditem)
 		instantiateditem.init(item)
-		
-	var human = Globals.Population.pop_front()
-	var instantiateditem = humanItem.instantiate()
-	$HumanContainer.add_child(instantiateditem)
-	instantiateditem.init(human)
 
 var time = 0
+var state = Globals.TimeOfDay.MORNING
+var untilDay = 2
+var untilMorning = 30
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	time += delta
@@ -111,10 +112,25 @@ func _process(delta):
 		time = 0
 		Globals.degradeSoupItems(1)
 		Globals.calculateSoup()
-		Globals.updateLabels()
-		maybeSendInHuman()
-		checkRoundOver()
-				
+		updateLabels()
+		if (state == Globals.TimeOfDay.MORNING):
+			untilDay -= 1
+		if (state == Globals.TimeOfDay.DAY):
+			maybeSendInHuman()
+			checkRoundOver()
+		if (state == Globals.TimeOfDay.NIGHT):
+			untilMorning -= 1
+		maybeChangeState()
+	
+func updateLabels():
+	$/root/Main/Filling.value = Globals.SOUPSTATS.filling
+	$/root/Main/Filling/Label.text = "Filling: %d%%" % Globals.SOUPSTATS.filling
+	$/root/Main/Power.value = Globals.SOUPSTATS.power
+	$/root/Main/Power/Label.text = "Power: %d%%" % Globals.SOUPSTATS.power
+	$/root/Main/Taste.value = Globals.SOUPSTATS.taste
+	$/root/Main/Taste/Label.text = "Taste: %d%%" % Globals.SOUPSTATS.taste
+	$/root/Main/TimeNow.text = str(Globals.TimeOfDay.keys()[state]) + " " + str(untilDay if state == Globals.TimeOfDay.MORNING else untilMorning)
+		
 func maybeSendInHuman():
 	if (!spawnPoint.isOccupied):
 		var human = Globals.Population.pop_front()
@@ -124,6 +140,13 @@ func maybeSendInHuman():
 			instantiateditem.init(human)
 			
 func checkRoundOver():
-	return false
-	# globalpop tom
-	# if all human container child DONE
+	if ($HumanContainer.get_child_count() == 0 && Globals.Population.is_empty()):
+		state = Globals.TimeOfDay.NIGHT
+
+func maybeChangeState():
+	if (state == Globals.TimeOfDay.MORNING && untilDay <= 0):
+		state = Globals.TimeOfDay.DAY
+		untilDay = 15
+	if (state == Globals.TimeOfDay.NIGHT && untilMorning <= 0):
+		state = Globals.TimeOfDay.MORNING
+		untilMorning = 30

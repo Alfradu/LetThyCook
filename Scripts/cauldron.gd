@@ -4,7 +4,6 @@ extends Node2D
 
 enum cauldronLevels { EMPTY = 0, ALMOSTEMPTY = 1, PRETTYFULL = 2, FULL = 3} 
 var levelScales = [0.7, 2, 3.4, 4.7]
-enum cauldronState { UNEATABLE = 0, BAD = 1, PRETTYGOOD = 2, AMAZING = 3}
 var stateImages = [
 	load("res://Assets/Soup/pixil-layer-4.png"), 
 	load("res://Assets/Soup/pixil-layer-3.png"), 
@@ -14,7 +13,7 @@ var stateImages = [
 var levelupdate
 var stateupdate
 @export var level = cauldronLevels.EMPTY
-@export var state = cauldronState.PRETTYGOOD
+@export var state = Globals.cauldronState.PRETTYGOOD
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -22,7 +21,7 @@ func _ready():
 	$tempSoup.scale = Vector2(levelScales[level],levelScales[level])
 	$soup.texture = stateImages[state]
 	$tempSoup.texture = stateImages[state]
-	Globals.soupState = state
+	Globals.SOUPSTATS.umami = state
 	Globals.soupLevel = level
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -34,7 +33,7 @@ func _process(delta):
 		if $soup.scale == vec:
 			levelupdate = false
 	if stateupdate:
-		state = Globals.soupState
+		state = Globals.SOUPSTATS.umami
 		$tempSoup.texture = stateImages[state]
 		$tempSoup.visible = true
 		$AnimationPlayer.play("crossfade")

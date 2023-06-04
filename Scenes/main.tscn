@@ -21,11 +21,12 @@ offset_right = 1920.0
 offset_bottom = 1080.0
 color = Color(0.184314, 0.145098, 0.0784314, 1)
 
+[node name="HumanContainer" type="Node2D" parent="."]
+
 [node name="cauldron" parent="." instance=ExtResource("1_w0w7g")]
 position = Vector2(926, 598)
 state = 3
 
-[node name="HumanContainer" type="Node2D" parent="."]
 [node name="tableMid" type="Node2D" parent="."]
 position = Vector2(928, 1140)
 
@@ -86,7 +87,15 @@ position = Vector2(1477, 915)
 scale = Vector2(4, 4)
 
 [node name="hand" parent="." instance=ExtResource("1_ib6nh")]
+z_index = 10
 position = Vector2(-167, 517)
+
+[node name="TimeNow" type="Label" parent="."]
+offset_left = 314.0
+offset_top = 32.0
+offset_right = 422.0
+offset_bottom = 58.0
+text = "resetsdgdfhdf"
 
 [node name="Filling" type="HSlider" parent="."]
 offset_left = 1.0
@@ -117,9 +126,9 @@ offset_bottom = 38.0
 text = "Power"
 
 [node name="Taste" type="HSlider" parent="."]
-offset_left = 1.0
+offset_left = 2.0
 offset_top = 148.0
-offset_right = 269.0
+offset_right = 270.0
 offset_bottom = 247.0
 
 [node name="Label" type="Label" parent="Taste"]
