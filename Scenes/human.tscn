@@ -1,6 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://cbisx2e3hxe1l"]
+[gd_scene load_steps=9 format=3 uid="uid://cbisx2e3hxe1l"]
 
 [ext_resource type="Script" path="res://Scripts/human.gd" id="1_3ms4j"]
+[ext_resource type="Script" path="res://Scripts/Holding.gd" id="2_q7yft"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_t1wih"]
 radius = 20.2661
@@ -78,14 +79,57 @@ tracks/2/keys = {
 }]
 }
 
+[sub_resource type="Animation" id="Animation_t8cnm"]
+resource_name = "leaveCrate"
+length = 1.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Holding:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(230, 100)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Holding:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1.1, 1.1)]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(1.5),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"leftBox"
+}]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_vkwtv"]
 _data = {
 "RESET": SubResource("Animation_xbirm"),
-"dipbowl": SubResource("Animation_5q040")
+"dipbowl": SubResource("Animation_5q040"),
+"leaveCrate": SubResource("Animation_t8cnm")
 }
 
 [node name="human" type="Node2D"]
-scale = Vector2(4.5, 4.5)
+scale = Vector2(4, 4)
 script = ExtResource("1_3ms4j")
 
 [node name="Body" type="Sprite2D" parent="."]
@@ -93,6 +137,7 @@ script = ExtResource("1_3ms4j")
 [node name="Holding" type="Sprite2D" parent="."]
 z_index = 5
 scale = Vector2(1.4, 1.4)
+script = ExtResource("2_q7yft")
 
 [node name="BowlHitBox" type="Area2D" parent="Holding"]
 

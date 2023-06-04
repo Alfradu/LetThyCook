@@ -27,10 +27,10 @@ func init(init_human):
 	var _rng = RandomNumberGenerator.new()
 	if (init_human.holdingBowl):
 		holding.texture = bowl
-		holding.scale.x = 1
-		holding.scale.y = 1
 	if (init_human.holdingBox):
 		holding.texture = box
+	holding.scale.x = 1
+	holding.scale.y = 1
 	setBodyTexture(init_human.status)
 	human = init_human
 	state = Globals.HumanState.WALKING_TO_CAULDRON
@@ -52,11 +52,15 @@ func _process(delta):
 		if abs(self.position.x - targetPos.x) < 10 && abs(self.position.y - targetPos.y) < 10:
 			state = Globals.HumanState.TAKING
 	if (state == Globals.HumanState.TAKING):
-		if (!$AnimationPlayer.is_playing()):
-			$AnimationPlayer.play("dipbowl")
+		if (human.holdingBowl):
+			if (!$AnimationPlayer.is_playing()):
+				$AnimationPlayer.play("dipbowl")
+		if (human.holdingBox):
+			if (!$AnimationPlayer.is_playing()):
+				$AnimationPlayer.play("leaveCrate")				
 	if (state == Globals.HumanState.WALKING_TO_END):
 		self.position = self.position.lerp(targetPos, delta)
-		if self.position == targetPos:
+		if abs(self.position.x - targetPos.x) < 40 && abs(self.position.y - targetPos.y) < 40:
 			state = Globals.HumanState.DONE
 	if (state == Globals.HumanState.DONE):
 		human.degradehuman()
@@ -84,11 +88,16 @@ func _on_area_2d_area_exited(area):
 
 func _on_animation_player_animation_finished(anim_name):
 	if (anim_name == "dipbowl"):
-		state = Globals.HumanState.WALKING_TO_END
 		holding.texture = bowl
-		targetPos = $/root/Main/RefPoints/humanEnd.position
-		
+	targetPos = $/root/Main/RefPoints/humanEnd.position
+	state = Globals.HumanState.WALKING_TO_END
+
 func eat():
 	human.humandideat()
 	holding.texture = bowlFull
 	hasEaten = true
+	
+func leftBox():
+	$Holding.onTable = true
+	$Holding.items = human.boxContent
+	$Holding.reparent($/root/Main/ItemContainer)

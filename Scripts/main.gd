@@ -4,68 +4,8 @@ var rng = RandomNumberGenerator.new()
 
 @onready var spawnPoint = $RefPoints/spawnPoint
 
-func setupFoodItems(FoodItems):
-	FoodItems.append(getFoodItem("Carrot", Globals.FoodType.VEGETABLE))
-	FoodItems.append(getFoodItem("Carrot", Globals.FoodType.VEGETABLE))
-	FoodItems.append(getFoodItem("Carrot", Globals.FoodType.VEGETABLE))
-	FoodItems.append(getFoodItem("Potato", Globals.FoodType.VEGETABLE))
-	FoodItems.append(getFoodItem("Potato", Globals.FoodType.VEGETABLE))
-	FoodItems.append(getFoodItem("Potato", Globals.FoodType.VEGETABLE))
-	FoodItems.append(getFoodItem("Cabbage", Globals.FoodType.VEGETABLE))
-	FoodItems.append(getFoodItem("Beef", Globals.FoodType.PROTEIN))
-	FoodItems.append(getFoodItem("Pork", Globals.FoodType.PROTEIN))
-	FoodItems.append(getFoodItem("Chicken", Globals.FoodType.PROTEIN))
-	FoodItems.append(getFoodItem("Thyme", Globals.FoodType.HERB))
-	FoodItems.append(getFoodItem("Parsley", Globals.FoodType.HERB))
-	FoodItems.append(getFoodItem("Dill", Globals.FoodType.HERB))
-	
-func getFoodItem(itemName, type, stats: Globals.FoodStats = null):
-	var item = Globals.FoodItem.new()
-	item.name = itemName
-	item.type = type
-	item.ttl = rng.randf_range(60, 120)
-	item.hiddenCombo = getHiddenCombo(itemName)
-	
-	var itemStats = Globals.FoodStats.new()
-	itemStats.filling = stats.filling if stats != null else getFilling(type)
-	itemStats.power = stats.power if stats != null else getPower(type)
-	itemStats.taste = stats.taste if stats != null else getTaste(type)
-	
-	item.stats = itemStats
-	
-	return item
-	
-func getFilling(type):
-	if (type == Globals.FoodType.VEGETABLE):
-		return rng.randi_range(20, 40)
-	if (type == Globals.FoodType.PROTEIN):
-		return rng.randi_range(5, 30)
-	if (type == Globals.FoodType.HERB):
-		return rng.randi_range(0, 15)
-
-func getPower(type):
-	if (type == Globals.FoodType.VEGETABLE):
-		return rng.randi_range(0, 25)
-	if (type == Globals.FoodType.PROTEIN):
-		return rng.randi_range(30, 50)
-	if (type == Globals.FoodType.HERB):
-		return rng.randi_range(0, 15)
-
-func getTaste(type):
-	if (type == Globals.FoodType.VEGETABLE):
-		return rng.randi_range(10, 30)
-	if (type == Globals.FoodType.PROTEIN):
-		return rng.randi_range(40, 50)
-	if (type == Globals.FoodType.HERB):
-		return rng.randi_range(40, 60)
-		
-func getHiddenCombo(itemName):
-	if (itemName == "Carrot"):
-		return "Potato"
-	return ""
-
 func setupPopulation(Population):
-	for i in range(14):
+	for i in range(10):
 		var human = Globals.Human.new()
 		human.name = "Jörgen"
 		human.status = Globals.Rank.PEASANT
@@ -73,7 +13,7 @@ func setupPopulation(Population):
 		human.holdingBowl = true
 		human.hunger = Globals.Hunger.HUNGRY
 		Population.append(human)
-	for i in range(4):
+	for i in range(3):
 		var human = Globals.Human.new()
 		human.name = "Bengt"
 		human.status = Globals.Rank.SOLDIER
@@ -81,7 +21,7 @@ func setupPopulation(Population):
 		human.holdingBowl = true
 		human.hunger = Globals.Hunger.CONTEMPT
 		Population.append(human)
-	for i in range(2):
+	for i in range(1):
 		var human = Globals.Human.new()
 		human.name = "Gaylord"
 		human.status = Globals.Rank.NOBLE
@@ -95,7 +35,6 @@ func setupPopulation(Population):
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	setupFoodItems(Globals.FoodItems)
 	setupPopulation(Globals.Population)
 	
 	for item in Globals.FoodItems:
@@ -106,10 +45,15 @@ func _ready():
 var time = 0
 var state = Globals.TimeOfDay.MORNING
 var untilDay = 2
-var untilMorning = 30
+var untilMorning = 4
+var delivery = 0
+var diffuculty = 1
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	time += delta
+	time += delta * diffuculty
+	delivery += delta * diffuculty
+	if (delivery > 5):
+		maybeSendInHuman(Globals.Orders)
 	if (time > 1):
 		time = 0
 		Globals.degradeSoupItems(1)
@@ -118,7 +62,7 @@ func _process(delta):
 		if (state == Globals.TimeOfDay.MORNING):
 			untilDay -= 1
 		if (state == Globals.TimeOfDay.DAY):
-			maybeSendInHuman()
+			maybeSendInHuman(Globals.Population)
 			checkRoundOver()
 		if (state == Globals.TimeOfDay.NIGHT):
 			untilMorning -= 1
@@ -134,9 +78,9 @@ func updateLabels():
 	$/root/Main/TimeNow.text = str(Globals.TimeOfDay.keys()[state]) + " " + str(untilDay if state == Globals.TimeOfDay.MORNING else untilMorning)
 	$/root/Main/SoupLevel.text = "Soup level: " + str(Globals.cauldronLevels.keys()[Globals.soupLevel])
 		
-func maybeSendInHuman():
+func maybeSendInHuman(list):
 	if (!spawnPoint.isOccupied):
-		var human = Globals.Population.pop_front()
+		var human = list.pop_front()
 		if (human != null):
 			var instantiateditem = humanItem.instantiate()
 			$HumanContainer.add_child(instantiateditem)
@@ -148,8 +92,13 @@ func checkRoundOver():
 
 func maybeChangeState():
 	if (state == Globals.TimeOfDay.MORNING && untilDay <= 0):
+		Globals.ToBePopulated.shuffle()
+		for human in Globals.ToBePopulated:
+			Globals.Population.append(human)
+			human.satisfaction = 0
 		state = Globals.TimeOfDay.DAY
-		untilDay = 15
+		Globals.ToBePopulated = []
+		untilDay = 5
 	if (state == Globals.TimeOfDay.NIGHT && untilMorning <= 0):
 		state = Globals.TimeOfDay.MORNING
-		untilMorning = 30
+		untilMorning = 10
