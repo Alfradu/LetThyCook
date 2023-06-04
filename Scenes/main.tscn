@@ -1,15 +1,17 @@
-[gd_scene load_steps=9 format=3 uid="uid://64q1xapxe1i8"]
+[gd_scene load_steps=11 format=3 uid="uid://64q1xapxe1i8"]
 
 [ext_resource type="PackedScene" uid="uid://b46fycpu36fr4" path="res://Scenes/hand.tscn" id="1_ib6nh"]
 [ext_resource type="Script" path="res://Scripts/main.gd" id="1_r782s"]
 [ext_resource type="PackedScene" uid="uid://dso8a14l42uq6" path="res://Scenes/cauldron.tscn" id="1_w0w7g"]
-[ext_resource type="PackedScene" uid="uid://boknxxs4unv80" path="res://Scenes/barrel.tscn" id="4_184di"]
-[ext_resource type="PackedScene" uid="uid://bvgqynkydm4sp" path="res://Scenes/ladle.tscn" id="6_ypd41"]
 [ext_resource type="Texture2D" uid="uid://cfypvk4tg780y" path="res://Assets/table/table-left.png" id="3_i8y3k"]
-[ext_resource type="PackedScene" path="res://Scenes/barrel.tscn" id="4_184di"]
+[ext_resource type="PackedScene" uid="uid://boknxxs4unv80" path="res://Scenes/barrel.tscn" id="4_184di"]
 [ext_resource type="Texture2D" uid="uid://cq3t6tuoppjjq" path="res://Assets/table/table-right.png" id="4_d7h36"]
 [ext_resource type="Texture2D" uid="uid://xqjjow6xcu5x" path="res://Assets/icon.svg" id="4_xpdd1"]
-[ext_resource type="PackedScene" path="res://Scenes/ladle.tscn" id="6_ypd41"]
+[ext_resource type="PackedScene" uid="uid://bvgqynkydm4sp" path="res://Scenes/ladle.tscn" id="6_ypd41"]
+[ext_resource type="Script" path="res://Scripts/spawnPoint.gd" id="9_jsjwr"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_btphb"]
+radius = 172.047
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_r782s")
@@ -22,6 +24,8 @@ color = Color(0.184314, 0.145098, 0.0784314, 1)
 [node name="cauldron" parent="." instance=ExtResource("1_w0w7g")]
 position = Vector2(926, 598)
 state = 3
+
+[node name="HumanContainer" type="Node2D" parent="."]
 
 [node name="tableLeft" type="Node2D" parent="."]
 position = Vector2(224, 659)
@@ -109,3 +113,24 @@ offset_right = 59.0
 offset_bottom = 38.0
 text = "Taste
 "
+
+[node name="RefPoints" type="Node2D" parent="."]
+
+[node name="humanSpawn" type="Marker2D" parent="RefPoints"]
+position = Vector2(-191, 43)
+
+[node name="cauldron" type="Marker2D" parent="RefPoints"]
+position = Vector2(932, 102)
+
+[node name="humanEnd" type="Marker2D" parent="RefPoints"]
+position = Vector2(2256, 31)
+
+[node name="spawnPoint" type="Area2D" parent="RefPoints"]
+script = ExtResource("9_jsjwr")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RefPoints/spawnPoint"]
+position = Vector2(-189, 43)
+shape = SubResource("CircleShape2D_btphb")
+
+[connection signal="area_entered" from="RefPoints/spawnPoint" to="RefPoints/spawnPoint" method="_on_area_entered"]
+[connection signal="area_exited" from="RefPoints/spawnPoint" to="RefPoints/spawnPoint" method="_on_area_exited"]

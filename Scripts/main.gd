@@ -2,6 +2,8 @@ extends Node2D
 
 var rng = RandomNumberGenerator.new()
 
+@onready var spawnPoint = $RefPoints/spawnPoint
+
 func setupFoodItems(FoodItems):
 	FoodItems.append(getFoodItem("Carrot", Globals.FoodType.VEGETABLE))
 	FoodItems.append(getFoodItem("Carrot", Globals.FoodType.VEGETABLE))
@@ -60,23 +62,68 @@ func getHiddenCombo(itemName):
 		return "Potato"
 	return ""
 
-func setupPopulation():
-	return
-
+func setupPopulation(Population):
+	for i in range(14):
+		var human = Globals.Human.new()
+		human.name = "Jörgen"
+		human.status = Globals.Rank.PEASANT
+		human.holdingBowl = true
+		human.hunger = Globals.Hunger.HUNGRY
+		Population.append(human)
+	for i in range(4):
+		var human = Globals.Human.new()
+		human.name = "Bengt"
+		human.status = Globals.Rank.SOLDIER
+		human.holdingBowl = true
+		human.hunger = Globals.Hunger.CONTEMPT
+		Population.append(human)
+	for i in range(2):
+		var human = Globals.Human.new()
+		human.name = "Gaylord"
+		human.status = Globals.Rank.NOBLE
+		human.holdingBowl = true
+		human.hunger = Globals.Hunger.FULL
+		Population.append(human)
+	
 @onready var foodItem = load("res://Scenes/item.tscn")
+@onready var humanItem = load("res://Scenes/human.tscn")
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	setupFoodItems(Globals.FoodItems)
-	setupPopulation()
+	setupPopulation(Globals.Population)
 	
-	print(foodItem)
-
 	for item in Globals.FoodItems:
 		var instantiateditem = foodItem.instantiate()
 		$ItemContainer.add_child(instantiateditem)
 		instantiateditem.init(item)
+		
+	var human = Globals.Population.pop_front()
+	var instantiateditem = humanItem.instantiate()
+	$HumanContainer.add_child(instantiateditem)
+	instantiateditem.init(human)
 
+var time = 0
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(_delta):
-	pass
+func _process(delta):
+	time += delta
+	if (time > 1):
+		time = 0
+		Globals.degradeSoupItems(1)
+		Globals.calculateSoup()
+		Globals.updateLabels()
+		maybeSendInHuman()
+		checkRoundOver()
+				
+func maybeSendInHuman():
+	if (!spawnPoint.isOccupied):
+		var human = Globals.Population.pop_front()
+		if (human != null):
+			var instantiateditem = humanItem.instantiate()
+			$HumanContainer.add_child(instantiateditem)
+			instantiateditem.init(human)
+			
+func checkRoundOver():
+	return false
+	# globalpop tom
+	# if all human container child DONE

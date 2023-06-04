@@ -2,6 +2,9 @@ extends Node
 
 enum handState { OPEN, CLOSED }
 enum FoodType { VEGETABLE = 0, PROTEIN = 1, HERB = 2 }
+enum Rank { PEASANT, SOLDIER, NOBLE }
+enum Hunger { ALMOSTDEAD, HUNGRY, CONTEMPT, FULL }
+enum HumanState { IDLE, WALKING_TO_CAULDRON, TAKING, WALKING_TO_END, DONE }
 
 @export var SOUPSTATS = {
 	filling = 0,
@@ -10,11 +13,10 @@ enum FoodType { VEGETABLE = 0, PROTEIN = 1, HERB = 2 }
 }
 
 @export var FoodItems = []
+@export var Population = []
 
 var soupLevel
 var soupState
-
-var personInLine = null
 
 class FoodStats:
 	var filling: int
@@ -29,23 +31,22 @@ class FoodItem:
 	var inSoup: bool
 	var hiddenCombo: String
 	
+class Human:
+	var name: String
+	var status: Rank
+	var holdingBowl: bool
+	var holdingBox: bool
+	var hunger: Hunger
+	
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 	updateLabels()
 
 var time = 0
 
-func _process(delta):
-	time += delta
-	if (time > 1):
-		time = 0
-		degradeSoupItems(1)
-		calculateSoup()
-		if (personInLine):
-			degradeSoupItems(10) #human.gluttony
-			personInLine = null
-		updateLabels()
-		
+func _process(_delta):
+	pass
+
 func updateLabels():
 	$/root/Main/Filling.value = SOUPSTATS.filling
 	$/root/Main/Filling/Label.text = "Filling: %d%%" % SOUPSTATS.filling
