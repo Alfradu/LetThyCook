@@ -50,5 +50,6 @@ func _souped():
 	queue_free();
 
 func _plums():
-	$plums.visible = true
-	$plums/AnimationPlayer.play("splash")
+	if Globals.soupLevel > 1:
+		$plums.visible = true
+		$plums/AnimationPlayer.play("splash")
