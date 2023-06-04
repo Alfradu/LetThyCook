@@ -4,10 +4,10 @@
 [ext_resource type="Script" path="res://Scripts/main.gd" id="1_r782s"]
 [ext_resource type="PackedScene" uid="uid://dso8a14l42uq6" path="res://Scenes/cauldron.tscn" id="1_w0w7g"]
 [ext_resource type="Texture2D" uid="uid://cfypvk4tg780y" path="res://Assets/table/table-left.png" id="3_i8y3k"]
-[ext_resource type="PackedScene" path="res://Scenes/barrel.tscn" id="4_184di"]
+[ext_resource type="PackedScene" uid="uid://boknxxs4unv80" path="res://Scenes/barrel.tscn" id="4_184di"]
 [ext_resource type="Texture2D" uid="uid://cq3t6tuoppjjq" path="res://Assets/table/table-right.png" id="4_d7h36"]
 [ext_resource type="Texture2D" uid="uid://xqjjow6xcu5x" path="res://Assets/icon.svg" id="4_xpdd1"]
-[ext_resource type="PackedScene" path="res://Scenes/ladle.tscn" id="6_ypd41"]
+[ext_resource type="PackedScene" uid="uid://bvgqynkydm4sp" path="res://Scenes/ladle.tscn" id="6_ypd41"]
 [ext_resource type="Script" path="res://Scripts/spawnPoint.gd" id="9_jsjwr"]
 [ext_resource type="PackedScene" uid="uid://dqf4v0mcrnydu" path="res://Scenes/bookBuy.tscn" id="10_le51f"]
 [ext_resource type="PackedScene" uid="uid://cgr2rj03h2r5" path="res://Scenes/bookRecip.tscn" id="11_2wti7"]
@@ -100,6 +100,7 @@ offset_bottom = 58.0
 text = "resetsdgdfhdf"
 
 [node name="Filling" type="HSlider" parent="."]
+z_index = 15
 offset_left = 1.0
 offset_top = -2.0
 offset_right = 269.0
@@ -114,6 +115,7 @@ offset_bottom = 38.0
 text = "Filling"
 
 [node name="Power" type="HSlider" parent="."]
+z_index = 15
 offset_left = 1.0
 offset_top = 73.0
 offset_right = 269.0
@@ -128,6 +130,7 @@ offset_bottom = 38.0
 text = "Power"
 
 [node name="Taste" type="HSlider" parent="."]
+z_index = 15
 offset_left = 2.0
 offset_top = 148.0
 offset_right = 270.0

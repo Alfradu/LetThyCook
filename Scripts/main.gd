@@ -11,11 +11,13 @@ func setupFoodItems(FoodItems):
 	FoodItems.append(getFoodItem("Potato", Globals.FoodType.VEGETABLE))
 	FoodItems.append(getFoodItem("Potato", Globals.FoodType.VEGETABLE))
 	FoodItems.append(getFoodItem("Potato", Globals.FoodType.VEGETABLE))
-	FoodItems.append(getFoodItem("Cabbage", Globals.FoodType.PROTEIN))
-#	FoodItems.append(getFoodItem("Beef", FoodType.PROTEIN))
-#	FoodItems.append(getFoodItem("Chicken", FoodType.PROTEIN))
-#	FoodItems.append(getFoodItem("Thyme", FoodType.HERB))
-#	FoodItems.append(getFoodItem("Parsley", FoodType.HERB))
+	FoodItems.append(getFoodItem("Cabbage", Globals.FoodType.VEGETABLE))
+	FoodItems.append(getFoodItem("Beef", Globals.FoodType.PROTEIN))
+	FoodItems.append(getFoodItem("Pork", Globals.FoodType.PROTEIN))
+	FoodItems.append(getFoodItem("Chicken", Globals.FoodType.PROTEIN))
+	FoodItems.append(getFoodItem("Thyme", Globals.FoodType.HERB))
+	FoodItems.append(getFoodItem("Parsley", Globals.FoodType.HERB))
+	FoodItems.append(getFoodItem("Dill", Globals.FoodType.HERB))
 	
 func getFoodItem(itemName, type, stats: Globals.FoodStats = null):
 	var item = Globals.FoodItem.new()
