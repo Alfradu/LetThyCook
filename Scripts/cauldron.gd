@@ -7,7 +7,8 @@ var levelScales = [0.7, 2, 3.4, 4.7]
 enum cauldronState { UNEATABLE = 0, BAD = 1, PRETTYGOOD = 2, AMAZING = 3}
 var stateImages = ["res://Assets/Soup/pixil-layer-4.png", "res://Assets/Soup/pixil-layer-3.png", "res://Assets/Soup/pixil-layer-2.png", "res://Assets/Soup/pixil-layer-1.png"]
  
-var update
+var levelupdate
+var stateupdate
 @export var level = cauldronLevels.EMPTY
 @export var state = cauldronState.PRETTYGOOD
 
@@ -20,11 +21,15 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	if update:
+	if levelupdate:
 		var vec = Vector2(levelScales[level], levelScales[level])
 		$soup.scale = $soup.scale.lerp(vec, delta)
 		if $soup.scale == vec:
-			update = false
+			levelupdate = false
+	if stateupdate:
+		state = Globals.soupState
+		$soup.texture = load(stateImages[state])
+		stateupdate = false
 
 func _on_cauldron_area_area_entered(area):
 	if (area.name == "SpoonPart"):
@@ -37,4 +42,4 @@ func _on_cauldron_area_area_exited(area):
 func poured():
 	if level != cauldronLevels.FULL:
 		level = level+1
-		update = true
+		levelupdate = true

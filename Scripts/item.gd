@@ -3,6 +3,7 @@ extends Node2D
 @onready var sprite = $Sprite2D
 @onready var hand = get_node("/root/Main/hand")
 
+var foodItem
 var dragging = false
 var overCauldron = false
 # Called when the node enters the scene tree for the first time.
@@ -15,7 +16,7 @@ func init(item):
 	sprite.texture = texture
 	self.position.x = rng.randf_range(50, 300)
 	self.position.y = rng.randf_range(300, 1000)
-	return self
+	foodItem = item
 	
 func getTexture(itemname):
 	return "res://Assets/Soup/items/" + itemname.to_lower() + "1.png"
@@ -53,3 +54,4 @@ func _plums():
 	if Globals.soupLevel > 1:
 		$plums.visible = true
 		$plums/AnimationPlayer.play("splash")
+	foodItem.inSoup = true

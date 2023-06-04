@@ -48,27 +48,27 @@ func getFoodItem(name, type, stats: FoodStats = null):
 	
 func getFilling(type):
 	if (type == FoodType.VEGETABLE):
-		return rng.randi_range(7, 10)
+		return rng.randi_range(70, 100)
 	if (type == FoodType.PROTEIN):
-		return rng.randi_range(3, 8)
+		return rng.randi_range(30, 80)
 	if (type == FoodType.HERB):
-		return rng.randi_range(0, 2)
+		return rng.randi_range(0, 20)
 
 func getPower(type):
 	if (type == FoodType.VEGETABLE):
-		return rng.randi_range(3, 5)
+		return rng.randi_range(30, 50)
 	if (type == FoodType.PROTEIN):
-		return rng.randi_range(6, 10)
+		return rng.randi_range(60, 100)
 	if (type == FoodType.HERB):
-		return rng.randi_range(2, 3)
+		return rng.randi_range(20, 30)
 
 func getTaste(type):
 	if (type == FoodType.VEGETABLE):
-		return rng.randi_range(1, 8)
+		return rng.randi_range(10, 80)
 	if (type == FoodType.PROTEIN):
-		return rng.randi_range(4, 10)
+		return rng.randi_range(40, 100)
 	if (type == FoodType.HERB):
-		return rng.randi_range(7, 10)
+		return rng.randi_range(70, 100)
 		
 func getHiddenCombo(name):
 	if (name == "Carrot"):
@@ -91,7 +91,6 @@ func _ready():
 		var instantiateditem = foodItem.instantiate()
 		$ItemContainer.add_child(instantiateditem)
 		instantiateditem.init(item)
-
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
