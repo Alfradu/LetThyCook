@@ -68,7 +68,6 @@ texture = ExtResource("1_drmva")
 
 [node name="soup" type="Sprite2D" parent="."]
 position = Vector2(6, 296)
-scale = Vector2(4.7, 4.7)
 texture = ExtResource("2_ae612")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="soup"]
