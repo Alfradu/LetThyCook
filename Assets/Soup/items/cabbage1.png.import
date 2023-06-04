@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bhrb3qhovokgd"
-path="res://.godot/imported/carrot3.png-7f58d78ed87560a4a9c12b2db218ec90.ctex"
+uid="uid://cvgn2n0jqb7s3"
+path="res://.godot/imported/cabbage1.png-15659f7ad89db29adda8974bef207a7c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Soup/Carrot/carrot3.png"
-dest_files=["res://.godot/imported/carrot3.png-7f58d78ed87560a4a9c12b2db218ec90.ctex"]
+source_file="res://Assets/Soup/items/cabbage1.png"
+dest_files=["res://.godot/imported/cabbage1.png-15659f7ad89db29adda8974bef207a7c.ctex"]
 
 [params]
 

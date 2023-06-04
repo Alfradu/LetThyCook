@@ -8,12 +8,11 @@ func _ready():
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(_delta):
 	pass
 
 
 func _on_cauldron_area_area_entered(area):
-	print(area.name)
 	if (area.name == "SpoonPart"):
 		ladle.pourable = true
 

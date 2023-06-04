@@ -1,7 +1,6 @@
-[gd_scene load_steps=8 format=3 uid="uid://bx8cooddov1t0"]
+[gd_scene load_steps=7 format=3 uid="uid://bx8cooddov1t0"]
 
 [ext_resource type="Script" path="res://Scripts/item.gd" id="1_3hfuy"]
-[ext_resource type="Texture2D" uid="uid://cf75r14bg3ebu" path="res://Assets/Soup/Carrot/carrot1.png" id="2_ic3ix"]
 [ext_resource type="PackedScene" path="res://Scenes/plums.tscn" id="3_yloxl"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_36syf"]
@@ -106,7 +105,6 @@ scale = Vector2(1.5, 1.5)
 script = ExtResource("1_3hfuy")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("2_ic3ix")
 
 [node name="Area2D" type="Area2D" parent="."]
 

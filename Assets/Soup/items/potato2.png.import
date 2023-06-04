@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b4bhe30mo3myh"
-path="res://.godot/imported/pixil-layer-2.png-1a8d4dbe7f8df6001a817d7bf789ce19.ctex"
+uid="uid://djkiueodabfvi"
+path="res://.godot/imported/potato2.png-351b8184c3b3936f5e1a65d57d2dad58.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Soup/Potato/pixil-layer-2.png"
-dest_files=["res://.godot/imported/pixil-layer-2.png-1a8d4dbe7f8df6001a817d7bf789ce19.ctex"]
+source_file="res://Assets/Soup/items/potato2.png"
+dest_files=["res://.godot/imported/potato2.png-351b8184c3b3936f5e1a65d57d2dad58.ctex"]
 
 [params]
 

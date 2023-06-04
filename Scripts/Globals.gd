@@ -1,11 +1,27 @@
 extends Node
 
-enum handState { OPEN, CLOSED}
-var test = 0
-# Called when the node enters the scene tree for the first time.
+enum handState { OPEN, CLOSED }
+
+@export var SOUPLEVEL = {
+	filling = 5,
+	power = 5,
+	taste = 5
+}
+
+@export var FoodItems = []
+
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
-# Called every frame. 'delta' is the elapsed time since the previous frame.
+
+var time = 0
+
 func _process(delta):
-	
-	pass
+	time += delta
+	if (time > 1):
+		time = 0
+		degradeSoup()
+		
+func degradeSoup():
+	for foodItem in FoodItems:
+		if (foodItem.inSoup):
+			foodItem.ttl -= 1

@@ -1,33 +1,27 @@
 extends Node2D
 
-enum ItemType { NONE, CABBAGE, CARROT, POTATO}
-var sprite_cabbage1 = load("res://Assets/Soup/Cabbage/cabbage1.png")
-var sprite_potato1 = load("res://Assets/Soup/Potato/potato1.png")
-var sprite_potato2 = load("res://Assets/Soup/Potato/potato2.png")
-var sprite_potato3 = load("res://Assets/Soup/Potato/potato3.png")
-var sprite_carrot1 = load("res://Assets/Soup/Carrot/carrot1.png")
-var sprite_carrot2 = load("res://Assets/Soup/Carrot/carrot2.png")
-var sprite_carrot3 = load("res://Assets/Soup/Carrot/carrot3.png")
-
-
-@export var type = ItemType.NONE
 @onready var sprite = $Sprite2D
-@onready var hand = get_node("../hand")
+@onready var hand = get_node("/root/Main/hand")
 
 var dragging = false
 var overCauldron = false
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	if type==ItemType.CABBAGE:
-		sprite.texture = sprite_cabbage1
-	elif type == ItemType.CARROT:
-		sprite.texture = sprite_carrot1
-	elif type == ItemType.POTATO:
-		sprite.texture = sprite_potato1
-	else : queue_free()
+	pass
+
+func init(item):
+	var rng = RandomNumberGenerator.new()
+	var texture = load(getTexture(item.name))
+	sprite.texture = texture
+	self.position.x = rng.randf_range(50, 300)
+	self.position.y = rng.randf_range(300, 1000)
+	return self
+	
+func getTexture(itemname):
+	return "res://Assets/Soup/items/" + itemname.to_lower() + "1.png"
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(_delta):
 	if dragging:
 		var mousepos = get_viewport().get_mouse_position()
 		self.position = Vector2(mousepos.x, mousepos.y)

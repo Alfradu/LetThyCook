@@ -18,6 +18,7 @@ config/icon="res://Assets/icon.svg"
 [autoload]
 
 Globals="*res://Scripts/Globals.gd"
+Item="*res://Scenes/item.tscn"
 
 [display]
 
