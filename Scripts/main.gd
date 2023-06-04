@@ -5,13 +5,23 @@ var rng = RandomNumberGenerator.new()
 @onready var spawnPoint = $RefPoints/spawnPoint
 
 func setupPopulation(Population):
-	for i in range(10):
+	for i in range(11):
 		var human = Globals.Human.new()
 		human.name = "Jörgen"
 		human.status = Globals.Rank.PEASANT
 		human.foodType = Globals.FoodType.VEGETABLE
 		human.holdingBowl = true
 		human.hunger = Globals.Hunger.HUNGRY
+		human.fat = false
+		Population.append(human)
+	for i in range(2):
+		var human = Globals.Human.new()
+		human.name = "Jörgen"
+		human.status = Globals.Rank.PEASANT
+		human.foodType = Globals.FoodType.VEGETABLE
+		human.holdingBowl = true
+		human.hunger = Globals.Hunger.HUNGRY
+		human.fat = true
 		Population.append(human)
 	for i in range(3):
 		var human = Globals.Human.new()
@@ -19,6 +29,7 @@ func setupPopulation(Population):
 		human.status = Globals.Rank.SOLDIER
 		human.foodType = Globals.FoodType.PROTEIN
 		human.holdingBowl = true
+		human.fat = false
 		human.hunger = Globals.Hunger.CONTEMPT
 		Population.append(human)
 	for i in range(1):
@@ -27,6 +38,7 @@ func setupPopulation(Population):
 		human.status = Globals.Rank.NOBLE
 		human.foodType = Globals.FoodType.HERB
 		human.holdingBowl = true
+		human.fat = false
 		human.hunger = Globals.Hunger.FULL
 		Population.append(human)
 	
