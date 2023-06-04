@@ -6,7 +6,9 @@ extends Node2D
 @onready var bowlFull = load("res://Assets/People/BowlFull.png")
 @onready var box = load("res://Assets/People/Box.png")
 @onready var peasant = load("res://Assets/People/Peasant.png")
+@onready var peasantWIDE = load("res://Assets/People/PeasantWIDE.png")
 @onready var soldier = load("res://Assets/People/Soldier.png")
+@onready var soldierWIDE = load("res://Assets/People/SoldierWIDE.png")
 @onready var cauldron = $/root/Main/RefPoints/cauldron
 
 var state
@@ -31,16 +33,22 @@ func init(init_human):
 		holding.scale.y = 1
 	if (init_human.holdingBox):
 		holding.texture = box
-	setBodyTexture(init_human.status)
+	setBodyTexture(init_human.status, init_human.fat)
 	human = init_human
 	state = Globals.HumanState.WALKING_TO_CAULDRON
 	self.position = $/root/Main/RefPoints/humanSpawn.position
 
-func setBodyTexture(status):
+func setBodyTexture(status, fat):
 	if (status == Globals.Rank.PEASANT):
-		body.texture = peasant
+		if fat:
+			body.texture = peasantWIDE
+		else:
+			body.texture = peasant
 	if (status == Globals.Rank.SOLDIER):
-		body.texture = soldier		
+		if fat:
+			body.texture = soldierWIDE
+		else:
+			body.texture = soldier
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):

@@ -59,6 +59,7 @@ class Human:
 		partOfSoupWithpreference /= itemsInSoup if itemsInSoup > 0 else 1
 
 		self.satisfaction = (Globals.SOUPSTATS.filling + Globals.SOUPSTATS.power + Globals.SOUPSTATS.taste) / 3 + (40 * partOfSoupWithpreference)
+		var willBeFat = self.hunger == Globals.Hunger.FULL
 		self.hunger = self.hunger + 2 as Globals.Hunger if self.hunger+2 < Globals.Hunger.FULL else Globals.Hunger.FULL
 		Globals.soupedPeople +=1
 		if self.fat:
@@ -67,6 +68,7 @@ class Human:
 		elif Globals.soupedPeople % 3 == 0:
 			Globals.soupedPeople = 0
 			Globals.updateCauldronLevel(-1)
+		self.fat = willBeFat
 	
 	func degradehuman():
 		self.hunger = self.hunger - 1 as Globals.Hunger if self.hunger-1 > Globals.Hunger.ALMOSTDEAD else Globals.Hunger.ALMOSTDEAD
