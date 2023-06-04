@@ -15,7 +15,6 @@ offset_bottom = 1080.0
 color = Color(0.184314, 0.145098, 0.0784314, 1)
 
 [node name="cauldron" parent="." instance=ExtResource("1_w0w7g")]
-level = 2
 state = 3
 
 [node name="ItemContainer" type="Node2D" parent="."]

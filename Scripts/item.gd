@@ -38,7 +38,8 @@ func _input(event):
 				$AnimationPlayer.play("plums");
 
 func _on_area_2d_area_entered(area):
-	hand.pickedItem = self
+	if area.name == "HandCollision":
+		hand.pickedItem = self
 	if area.name == "cauldronArea":
 		overCauldron = true;
 
