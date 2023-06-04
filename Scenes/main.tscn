@@ -23,6 +23,24 @@ color = Color(0.184314, 0.145098, 0.0784314, 1)
 position = Vector2(926, 598)
 state = 3
 
+[node name="tableMid" type="Node2D" parent="."]
+position = Vector2(928, 1140)
+
+[node name="Sprite2D" type="Sprite2D" parent="tableMid"]
+position = Vector2(-475.868, 138.823)
+rotation = -1.5708
+scale = Vector2(0.947744, 1.62946)
+texture = ExtResource("4_d7h36")
+centered = false
+metadata/_edit_lock_ = true
+
+[node name="SpawnAreaProtein" type="Sprite2D" parent="tableMid"]
+self_modulate = Color(1, 1, 1, 0)
+position = Vector2(-373, -178)
+scale = Vector2(5.90625, 0.539062)
+texture = ExtResource("4_xpdd1")
+centered = false
+
 [node name="tableLeft" type="Node2D" parent="."]
 position = Vector2(224, 659)
 scale = Vector2(1.2, 1.4)

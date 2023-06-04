@@ -9,7 +9,7 @@ func setupFoodItems(FoodItems):
 	FoodItems.append(getFoodItem("Potato", Globals.FoodType.VEGETABLE))
 	FoodItems.append(getFoodItem("Potato", Globals.FoodType.VEGETABLE))
 	FoodItems.append(getFoodItem("Potato", Globals.FoodType.VEGETABLE))
-	FoodItems.append(getFoodItem("Cabbage", Globals.FoodType.VEGETABLE))
+	FoodItems.append(getFoodItem("Cabbage", Globals.FoodType.PROTEIN))
 #	FoodItems.append(getFoodItem("Beef", FoodType.PROTEIN))
 #	FoodItems.append(getFoodItem("Chicken", FoodType.PROTEIN))
 #	FoodItems.append(getFoodItem("Thyme", FoodType.HERB))

@@ -1,6 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://bx8cooddov1t0"]
+[gd_scene load_steps=8 format=3 uid="uid://bx8cooddov1t0"]
 
 [ext_resource type="Script" path="res://Scripts/item.gd" id="1_3hfuy"]
+[ext_resource type="Texture2D" uid="uid://cgdvbaypq8rs7" path="res://Assets/Soup/items/carrot2.png" id="2_r004l"]
 [ext_resource type="PackedScene" uid="uid://cs655rh3twb2k" path="res://Scenes/plums.tscn" id="3_yloxl"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_36syf"]
@@ -105,8 +106,16 @@ scale = Vector2(1.5, 1.5)
 script = ExtResource("1_3hfuy")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_r004l")
+
+[node name="shadow" type="Sprite2D" parent="Sprite2D"]
+self_modulate = Color(0.368627, 0.368627, 0.368627, 1)
+show_behind_parent = true
+position = Vector2(2.5, 2.5)
+texture = ExtResource("2_r004l")
 
 [node name="Area2D" type="Area2D" parent="."]
+visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 scale = Vector2(4.93, 4.93)
