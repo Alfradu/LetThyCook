@@ -1,9 +1,11 @@
 extends Node2D
 
 @onready var sprite = $Sprite2D
+@onready var shadow = $Sprite2D/shadow
 @onready var hand = get_node("/root/Main/hand")
 @onready var VeggieSpawn = $/root/Main/tableLeft/SpawnAreaVeggies
 @onready var HerbSpawn = $/root/Main/tableRight/SpawnAreaHerbs
+@onready var ProteinSpawn = $/root/Main/tableMid/SpawnAreaProtein
 
 var foodItem
 var dragging = false
@@ -16,16 +18,18 @@ func init(item):
 	var rng = RandomNumberGenerator.new()
 	var texture = load(getTexture(item.name))
 	sprite.texture = texture
+	shadow.texture = texture
 	var spawn
 	match item.type:
 		Globals.FoodType.PROTEIN:
-			spawn = [VeggieSpawn.global_position, VeggieSpawn.get_rect().abs()]
+			spawn = [ProteinSpawn.global_position, ProteinSpawn.get_rect().size*ProteinSpawn.scale]
 		Globals.FoodType.HERB:
-			spawn = [HerbSpawn.global_position, HerbSpawn.get_rect().abs()]
+			spawn = [HerbSpawn.global_position, HerbSpawn.get_rect().size*HerbSpawn.scale]
 		Globals.FoodType.VEGETABLE, _:
 			spawn = [VeggieSpawn.global_position, VeggieSpawn.get_rect().size*VeggieSpawn.scale]
 	self.position = Vector2(rng.randf_range(spawn[0].x,spawn[0].x+spawn[1].x), rng.randf_range(spawn[0].y, spawn[0].y+spawn[1].y))
-	$Sprite2D.rotation = rng.randf_range(0,360)
+#	var randRotation = rng.randf_range(0,360)
+#	sprite.rotation = randRotation messes up shadow xd
 	foodItem = item
 	
 func getTexture(itemname):
