@@ -22,7 +22,7 @@ func _ready():
 	pass # Replace with function body.
 
 func init(init_human):
-	var rng = RandomNumberGenerator.new()
+	var _rng = RandomNumberGenerator.new()
 	if (init_human.holdingBowl):
 		holding.texture = bowl
 		holding.scale.x = 1

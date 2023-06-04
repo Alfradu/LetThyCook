@@ -28,6 +28,7 @@ func _process(delta):
 			sprite.texture = ladle_pouring
 			$AnimationPlayer.play("pour")
 			get_parent().get_node("cauldron").poured();
+			Globals.updateCauldronLevel(1)
 		return
 	
 	if dragging:

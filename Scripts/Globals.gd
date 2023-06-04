@@ -3,7 +3,7 @@ extends Node
 enum handState { OPEN, CLOSED }
 enum FoodType { VEGETABLE = 0, PROTEIN = 1, HERB = 2 }
 enum Rank { PEASANT = 0, SOLDIER = 1, NOBLE = 2 }
-enum Hunger { ALMOSTDEAD, HUNGRY, CONTEMPT, FULL }
+enum Hunger { ALMOSTDEAD = 0, HUNGRY = 1, CONTEMPT = 2, FULL = 3}
 enum HumanState { IDLE, WALKING_TO_CAULDRON, TAKING, WALKING_TO_END, DONE }
 enum TimeOfDay { MORNING, DAY, NIGHT }
 enum cauldronState { UNEATABLE = 0, BAD = 1, PRETTYGOOD = 2, AMAZING = 3}
@@ -45,8 +45,10 @@ class Human:
 	var isDead: bool
 	var hunger: Hunger
 	var satisfaction: int
+	var fat: bool
 	
 	func humandideat():
+		if Globals.soupLevel == cauldronLevels.EMPTY: return
 		var partOfSoupWithpreference = 0
 		var itemsInSoup = 0
 		for item in Globals.FoodItems:
@@ -57,14 +59,17 @@ class Human:
 		partOfSoupWithpreference /= itemsInSoup if itemsInSoup > 0 else 1
 
 		self.satisfaction = (Globals.SOUPSTATS.filling + Globals.SOUPSTATS.power + Globals.SOUPSTATS.taste) / 3 + (40 * partOfSoupWithpreference)
-		self.hunger += 2 
+		self.hunger = self.hunger + 2 as Globals.Hunger if self.hunger+2 < Globals.Hunger.FULL else Globals.Hunger.FULL
 		Globals.soupedPeople +=1
-		if (Globals.soupedPeople % 3 == 0 && Globals.soupLevel != cauldronLevels.EMPTY):
+		if self.fat:
+			Globals.soupedPeople = 0
+			Globals.updateCauldronLevel(-2)
+		elif Globals.soupedPeople % 3 == 0:
 			Globals.soupedPeople = 0
 			Globals.updateCauldronLevel(-1)
 	
 	func degradehuman():
-		self.hunger -= 1
+		self.hunger = self.hunger - 1 as Globals.Hunger if self.hunger-1 > Globals.Hunger.ALMOSTDEAD else Globals.Hunger.ALMOSTDEAD
 		if hunger <= 0:
 			isDead = true
 	
