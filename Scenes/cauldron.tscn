@@ -1,9 +1,10 @@
-[gd_scene load_steps=9 format=3 uid="uid://dso8a14l42uq6"]
+[gd_scene load_steps=11 format=3 uid="uid://dso8a14l42uq6"]
 
 [ext_resource type="Texture2D" uid="uid://dw7slyh67nwrk" path="res://Assets/Soup/pixil-layer-0.png" id="1_drmva"]
 [ext_resource type="Script" path="res://Scripts/cauldron.gd" id="1_vxttm"]
 [ext_resource type="Texture2D" uid="uid://csc8klbut3kvc" path="res://Assets/Soup/pixil-layer-2.png" id="2_ae612"]
 [ext_resource type="Texture2D" uid="uid://d2obvgln851sq" path="res://Assets/Soup/pixil-layer-5.png" id="3_7ndse"]
+[ext_resource type="Texture2D" uid="uid://c6u5n4vp1ps3c" path="res://Assets/Soup/pixil-layer-3.png" id="4_l2cik"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_6tvo5"]
 
@@ -20,6 +21,54 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../tempSoup:self_modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../tempSoup:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("../tempSoup:rotation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("../soup:self_modulate")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
 }
 
 [sub_resource type="Animation" id="Animation_p5nk5"]
@@ -38,16 +87,84 @@ tracks/0/keys = {
 "update": 0,
 "values": [0.0, 6.28319]
 }
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../tempSoup:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 40),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 6.28319]
+}
+
+[sub_resource type="Animation" id="Animation_i6a2j"]
+resource_name = "crossfade"
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../tempSoup:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../tempSoup:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("..")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(1),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"_changeCrossfadeSprite"
+}]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("../soup:self_modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_rnyab"]
 _data = {
 "RESET": SubResource("Animation_mosuy"),
+"crossfade": SubResource("Animation_i6a2j"),
 "speen": SubResource("Animation_p5nk5")
 }
 
 [node name="cauldron" type="Node2D"]
 position = Vector2(938, 532)
 script = ExtResource("1_vxttm")
+level = 2
 
 [node name="cauldronArea" type="Area2D" parent="."]
 collision_layer = 3
@@ -68,18 +185,34 @@ texture = ExtResource("1_drmva")
 
 [node name="soup" type="Sprite2D" parent="."]
 position = Vector2(6, 296)
+scale = Vector2(4.7, 4.7)
 texture = ExtResource("2_ae612")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="soup"]
-autoplay = "speen"
-libraries = {
-"": SubResource("AnimationLibrary_rnyab")
-}
+[node name="tempSoup" type="Sprite2D" parent="."]
+visible = false
+self_modulate = Color(1, 1, 1, 0)
+position = Vector2(6, 296)
+scale = Vector2(4.7, 4.7)
+texture = ExtResource("4_l2cik")
 
 [node name="cauldron front" type="Sprite2D" parent="."]
 position = Vector2(-7, 340)
 scale = Vector2(4.03, 4.03)
 texture = ExtResource("3_7ndse")
+
+[node name="RotationPlayer" type="AnimationPlayer" parent="."]
+root_node = NodePath("../soup")
+autoplay = "speen"
+libraries = {
+"": SubResource("AnimationLibrary_rnyab")
+}
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+root_node = NodePath("../tempSoup")
+autoplay = "speen"
+libraries = {
+"": SubResource("AnimationLibrary_rnyab")
+}
 
 [connection signal="area_entered" from="cauldronArea" to="." method="_on_cauldron_area_area_entered"]
 [connection signal="area_exited" from="cauldronArea" to="." method="_on_cauldron_area_area_exited"]

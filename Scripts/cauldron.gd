@@ -5,7 +5,11 @@ extends Node2D
 enum cauldronLevels { EMPTY = 0, ALMOSTEMPTY = 1, PRETTYFULL = 2, FULL = 3} 
 var levelScales = [0.7, 2, 3.4, 4.7]
 enum cauldronState { UNEATABLE = 0, BAD = 1, PRETTYGOOD = 2, AMAZING = 3}
-var stateImages = ["res://Assets/Soup/pixil-layer-4.png", "res://Assets/Soup/pixil-layer-3.png", "res://Assets/Soup/pixil-layer-2.png", "res://Assets/Soup/pixil-layer-1.png"]
+var stateImages = [
+	load("res://Assets/Soup/pixil-layer-4.png"), 
+	load("res://Assets/Soup/pixil-layer-3.png"), 
+	load("res://Assets/Soup/pixil-layer-2.png"), 
+	load("res://Assets/Soup/pixil-layer-1.png")]
  
 var levelupdate
 var stateupdate
@@ -15,7 +19,9 @@ var stateupdate
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	$soup.scale = Vector2(levelScales[level],levelScales[level])
-	$soup.texture = load(stateImages[state])
+	$tempSoup.scale = Vector2(levelScales[level],levelScales[level])
+	$soup.texture = stateImages[state]
+	$tempSoup.texture = stateImages[state]
 	Globals.soupState = state
 	Globals.soupLevel = level
 
@@ -24,11 +30,14 @@ func _process(delta):
 	if levelupdate:
 		var vec = Vector2(levelScales[level], levelScales[level])
 		$soup.scale = $soup.scale.lerp(vec, delta)
+		$tempSoup.scale = $tempSoup.scale.lerp(vec, delta)
 		if $soup.scale == vec:
 			levelupdate = false
 	if stateupdate:
 		state = Globals.soupState
-		$soup.texture = load(stateImages[state])
+		$tempSoup.texture = stateImages[state]
+		$tempSoup.visible = true
+		$AnimationPlayer.play("crossfade")
 		stateupdate = false
 
 func _on_cauldron_area_area_entered(area):
@@ -41,5 +50,10 @@ func _on_cauldron_area_area_exited(area):
 
 func poured():
 	if level != cauldronLevels.FULL:
-		level = level+1
+		level = level+1 as cauldronLevels
 		levelupdate = true
+
+func _changeCrossfadeSprite():
+	$soup.texture = stateImages[state]
+	$soup.self_modulate = Color(1, 1, 1, 1)
+

@@ -3,8 +3,8 @@
 [ext_resource type="PackedScene" uid="uid://b46fycpu36fr4" path="res://Scenes/hand.tscn" id="1_ib6nh"]
 [ext_resource type="Script" path="res://Scripts/main.gd" id="1_r782s"]
 [ext_resource type="PackedScene" uid="uid://dso8a14l42uq6" path="res://Scenes/cauldron.tscn" id="1_w0w7g"]
-[ext_resource type="PackedScene" uid="uid://boknxxs4unv80" path="res://Scenes/barrel.tscn" id="4_184di"]
-[ext_resource type="PackedScene" uid="uid://bvgqynkydm4sp" path="res://Scenes/ladle.tscn" id="6_ypd41"]
+[ext_resource type="PackedScene" path="res://Scenes/barrel.tscn" id="4_184di"]
+[ext_resource type="PackedScene" path="res://Scenes/ladle.tscn" id="6_ypd41"]
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_r782s")
@@ -36,6 +36,7 @@ offset_right = 268.0
 offset_bottom = 99.0
 
 [node name="Label" type="Label" parent="Filling"]
+layout_mode = 0
 offset_left = 13.0
 offset_top = 12.0
 offset_right = 59.0
@@ -49,6 +50,7 @@ offset_right = 269.0
 offset_bottom = 172.0
 
 [node name="Label" type="Label" parent="Power"]
+layout_mode = 0
 offset_left = 13.0
 offset_top = 12.0
 offset_right = 59.0
@@ -62,6 +64,7 @@ offset_right = 269.0
 offset_bottom = 247.0
 
 [node name="Label" type="Label" parent="Taste"]
+layout_mode = 0
 offset_left = 13.0
 offset_top = 12.0
 offset_right = 59.0

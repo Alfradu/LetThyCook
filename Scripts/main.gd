@@ -30,12 +30,12 @@ func setupFoodItems(FoodItems):
 #	FoodItems.append(getFoodItem("Thyme", FoodType.HERB))
 #	FoodItems.append(getFoodItem("Parsley", FoodType.HERB))
 	
-func getFoodItem(name, type, stats: FoodStats = null):
+func getFoodItem(itemName, type, stats: FoodStats = null):
 	var item = FoodItem.new()
-	item.name = name
+	item.name = itemName
 	item.type = type
 	item.ttl = rng.randf_range(60, 120)
-	item.hiddenCombo = getHiddenCombo(name)
+	item.hiddenCombo = getHiddenCombo(itemName)
 	
 	var itemStats = FoodStats.new()
 	itemStats.filling = stats.filling if stats != null else getFilling(type)
@@ -70,8 +70,8 @@ func getTaste(type):
 	if (type == FoodType.HERB):
 		return rng.randi_range(70, 100)
 		
-func getHiddenCombo(name):
-	if (name == "Carrot"):
+func getHiddenCombo(itemName):
+	if (itemName == "Carrot"):
 		return "Potato"
 	return ""
 
@@ -93,5 +93,5 @@ func _ready():
 		instantiateditem.init(item)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(_delta):
 	pass

@@ -16,6 +16,7 @@ func init(item):
 	sprite.texture = texture
 	self.position.x = rng.randf_range(50, 300)
 	self.position.y = rng.randf_range(300, 1000)
+	$Sprite2D.rotation = rng.randf_range(0,360)
 	foodItem = item
 	
 func getTexture(itemname):
