@@ -56,4 +56,4 @@ func poured():
 func _changeCrossfadeSprite():
 	$soup.texture = stateImages[state]
 	$soup.self_modulate = Color(1, 1, 1, 1)
-
+	$tempSoup.self_modulate = Color(1, 1, 1, 0)

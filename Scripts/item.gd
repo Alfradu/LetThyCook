@@ -2,6 +2,8 @@ extends Node2D
 
 @onready var sprite = $Sprite2D
 @onready var hand = get_node("/root/Main/hand")
+@onready var VeggieSpawn = $/root/Main/tableLeft/SpawnAreaVeggies
+@onready var HerbSpawn = $/root/Main/tableRight/SpawnAreaHerbs
 
 var foodItem
 var dragging = false
@@ -14,8 +16,15 @@ func init(item):
 	var rng = RandomNumberGenerator.new()
 	var texture = load(getTexture(item.name))
 	sprite.texture = texture
-	self.position.x = rng.randf_range(50, 300)
-	self.position.y = rng.randf_range(300, 1000)
+	var spawn
+	match item.type:
+		Globals.FoodType.PROTEIN:
+			spawn = [VeggieSpawn.global_position, VeggieSpawn.get_rect().abs()]
+		Globals.FoodType.HERB:
+			spawn = [HerbSpawn.global_position, HerbSpawn.get_rect().abs()]
+		Globals.FoodType.VEGETABLE, _:
+			spawn = [VeggieSpawn.global_position, VeggieSpawn.get_rect().size*VeggieSpawn.scale]
+	self.position = Vector2(rng.randf_range(spawn[0].x,spawn[0].x+spawn[1].x), rng.randf_range(spawn[0].y, spawn[0].y+spawn[1].y))
 	$Sprite2D.rotation = rng.randf_range(0,360)
 	foodItem = item
 	

@@ -1,6 +1,7 @@
 extends Node
 
 enum handState { OPEN, CLOSED }
+enum FoodType { VEGETABLE = 0, PROTEIN = 1, HERB = 2 }
 
 @export var SOUPSTATS = {
 	filling = 0,
@@ -15,6 +16,19 @@ var soupState
 
 var personInLine = null
 
+class FoodStats:
+	var filling: int
+	var power: int
+	var taste: int
+
+class FoodItem:
+	var name: String
+	var type: FoodType
+	var stats: FoodStats
+	var ttl: int
+	var inSoup: bool
+	var hiddenCombo: String
+	
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 	updateLabels()
