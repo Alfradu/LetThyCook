@@ -65,7 +65,7 @@ func _process(delta):
 				$AnimationPlayer.play("dipbowl")
 		if (human.holdingBox):
 			if (!$AnimationPlayer.is_playing()):
-				$AnimationPlayer.play("leaveCrate")				
+				$AnimationPlayer.play("leaveCrate")
 	if (state == Globals.HumanState.WALKING_TO_END):
 		self.position = self.position.lerp(targetPos, delta)
 		if abs(self.position.x - targetPos.x) < 40 && abs(self.position.y - targetPos.y) < 40:
@@ -94,15 +94,15 @@ func _on_area_2d_area_exited(area):
 	if area.name == "HandCollision":
 		isHovered = false
 
-func _on_animation_player_animation_finished(anim_name):
-	if (anim_name == "dipbowl"):
-		holding.texture = bowl
+func _on_animation_player_animation_finished(_anim_name):
+#	if (anim_name == "dipbowl"):
+#		holding.texture = bowl
 	targetPos = $/root/Main/RefPoints/humanEnd.position
 	state = Globals.HumanState.WALKING_TO_END
 
 func eat():
 	human.humandideat()
-	holding.texture = bowlFull
+	if Globals.soupLevel != Globals.cauldronLevels.EMPTY: holding.texture = bowlFull
 	hasEaten = true
 	
 func leftBox():

@@ -37,7 +37,7 @@ class FoodItem:
 	var stats: FoodStats
 	var ttl: int
 	var inSoup: bool
-	var hiddenCombo: String
+	var hiddenCombo: String #TODO: remove?
 
 class Human:
 	var name: String
@@ -63,7 +63,7 @@ class Human:
 				itemsInSoup += 1
 				if item.type == foodType:
 					partOfSoupWithpreference += 1
-		partOfSoupWithpreference = partOfSoupWithpreference / itemsInSoup if itemsInSoup > 0 else 1
+		partOfSoupWithpreference = partOfSoupWithpreference / itemsInSoup if itemsInSoup > 0 else 1.0
 		
 		self.ateSoupLevel = Globals.SOUPSTATS.umami
 		self.satisfaction = (Globals.SOUPSTATS.filling + Globals.SOUPSTATS.power + Globals.SOUPSTATS.taste) / 3 + (40 * partOfSoupWithpreference)
@@ -77,7 +77,7 @@ class Human:
 			Globals.soupedPeople = 0
 			Globals.updateCauldronLevel(-1)
 			
-		if self.satisfaction > 100 && rng.randf_range(0, 10) > 7:
+		if self.satisfaction > 80 && rng.randf_range(0, 10) > 5:
 			self.holdingBowl = false
 			self.holdingBox = true
 			for i in range(rng.randi_range(1,3)):
@@ -90,12 +90,31 @@ class Human:
 		self.hunger = self.hunger - 1 as Globals.Hunger if self.hunger-1 > Globals.Hunger.ALMOSTDEAD else Globals.Hunger.ALMOSTDEAD
 		if hunger <= 0:
 			isDead = true
-	
+
+var time = 0
+var foodLibrary = [
+	{ name = "Potato",  type = FoodType.VEGETABLE, combo = "Pork",   discovered = false, cost = 5,  modifier = 0},
+	{ name = "Carrot",  type = FoodType.VEGETABLE, combo = "potato", discovered = false, cost = 5,  modifier = 0},
+	{ name = "Cabbage", type = FoodType.VEGETABLE, combo = "Beef",   discovered = false, cost = 5,  modifier = 0},
+#	{ name = "Onion",   type = FoodType.VEGETABLE, combo = "Fish",   discovered = false, cost = 15, modifier = 10},
+#	{ name = "Garlic",  type = FoodType.VEGETABLE, combo = "Chicken",discovered = false, cost = 15, modifier = 10},
+#	{ name = "Turnip",  type = FoodType.VEGETABLE, combo = "Thyme",  discovered = false, cost = 10, modifier = 5},
+#	{ name = "Beans",   type = FoodType.VEGETABLE, combo = "Onion",  discovered = false, cost = 20, modifier = 15},
+	{ name = "Beef",    type = FoodType.PROTEIN,   combo = "Thyme",  discovered = false, cost = 25, modifier = 20},
+	{ name = "Pork",    type = FoodType.PROTEIN,   combo = "Parsley",discovered = false, cost = 30, modifier = 20},
+	{ name = "Chicken", type = FoodType.PROTEIN,   combo = "Carrot", discovered = false, cost = 35, modifier = 20},
+#	{ name = "Fish",    type = FoodType.PROTEIN,   combo = "Dill",   discovered = false, cost = 55, modifier = 20},
+	{ name = "Thyme",   type = FoodType.HERB,      combo = "Parsley",discovered = false, cost = 50, modifier = 20},
+	{ name = "Parsley", type = FoodType.HERB,      combo = "Potato", discovered = false, cost = 60, modifier = 40},
+	{ name = "Dill",    type = FoodType.HERB,      combo = "Fish",   discovered = false, cost = 55, modifier = 30},
+#	{ name = "Salt",    type = FoodType.HERB,      combo = "",       discovered = false, cost = 50, modifier = 50},
+#	{ name = "Pepper",  type = FoodType.HERB,      combo = "",       discovered = false, cost = 50, modifier = 50}
+] 
+
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 	setupFoodItems()
-
-var time = 0
+	print(foodLibrary[0])
 
 func _process(_delta):
 	pass
@@ -136,71 +155,64 @@ func updateCauldronLevel(nr):
 	
 
 func setupFoodItems():
-	FoodItems.append(getFoodItem("Carrot", Globals.FoodType.VEGETABLE))
-	FoodItems.append(getFoodItem("Carrot", Globals.FoodType.VEGETABLE))
-	FoodItems.append(getFoodItem("Carrot", Globals.FoodType.VEGETABLE))
-	FoodItems.append(getFoodItem("Potato", Globals.FoodType.VEGETABLE))
-	FoodItems.append(getFoodItem("Potato", Globals.FoodType.VEGETABLE))
-	FoodItems.append(getFoodItem("Potato", Globals.FoodType.VEGETABLE))
-	FoodItems.append(getFoodItem("Cabbage", Globals.FoodType.VEGETABLE))
-	FoodItems.append(getFoodItem("Beef", Globals.FoodType.PROTEIN))
-	FoodItems.append(getFoodItem("Pork", Globals.FoodType.PROTEIN))
-	FoodItems.append(getFoodItem("Chicken", Globals.FoodType.PROTEIN))
-	FoodItems.append(getFoodItem("Thyme", Globals.FoodType.HERB))
-	FoodItems.append(getFoodItem("Parsley", Globals.FoodType.HERB))
-	FoodItems.append(getFoodItem("Dill", Globals.FoodType.HERB))
+	FoodItems.append(getFoodItem("Carrot"))
+	FoodItems.append(getFoodItem("Carrot"))
+	FoodItems.append(getFoodItem("Carrot"))
+	FoodItems.append(getFoodItem("Potato"))
+	FoodItems.append(getFoodItem("Potato"))
+	FoodItems.append(getFoodItem("Potato"))
+	FoodItems.append(getFoodItem("Cabbage"))
+	FoodItems.append(getFoodItem("Beef"))
+	FoodItems.append(getFoodItem("Pork"))
+	FoodItems.append(getFoodItem("Chicken"))
+	FoodItems.append(getFoodItem("Thyme"))
+	FoodItems.append(getFoodItem("Parsley"))
+	FoodItems.append(getFoodItem("Dill"))
 	
-func getFoodItem(itemName = "", type = null, stats: Globals.FoodStats = null):
-	if (itemName == "" && type == null):
-		type = getRandomType()
-		itemName = getName(type) 
-	var item = Globals.FoodItem.new()
-	item.name = itemName
-	item.type = type
-	item.ttl = rng.randf_range(60, 120)
-	item.hiddenCombo = getHiddenCombo(itemName)
+func getFoodItem(itemName = "", stats: FoodStats = null):
+	var item = getRandomItem() if itemName == "" else getFoodFromLibrary(itemName) #TODO: can crash here if we dont find name in lib
+	var i = FoodItem.new()
+	i.name = item.name
+	i.type = item.type
+	i.ttl = rng.randf_range(60, 120)
+	i.hiddenCombo = item.combo
 	
-	var itemStats = Globals.FoodStats.new()
-	itemStats.filling = stats.filling if stats != null else getFilling(type)
-	itemStats.power = stats.power if stats != null else getPower(type)
-	itemStats.taste = stats.taste if stats != null else getTaste(type)
+	var itemStats = FoodStats.new()
+	itemStats.filling = stats.filling if stats != null else getFilling(item)
+	itemStats.power = stats.power if stats != null else getPower(item)
+	itemStats.taste = stats.taste if stats != null else getTaste(item)
 	
-	item.stats = itemStats
+	i.stats = itemStats
+	return i
 	
-	return item
+func getRandomItem():
+	return foodLibrary[rng.randi_range(0, foodLibrary.size()-1)];
 	
-func getRandomType():
-	return Globals.FoodType.VEGETABLE
-	
-func getName(type):
-	if (type == Globals.FoodType.VEGETABLE):
-		return "carrot"
+func getFoodFromLibrary(foodName):
+	for item in foodLibrary:
+		if foodName == item.name: return item
+	return null
 
-func getFilling(type):
-	if (type == Globals.FoodType.VEGETABLE):
-		return rng.randi_range(20, 40)
-	if (type == Globals.FoodType.PROTEIN):
-		return rng.randi_range(5, 30)
-	if (type == Globals.FoodType.HERB):
-		return rng.randi_range(0, 15)
+func getFilling(item):
+	if (item.type == FoodType.VEGETABLE):
+		return rng.randi_range(20, 40)+item.modifier
+	if (item.type == FoodType.PROTEIN):
+		return rng.randi_range(5, 30)+item.modifier
+	if (item.type == FoodType.HERB):
+		return rng.randi_range(0, 15)+item.modifier
 
-func getPower(type):
-	if (type == Globals.FoodType.VEGETABLE):
-		return rng.randi_range(0, 25)
-	if (type == Globals.FoodType.PROTEIN):
-		return rng.randi_range(30, 50)
-	if (type == Globals.FoodType.HERB):
-		return rng.randi_range(0, 15)
+func getPower(item):
+	if (item.type == FoodType.VEGETABLE):
+		return rng.randi_range(0, 25)+item.modifier
+	if (item.type == FoodType.PROTEIN):
+		return rng.randi_range(30, 50)+item.modifier
+	if (item.type == FoodType.HERB):
+		return rng.randi_range(0, 15)+item.modifier
 
-func getTaste(type):
-	if (type == Globals.FoodType.VEGETABLE):
-		return rng.randi_range(10, 30)
-	if (type == Globals.FoodType.PROTEIN):
-		return rng.randi_range(40, 50)
-	if (type == Globals.FoodType.HERB):
-		return rng.randi_range(40, 60)
-		
-func getHiddenCombo(itemName):
-	if (itemName == "Carrot"):
-		return "Potato"
-	return ""
+func getTaste(item):
+	if (item.type == FoodType.VEGETABLE):
+		return rng.randi_range(10, 30)+item.modifier
+	if (item.type == FoodType.PROTEIN):
+		return rng.randi_range(40, 50)+item.modifier
+	if (item.type == FoodType.HERB):
+		return rng.randi_range(40, 60)+item.modifier

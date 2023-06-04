@@ -27,7 +27,6 @@ func _process(delta):
 		if (!$AnimationPlayer.is_playing()):
 			sprite.texture = ladle_pouring
 			$AnimationPlayer.play("pour")
-			get_parent().get_node("cauldron").poured();
 			Globals.updateCauldronLevel(1)
 		return
 	

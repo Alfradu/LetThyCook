@@ -46,11 +46,6 @@ func _on_cauldron_area_area_exited(area):
 	if (area.name == "SpoonPart"):
 		ladle.pourable = false
 
-func poured():
-	if level != Globals.cauldronLevels.FULL:
-		level = level+1 as Globals.cauldronLevels
-		levelupdate = true
-
 func _changeCrossfadeSprite():
 	$soup.texture = stateImages[state]
 	$soup.self_modulate = Color(1, 1, 1, 1)

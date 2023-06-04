@@ -1,7 +1,7 @@
 [gd_scene load_steps=9 format=3 uid="uid://cbisx2e3hxe1l"]
 
 [ext_resource type="Script" path="res://Scripts/human.gd" id="1_3ms4j"]
-[ext_resource type="Script" path="res://Scripts/Holding.gd" id="2_q7yft"]
+[ext_resource type="Script" path="res://Scripts/Holding.gd" id="2_4jtkn"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_t1wih"]
 radius = 20.2661
@@ -39,7 +39,7 @@ tracks/1/keys = {
 
 [sub_resource type="Animation" id="Animation_5q040"]
 resource_name = "dipbowl"
-length = 4.0
+length = 3.0
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -47,10 +47,10 @@ tracks/0/path = NodePath("Holding:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 1.5, 2.5, 4),
+"times": PackedFloat32Array(0, 1.2, 2, 3),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 0,
-"values": [Vector2(0, 0), Vector2(0, 100), Vector2(0, 100), Vector2(0, 0)]
+"values": [Vector2(0, 0), Vector2(0, 90), Vector2(0, 90), Vector2(0, 0)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -59,7 +59,7 @@ tracks/1/path = NodePath("Holding:scale")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 1.5, 2.5, 4),
+"times": PackedFloat32Array(0, 1.2, 2, 3),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 0,
 "values": [Vector2(1, 1), Vector2(1.4, 1.4), Vector2(1.4, 1.4), Vector2(1, 1)]
@@ -71,7 +71,7 @@ tracks/2/path = NodePath(".")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(2.1),
+"times": PackedFloat32Array(2),
 "transitions": PackedFloat32Array(1),
 "values": [{
 "args": [],
@@ -79,9 +79,8 @@ tracks/2/keys = {
 }]
 }
 
-[sub_resource type="Animation" id="Animation_t8cnm"]
+[sub_resource type="Animation" id="Animation_fvxf1"]
 resource_name = "leaveCrate"
-length = 1.5
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -89,10 +88,10 @@ tracks/0/path = NodePath("Holding:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 1.5),
+"times": PackedFloat32Array(0, 1),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector2(0, 0), Vector2(230, 100)]
+"values": [Vector2(0, 0), Vector2(160, 80)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -101,10 +100,10 @@ tracks/1/path = NodePath("Holding:scale")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 1.5),
+"times": PackedFloat32Array(0, 1),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector2(1, 1), Vector2(1.1, 1.1)]
+"values": [Vector2(1, 1), Vector2(1.2, 1.2)]
 }
 tracks/2/type = "method"
 tracks/2/imported = false
@@ -113,7 +112,7 @@ tracks/2/path = NodePath(".")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(1.5),
+"times": PackedFloat32Array(1),
 "transitions": PackedFloat32Array(1),
 "values": [{
 "args": [],
@@ -125,11 +124,11 @@ tracks/2/keys = {
 _data = {
 "RESET": SubResource("Animation_xbirm"),
 "dipbowl": SubResource("Animation_5q040"),
-"leaveCrate": SubResource("Animation_t8cnm")
+"leaveCrate": SubResource("Animation_fvxf1")
 }
 
 [node name="human" type="Node2D"]
-scale = Vector2(4, 4)
+scale = Vector2(4.5, 4.5)
 script = ExtResource("1_3ms4j")
 
 [node name="Body" type="Sprite2D" parent="."]
@@ -137,7 +136,7 @@ script = ExtResource("1_3ms4j")
 [node name="Holding" type="Sprite2D" parent="."]
 z_index = 5
 scale = Vector2(1.4, 1.4)
-script = ExtResource("2_q7yft")
+script = ExtResource("2_4jtkn")
 
 [node name="BowlHitBox" type="Area2D" parent="Holding"]
 
@@ -163,9 +162,13 @@ collision_mask = 4
 collide_with_areas = true
 
 [node name="Label" type="Label" parent="."]
-offset_right = 40.0
-offset_bottom = 23.0
+offset_left = 25.7778
+offset_top = -24.4444
+offset_right = 65.7778
+offset_bottom = -1.44444
 
+[connection signal="area_entered" from="Holding/BowlHitBox" to="Holding" method="_on_bowl_hit_box_area_entered"]
+[connection signal="area_exited" from="Holding/BowlHitBox" to="Holding" method="_on_bowl_hit_box_area_exited"]
 [connection signal="area_entered" from="humanArea" to="." method="_on_area_2d_area_entered"]
 [connection signal="area_exited" from="humanArea" to="." method="_on_area_2d_area_exited"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://bvgqynkydm4sp"]
+[gd_scene load_steps=8 format=3 uid="uid://blsuuk4guurtt"]
 
 [ext_resource type="Script" path="res://Scripts/ladle.gd" id="1_n0bmp"]
 [ext_resource type="Texture2D" uid="uid://dkvmaa0q7oth8" path="res://Assets/Barrel/ladle.png" id="1_rnic0"]
