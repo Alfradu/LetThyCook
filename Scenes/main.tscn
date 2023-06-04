@@ -1,20 +1,19 @@
-[gd_scene load_steps=11 format=3 uid="uid://64q1xapxe1i8"]
+[gd_scene load_steps=13 format=3 uid="uid://64q1xapxe1i8"]
 
 [ext_resource type="PackedScene" uid="uid://b46fycpu36fr4" path="res://Scenes/hand.tscn" id="1_ib6nh"]
 [ext_resource type="Script" path="res://Scripts/main.gd" id="1_r782s"]
 [ext_resource type="PackedScene" uid="uid://dso8a14l42uq6" path="res://Scenes/cauldron.tscn" id="1_w0w7g"]
 [ext_resource type="Texture2D" uid="uid://cfypvk4tg780y" path="res://Assets/table/table-left.png" id="3_i8y3k"]
-[ext_resource type="PackedScene" uid="uid://boknxxs4unv80" path="res://Scenes/barrel.tscn" id="4_184di"]
+[ext_resource type="PackedScene" path="res://Scenes/barrel.tscn" id="4_184di"]
 [ext_resource type="Texture2D" uid="uid://cq3t6tuoppjjq" path="res://Assets/table/table-right.png" id="4_d7h36"]
 [ext_resource type="Texture2D" uid="uid://xqjjow6xcu5x" path="res://Assets/icon.svg" id="4_xpdd1"]
-[ext_resource type="PackedScene" uid="uid://bvgqynkydm4sp" path="res://Scenes/ladle.tscn" id="6_ypd41"]
+[ext_resource type="PackedScene" path="res://Scenes/ladle.tscn" id="6_ypd41"]
 [ext_resource type="Script" path="res://Scripts/spawnPoint.gd" id="9_jsjwr"]
+[ext_resource type="PackedScene" uid="uid://dqf4v0mcrnydu" path="res://Scenes/bookBuy.tscn" id="10_le51f"]
+[ext_resource type="PackedScene" uid="uid://cgr2rj03h2r5" path="res://Scenes/bookRecip.tscn" id="11_2wti7"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_btphb"]
 radius = 172.047
-[ext_resource type="PackedScene" path="res://Scenes/ladle.tscn" id="6_ypd41"]
-[ext_resource type="PackedScene" uid="uid://cgr2rj03h2r5" path="res://Scenes/bookRecip.tscn" id="9_jo53x"]
-[ext_resource type="PackedScene" uid="uid://dqf4v0mcrnydu" path="res://Scenes/bookBuy.tscn" id="10_iclsw"]
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_r782s")
@@ -78,18 +77,12 @@ scale = Vector2(2.51172, 2.55078)
 texture = ExtResource("4_xpdd1")
 centered = false
 
-[node name="bookRecip" parent="." instance=ExtResource("9_jo53x")]
-position = Vector2(90, 1003)
-
-[node name="bookRecip2" parent="." instance=ExtResource("10_iclsw")]
-position = Vector2(325, 1003)
+[node name="ItemContainer" type="Node2D" parent="."]
+position = Vector2(0, 1)
 
 [node name="barrel" parent="." instance=ExtResource("4_184di")]
 position = Vector2(1744, 983)
 scale = Vector2(6, 6)
-
-[node name="ItemContainer" type="Node2D" parent="."]
-position = Vector2(0, 1)
 
 [node name="ladle" parent="." instance=ExtResource("6_ypd41")]
 position = Vector2(1477, 915)
@@ -152,20 +145,29 @@ text = "Taste
 [node name="RefPoints" type="Node2D" parent="."]
 
 [node name="humanSpawn" type="Marker2D" parent="RefPoints"]
-position = Vector2(-191, 43)
+position = Vector2(-191, 110)
 
 [node name="cauldron" type="Marker2D" parent="RefPoints"]
-position = Vector2(932, 102)
+position = Vector2(932, 110)
 
 [node name="humanEnd" type="Marker2D" parent="RefPoints"]
-position = Vector2(2256, 31)
+position = Vector2(2256, 110)
 
 [node name="spawnPoint" type="Area2D" parent="RefPoints"]
+position = Vector2(-191, 110)
+collision_layer = 4
+collision_mask = 4
 script = ExtResource("9_jsjwr")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="RefPoints/spawnPoint"]
-position = Vector2(-189, 43)
 shape = SubResource("CircleShape2D_btphb")
+metadata/_edit_lock_ = true
+
+[node name="bookRecip" parent="." instance=ExtResource("10_le51f")]
+position = Vector2(101, 977)
+
+[node name="bookRecip2" parent="." instance=ExtResource("11_2wti7")]
+position = Vector2(332, 989)
 
 [connection signal="area_entered" from="RefPoints/spawnPoint" to="RefPoints/spawnPoint" method="_on_area_entered"]
 [connection signal="area_exited" from="RefPoints/spawnPoint" to="RefPoints/spawnPoint" method="_on_area_exited"]
