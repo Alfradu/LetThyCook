@@ -57,7 +57,11 @@ func _changeCrossfadeSprite():
 	$tempSoup.self_modulate = Color(1, 1, 1, 0)
 
 func updateLevel(nr):
-	if (nr+level >= Globals.cauldronLevels.EMPTY && nr+level <= Globals.cauldronLevels.FULL):
-		level +=nr
-		Globals.soupLevel = level
-		levelupdate = true 
+	level += nr
+	if level < Globals.cauldronLevels.EMPTY: level = Globals.cauldronLevels.EMPTY
+	elif level > Globals.cauldronLevels.FULL: level = Globals.cauldronLevels.FULL
+	Globals.soupLevel = level
+	levelupdate = true 
+	if level == Globals.cauldronLevels.EMPTY: Globals.degradeSoupItems(99)
+	elif nr < 0: Globals.degradeSoupItems(10)
+	elif nr > 0: Globals.degradeSoupItems(20)

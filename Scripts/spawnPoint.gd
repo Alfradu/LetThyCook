@@ -10,9 +10,9 @@ func _ready():
 func _process(_delta):
 	pass
 
-func _on_area_entered(area):
+func _on_area_entered(_area):
 	isOccupied = true
 
 
-func _on_area_exited(area):
+func _on_area_exited(_area):
 	isOccupied = false

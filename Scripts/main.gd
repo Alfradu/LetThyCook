@@ -132,6 +132,7 @@ func updateLabels():
 	$/root/Main/Taste.value = Globals.SOUPSTATS.taste
 	$/root/Main/Taste/Label.text = "Taste: %d%%" % Globals.SOUPSTATS.taste
 	$/root/Main/TimeNow.text = str(Globals.TimeOfDay.keys()[state]) + " " + str(untilDay if state == Globals.TimeOfDay.MORNING else untilMorning)
+	$/root/Main/SoupLevel.text = "Soup level: " + str(Globals.cauldronLevels.keys()[Globals.soupLevel])
 		
 func maybeSendInHuman():
 	if (!spawnPoint.isOccupied):
