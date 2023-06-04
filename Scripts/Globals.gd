@@ -114,7 +114,6 @@ var foodLibrary = [
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 	setupFoodItems()
-	print(foodLibrary[0])
 
 func _process(_delta):
 	pass
