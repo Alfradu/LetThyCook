@@ -176,11 +176,11 @@ script = ExtResource("9_jsjwr")
 shape = SubResource("CircleShape2D_btphb")
 metadata/_edit_lock_ = true
 
-[node name="bookRecip" parent="." instance=ExtResource("10_le51f")]
-position = Vector2(101, 977)
+[node name="bookBuy" parent="." instance=ExtResource("10_le51f")]
+position = Vector2(115, 974)
 
-[node name="bookRecip2" parent="." instance=ExtResource("11_2wti7")]
-position = Vector2(332, 989)
+[node name="bookRecip" parent="." instance=ExtResource("11_2wti7")]
+position = Vector2(334, 984)
 
 [connection signal="area_entered" from="RefPoints/spawnPoint" to="RefPoints/spawnPoint" method="_on_area_entered"]
 [connection signal="area_exited" from="RefPoints/spawnPoint" to="RefPoints/spawnPoint" method="_on_area_exited"]

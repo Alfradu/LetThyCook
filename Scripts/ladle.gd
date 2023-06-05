@@ -45,11 +45,19 @@ func _input(event):
 				state = ActionType.POURING
 			dragging = false;
 
-func _on_area_2d_area_entered(_area):
-	hand.pickedItem = self
-	
+func _on_area_2d_area_entered(area):
+	if area.name == "HandCollision":
+		hand.pickedItem = self
+		hand.setText("Ladle")
+
+func _on_area_2d_area_exited(area):
+	if area.name == "HandCollision":
+		if hand.pickedItem == self: hand.pickedItem = null
+		hand.clearText("Ladle")
+
 func reset():
 	pourable = false
 	onBarrel = false
 	state = ActionType.EMPTY
 	sprite.texture = ladle_empty
+

@@ -80,7 +80,7 @@ func _input(event):
 	if event is InputEventMouseButton && event.button_index == MOUSE_BUTTON_LEFT:
 		if event.is_pressed() && isHovered && state == Globals.HumanState.TAKING && !hasEaten:
 			$AnimationPlayer.play_backwards("dipbowl");
-		
+
 func _on_area_2d_area_entered(area):
 	if area.name == "HandCollision":
 		isHovered = true
@@ -88,7 +88,6 @@ func _on_area_2d_area_entered(area):
 		if $/root/Main/hand.state == Globals.handState.CLOSED && state == Globals.HumanState.TAKING && !hasEaten:
 			$AnimationPlayer.speed_scale = 2
 			$AnimationPlayer.play_backwards("dipbowl")
-			
 
 func _on_area_2d_area_exited(area):
 	if area.name == "HandCollision":

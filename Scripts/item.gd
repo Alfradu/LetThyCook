@@ -53,12 +53,18 @@ func _input(event):
 func _on_area_2d_area_entered(area):
 	if area.name == "HandCollision":
 		hand.pickedItem = self
+		if !overCauldron:
+			hand.setText(foodItem.name)
 	if area.name == "cauldronArea":
 		overCauldron = true;
 
 func _on_area_2d_area_exited(area):
 	if area.name == "cauldronArea":
 		overCauldron = false;
+	if area.name == "HandCollision":
+		if hand.pickedItem == self:
+			hand.pickedItem = null
+		hand.clearText(foodItem.name)
 
 func _souped():
 	#add stats n point to soup
@@ -70,3 +76,4 @@ func _plums():
 		$plums.visible = true
 		$plums/AnimationPlayer.play("splash")
 	foodItem.inSoup = true
+	Globals.calculateSoup()
