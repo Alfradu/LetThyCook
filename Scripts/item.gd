@@ -54,7 +54,7 @@ func _on_area_2d_area_entered(area):
 	if area.name == "HandCollision":
 		hand.pickedItem = self
 		if !overCauldron:
-			hand.setText(foodItem.name)
+			hand.setText(foodItem.name if foodItem != null else "")
 	if area.name == "cauldronArea":
 		overCauldron = true;
 
@@ -64,7 +64,7 @@ func _on_area_2d_area_exited(area):
 	if area.name == "HandCollision":
 		if hand.pickedItem == self:
 			hand.pickedItem = null
-		hand.clearText(foodItem.name)
+		hand.clearText(foodItem.name if foodItem != null else "")
 
 func _souped():
 	#add stats n point to soup

@@ -189,6 +189,12 @@ position = Vector2(6, 296)
 scale = Vector2(4.7, 4.7)
 texture = ExtResource("2_ae612")
 
+[node name="soupStatic" type="Sprite2D" parent="."]
+self_modulate = Color(1, 1, 1, 0)
+position = Vector2(6, 296)
+scale = Vector2(4.7, 4.7)
+texture = ExtResource("2_ae612")
+
 [node name="tempSoup" type="Sprite2D" parent="."]
 visible = false
 self_modulate = Color(1, 1, 1, 0)
@@ -217,8 +223,6 @@ libraries = {
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("6_cv6yd")
-volume_db = 1.284
 
 [connection signal="area_entered" from="cauldronArea" to="." method="_on_cauldron_area_area_entered"]
 [connection signal="area_exited" from="cauldronArea" to="." method="_on_cauldron_area_area_exited"]
-[connection signal="finished" from="AudioStreamPlayer2D" to="." method="_on_audio_stream_player_2d_finished"]

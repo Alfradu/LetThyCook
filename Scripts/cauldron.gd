@@ -1,6 +1,7 @@
 extends Node2D
 
 @onready var ladle = get_node("../ladle")
+@onready var bubble = load("res://Scenes/bubble.tscn")
 
 var levelScales = [0.7, 2, 3.4, 4.7]
 var stateImages = [
@@ -9,8 +10,13 @@ var stateImages = [
 	load("res://Assets/Soup/pixil-layer-2.png"), 
 	load("res://Assets/Soup/pixil-layer-1.png")]
  
+var rng = RandomNumberGenerator.new()
+
 var levelupdate
 var stateupdate
+var soundLevel
+var isChangingSound
+var timeSinceBubble = 0
 @export var level = Globals.cauldronLevels.EMPTY
 @export var state = Globals.cauldronState.PRETTYGOOD
 
@@ -22,6 +28,7 @@ func _ready():
 	$tempSoup.texture = stateImages[state]
 	Globals.SOUPSTATS.umami = state
 	Globals.soupLevel = level
+	$AudioStreamPlayer2D.volume_db = level * (level + 1)
 	$AudioStreamPlayer2D.play()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -29,6 +36,7 @@ func _process(delta):
 	if levelupdate:
 		var vec = Vector2(levelScales[level], levelScales[level])
 		$soup.scale = $soup.scale.lerp(vec, delta)
+		$soupStatic.scale = $soupStatic.scale.lerp(vec, delta)
 		$tempSoup.scale = $tempSoup.scale.lerp(vec, delta)
 		if $soup.scale == vec:
 			levelupdate = false
@@ -38,6 +46,19 @@ func _process(delta):
 		$tempSoup.visible = true
 		$AnimationPlayer.play("crossfade")
 		stateupdate = false
+	if isChangingSound:
+		var diff = $AudioStreamPlayer2D.volume_db - soundLevel
+		var up = diff < 0
+		if up:
+			$AudioStreamPlayer2D.volume_db += -diff if diff < 1 && diff > -1 else 1
+		else:
+			$AudioStreamPlayer2D.volume_db += diff if diff < 1 else -1
+		if $AudioStreamPlayer2D.volume_db == soundLevel:
+			isChangingSound = false
+	timeSinceBubble += delta
+	if level != Globals.cauldronLevels.EMPTY && timeSinceBubble > 3.5 - state:
+		spawnBubble()
+		timeSinceBubble = 0
 
 func _on_cauldron_area_area_entered(area):
 	if (area.name == "SpoonPart"):
@@ -57,11 +78,22 @@ func updateLevel(nr):
 	if level < Globals.cauldronLevels.EMPTY: level = Globals.cauldronLevels.EMPTY
 	elif level > Globals.cauldronLevels.FULL: level = Globals.cauldronLevels.FULL
 	Globals.soupLevel = level
+	changeSound(level)
 	levelupdate = true 
 	if level == Globals.cauldronLevels.EMPTY: Globals.degradeSoupItems(99)
 	elif nr < 0: Globals.degradeSoupItems(10)
 	elif nr > 0: Globals.degradeSoupItems(20)
 
+func changeSound(level):
+	soundLevel = level * (level + 1) if level * (level + 1) != 0 else -80
+	isChangingSound = true	
 
-func _on_audio_stream_player_2d_finished():
-	$AudioStreamPlayer2D.play()
+func spawnBubble():
+	var bubblespawn = bubble.instantiate()
+	var r = rng.randf_range(5, $soupStatic.scale.x * 10)
+	var angle = rng.randf_range(0, 180)
+	var x = r * cos(angle)
+	var y = r * sin(angle) - $soupStatic.scale.x * 12
+	bubblespawn.position = Vector2(x, y)
+	bubblespawn.rotation = 0
+	$soupStatic.add_child(bubblespawn)
