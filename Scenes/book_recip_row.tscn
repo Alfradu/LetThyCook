@@ -1,0 +1,43 @@
+[gd_scene load_steps=6 format=3 uid="uid://bn8p5gl8mtjpp"]
+
+[ext_resource type="Texture2D" uid="uid://dr4fd8eh7ypbi" path="res://Assets/books/woodframe.png" id="1_4sscv"]
+[ext_resource type="Texture2D" uid="uid://bud813akkc1tk" path="res://Assets/Soup/items/potato1.png" id="2_oijyr"]
+[ext_resource type="FontFile" uid="uid://dj2kwm3wierp1" path="res://antiquity-print.ttf" id="3_13ar3"]
+[ext_resource type="Texture2D" uid="uid://cvgn2n0jqb7s3" path="res://Assets/Soup/items/cabbage1.png" id="4_g70rk"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_o7nn6"]
+font = ExtResource("3_13ar3")
+font_size = 94
+font_color = Color(0, 0, 0, 1)
+
+[node name="bookRecipRow" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(225, 187)
+texture = ExtResource("1_4sscv")
+
+[node name="Sprite2D" type="Sprite2D" parent="Sprite2D"]
+position = Vector2(2, 0)
+scale = Vector2(0.54, 0.54)
+texture = ExtResource("2_oijyr")
+
+[node name="+" type="Label" parent="."]
+offset_left = 301.0
+offset_top = 99.0
+offset_right = 390.0
+offset_bottom = 238.0
+text = "+"
+label_settings = SubResource("LabelSettings_o7nn6")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+clip_text = true
+
+[node name="Sprite2D2" type="Sprite2D" parent="."]
+position = Vector2(461, 187)
+texture = ExtResource("1_4sscv")
+
+[node name="Sprite2D" type="Sprite2D" parent="Sprite2D2"]
+position = Vector2(1, 6)
+scale = Vector2(0.535, 0.535)
+texture = ExtResource("4_g70rk")

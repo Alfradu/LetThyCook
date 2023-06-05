@@ -114,3 +114,9 @@ func maybeChangeState():
 	if (state == Globals.TimeOfDay.NIGHT && untilMorning <= 0):
 		state = Globals.TimeOfDay.MORNING
 		untilMorning = 10
+
+func showRedBook():
+	pass
+	
+func showGreenBook():
+	pass

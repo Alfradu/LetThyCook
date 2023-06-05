@@ -91,7 +91,7 @@ class Human:
 var time = 0
 var foodLibrary = [
 	{ name = "Potato",  type = FoodType.VEGETABLE, combo = "Pork",   discovered = false, cost = 5,  modifier = 0},
-	{ name = "Carrot",  type = FoodType.VEGETABLE, combo = "potato", discovered = false, cost = 5,  modifier = 0},
+	{ name = "Carrot",  type = FoodType.VEGETABLE, combo = "Cabbage", discovered = false, cost = 5,  modifier = 0},
 	{ name = "Cabbage", type = FoodType.VEGETABLE, combo = "Beef",   discovered = false, cost = 5,  modifier = 0},
 #	{ name = "Onion",   type = FoodType.VEGETABLE, combo = "Fish",   discovered = false, cost = 15, modifier = 10},
 #	{ name = "Garlic",  type = FoodType.VEGETABLE, combo = "Chicken",discovered = false, cost = 15, modifier = 10},
@@ -101,8 +101,8 @@ var foodLibrary = [
 	{ name = "Pork",    type = FoodType.PROTEIN,   combo = "Parsley",discovered = false, cost = 30, modifier = 20},
 	{ name = "Chicken", type = FoodType.PROTEIN,   combo = "Carrot", discovered = false, cost = 35, modifier = 20},
 #	{ name = "Fish",    type = FoodType.PROTEIN,   combo = "Dill",   discovered = false, cost = 55, modifier = 20},
-	{ name = "Thyme",   type = FoodType.HERB,      combo = "Parsley",discovered = false, cost = 50, modifier = 20},
-	{ name = "Parsley", type = FoodType.HERB,      combo = "Potato", discovered = false, cost = 60, modifier = 40},
+	{ name = "Thyme",   type = FoodType.HERB,      combo = "Chicken",discovered = false, cost = 50, modifier = 20},
+	{ name = "Parsley", type = FoodType.HERB,      combo = "Beef", discovered = false, cost = 60, modifier = 40},
 	{ name = "Dill",    type = FoodType.HERB,      combo = "Fish",   discovered = false, cost = 55, modifier = 30},
 #	{ name = "Salt",    type = FoodType.HERB,      combo = "",       discovered = false, cost = 50, modifier = 50},
 #	{ name = "Pepper",  type = FoodType.HERB,      combo = "",       discovered = false, cost = 50, modifier = 50}
