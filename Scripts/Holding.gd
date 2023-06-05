@@ -28,7 +28,9 @@ func _input(event):
 func _on_bowl_hit_box_area_entered(area):
 	if area.name == "HandCollision":
 		hovering = true
+		if onTable: area.get_parent().setText("Unpack")
 
 func _on_bowl_hit_box_area_exited(area):
 	if area.name == "HandCollision":
 		hovering = false
+		if onTable: area.get_parent().clearText("Unpack")

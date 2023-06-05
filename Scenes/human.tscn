@@ -4,7 +4,7 @@
 [ext_resource type="Script" path="res://Scripts/Holding.gd" id="2_4jtkn"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_t1wih"]
-radius = 20.2661
+radius = 30.9626
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_1v5b0"]
 radius = 33.1111
@@ -141,7 +141,7 @@ script = ExtResource("2_4jtkn")
 [node name="BowlHitBox" type="Area2D" parent="Holding"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Holding/BowlHitBox"]
-position = Vector2(4.44444, -13.7778)
+position = Vector2(0.15873, -19.5238)
 shape = SubResource("CircleShape2D_t1wih")
 
 [node name="humanArea" type="Area2D" parent="."]
@@ -150,6 +150,7 @@ collision_mask = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="humanArea"]
 shape = SubResource("CapsuleShape2D_1v5b0")
+metadata/_edit_lock_ = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

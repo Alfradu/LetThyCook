@@ -10,7 +10,7 @@ var pickedItem
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	$HoverText.text = ""
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
@@ -26,3 +26,11 @@ func _input(event):
 			sprite.texture = sprite_open
 			state = Globals.handState.OPEN
 			pickedItem = null
+
+func setText(text):
+	if state != Globals.handState.CLOSED:
+		$HoverText.text = text
+	
+func clearText(text):
+	if $HoverText.text == text: 
+		$HoverText.text = ""
