@@ -1,7 +1,8 @@
-[gd_scene load_steps=10 format=3 uid="uid://cbisx2e3hxe1l"]
+[gd_scene load_steps=11 format=3 uid="uid://cbisx2e3hxe1l"]
 
 [ext_resource type="Script" path="res://Scripts/human.gd" id="1_3ms4j"]
 [ext_resource type="Script" path="res://Scripts/Holding.gd" id="2_4jtkn"]
+[ext_resource type="FontFile" uid="uid://dj2kwm3wierp1" path="res://antiquity-print.ttf" id="3_6o0w1"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_t1wih"]
 radius = 30.9626
@@ -154,7 +155,7 @@ tracks/0/path = NodePath("foodEffect:visible")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(2),
+"times": PackedFloat32Array(2.5),
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [false]
@@ -166,7 +167,7 @@ tracks/1/path = NodePath("foodEffect:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0.1, 2),
+"times": PackedFloat32Array(0, 2.5),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Vector2(0, 0), Vector2(-300, -150)]
@@ -217,6 +218,22 @@ collide_with_areas = true
 
 [node name="foodEffect" type="Sprite2D" parent="."]
 z_index = 15
+
+[node name="ScoreEarned" type="Label" parent="foodEffect"]
+offset_left = 17.7193
+offset_top = 2.08187
+offset_right = 57.7193
+offset_bottom = 29.0819
+theme_override_colors/font_color = Color(0.341176, 0.396078, 0.772549, 1)
+theme_override_fonts/font = ExtResource("3_6o0w1")
+
+[node name="MoneyEarned" type="Label" parent="foodEffect"]
+offset_left = 15.2748
+offset_top = 16.0819
+offset_right = 55.2748
+offset_bottom = 42.0819
+theme_override_colors/font_color = Color(0.321569, 0.654902, 0.423529, 1)
+theme_override_fonts/font = ExtResource("3_6o0w1")
 
 [connection signal="area_entered" from="Holding/BowlHitBox" to="." method="_on_bowl_hit_box_area_entered"]
 [connection signal="area_entered" from="Holding/BowlHitBox" to="Holding" method="_on_bowl_hit_box_area_entered"]
