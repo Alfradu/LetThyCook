@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://d4hyeu1c3co4"]
+
+[ext_resource type="Script" path="res://Scripts/BookOpen.gd" id="1_6ehdy"]
+[ext_resource type="Texture2D" uid="uid://cgy7yudx4ba1p" path="res://Assets/books/bookred.png" id="2_7kbwh"]
+
+[node name="BookOpen" type="Node2D"]
+script = ExtResource("1_6ehdy")
+
+[node name="bookl" type="Sprite2D" parent="."]
+texture = ExtResource("2_7kbwh")
+centered = false
+metadata/_edit_lock_ = true
+
+[node name="bookr" type="Sprite2D" parent="."]
+position = Vector2(960, 0)
+texture = ExtResource("2_7kbwh")
+centered = false
+flip_h = true
