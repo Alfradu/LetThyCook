@@ -5,8 +5,8 @@ var hoveringNextBtn = false
 var hoveringPrevBtn = false
 
 var page = 1
-var max = 2
-var min = 1
+var maxPage = 2
+var minPage = 1
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -42,11 +42,11 @@ func nextPage():
 	var nextNode = get_node("page"+str(page))
 	prevNode.visible = false
 	nextNode.visible = true
-	if (page == max): 
+	if (page == maxPage): 
 		disableButton($nextbtn/Sprite2D, $nextbtn/nextArea)
 	else:
 		enableButton($nextbtn/Sprite2D, $nextbtn/nextArea)
-	if (page == min): 
+	if (page == minPage): 
 		disableButton($prevbtn/Sprite2D, $prevbtn/prevArea)
 	else:
 		enableButton($prevbtn/Sprite2D, $prevbtn/prevArea)
@@ -55,13 +55,13 @@ func prevPage():
 	var prevNode = get_node("page"+str(page))
 	page -= 1
 	var nextNode = get_node("page"+str(page))
-	get_node("page"+str(page)).visible = false
-	get_node("page"+str(page)).visible = true
-	if (page == max): 
+	prevNode.visible = false
+	nextNode.visible = true
+	if (page == maxPage): 
 		disableButton($nextbtn/Sprite2D, $nextbtn/nextArea)
 	else:
 		enableButton($nextbtn/Sprite2D, $nextbtn/nextArea)
-	if (page == min): 
+	if (page == minPage): 
 		disableButton($prevbtn/Sprite2D, $prevbtn/prevArea)
 	else:
 		enableButton($prevbtn/Sprite2D, $prevbtn/prevArea)

@@ -85,8 +85,8 @@ func updateLevel(nr):
 	elif nr < 0: Globals.degradeSoupItems(10)
 	elif nr > 0: Globals.degradeSoupItems(20)
 
-func changeSound(level):
-	soundLevel = level * (level + 1) if level * (level + 1) != 0 else -80
+func changeSound(newSoundLevel):
+	soundLevel = newSoundLevel * (newSoundLevel + 1) if newSoundLevel * (newSoundLevel + 1) != 0 else -80
 	isChangingSound = true
 
 func spawnBubble():
