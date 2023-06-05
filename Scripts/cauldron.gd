@@ -22,6 +22,7 @@ func _ready():
 	$tempSoup.texture = stateImages[state]
 	Globals.SOUPSTATS.umami = state
 	Globals.soupLevel = level
+	$AudioStreamPlayer2D.play()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -60,3 +61,7 @@ func updateLevel(nr):
 	if level == Globals.cauldronLevels.EMPTY: Globals.degradeSoupItems(99)
 	elif nr < 0: Globals.degradeSoupItems(10)
 	elif nr > 0: Globals.degradeSoupItems(20)
+
+
+func _on_audio_stream_player_2d_finished():
+	$AudioStreamPlayer2D.play()
