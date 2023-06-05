@@ -48,8 +48,15 @@ func setupPopulation(Population):
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	setupPopulation(Globals.Population)
+#
+	for i in range(0, 3):
+		var item = Globals.FoodItems[i]
+		var instantiateditem = foodItem.instantiate()
+		$ItemContainer.add_child(instantiateditem)
+		item.inSoup = true
 	
-	for item in Globals.FoodItems:
+	for i in range(3, len(Globals.FoodItems)):
+		var item = Globals.FoodItems[i]		
 		var instantiateditem = foodItem.instantiate()
 		$ItemContainer.add_child(instantiateditem)
 		instantiateditem.init(item)
@@ -81,14 +88,25 @@ func _process(delta):
 		maybeChangeState()
 
 func updateLabels():
-	$/root/Main/Filling.value = Globals.SOUPSTATS.filling
-	$/root/Main/Filling/Label.text = "Filling: %d%%" % Globals.SOUPSTATS.filling
-	$/root/Main/Power.value = Globals.SOUPSTATS.power
-	$/root/Main/Power/Label.text = "Power: %d%%" % Globals.SOUPSTATS.power
-	$/root/Main/Taste.value = Globals.SOUPSTATS.taste
-	$/root/Main/Taste/Label.text = "Taste: %d%%" % Globals.SOUPSTATS.taste
-	$/root/Main/TimeNow.text = str(Globals.TimeOfDay.keys()[state]) + " " + str(untilDay if state == Globals.TimeOfDay.MORNING else untilMorning)
-	$/root/Main/SoupLevel.text = "Soup level: " + str(Globals.cauldronLevels.keys()[Globals.soupLevel])
+	$/root/Main/HUD/Filling.value = Globals.SOUPSTATS.filling
+	$/root/Main/HUD/Power.value = Globals.SOUPSTATS.power
+	$/root/Main/HUD/Taste.value = Globals.SOUPSTATS.taste
+	$/root/Main/HUD/PeopleLeft/Label2.text = str(toFeed())
+	$/root/Main/HUD/Money/Label2.text = formatScore()
+	$/root/Main/HUD/Score.text = "Score: " + formatScore()
+	#$/root/Main/TimeNow.text = str(Globals.TimeOfDay.keys()[state]) + " " + str(untilDay if state == Globals.TimeOfDay.MORNING else untilMorning)
+	#$/root/Main/SoupLevel.text = "Soup level: " + str(Globals.cauldronLevels.keys()[Globals.soupLevel])
+
+func formatScore():
+	var score = 123
+	return "%06d" % score
+
+func toFeed():
+	var count = 0
+	for item in Globals.Population:
+		if item.holdingBowl:
+			count += 1
+	return count
 
 func maybeSendInHuman(list):
 	if (!spawnPoint.isOccupied):

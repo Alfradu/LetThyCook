@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://64q1xapxe1i8"]
+[gd_scene load_steps=21 format=3 uid="uid://64q1xapxe1i8"]
 
 [ext_resource type="PackedScene" uid="uid://b46fycpu36fr4" path="res://Scenes/hand.tscn" id="1_ib6nh"]
 [ext_resource type="Script" path="res://Scripts/main.gd" id="1_r782s"]
@@ -8,9 +8,49 @@
 [ext_resource type="Texture2D" uid="uid://cq3t6tuoppjjq" path="res://Assets/table/table-right.png" id="4_d7h36"]
 [ext_resource type="Texture2D" uid="uid://xqjjow6xcu5x" path="res://Assets/icon.svg" id="4_xpdd1"]
 [ext_resource type="PackedScene" uid="uid://blsuuk4guurtt" path="res://Scenes/ladle.tscn" id="6_ypd41"]
+[ext_resource type="Script" path="res://Scripts/HUD.gd" id="9_d6h7d"]
 [ext_resource type="Script" path="res://Scripts/spawnPoint.gd" id="9_jsjwr"]
+[ext_resource type="FontFile" uid="uid://dj2kwm3wierp1" path="res://antiquity-print.ttf" id="9_lgflv"]
 [ext_resource type="PackedScene" uid="uid://dqf4v0mcrnydu" path="res://Scenes/bookBuy.tscn" id="10_le51f"]
 [ext_resource type="PackedScene" uid="uid://cgr2rj03h2r5" path="res://Scenes/bookRecip.tscn" id="11_2wti7"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_38iol"]
+bg_color = Color(0.235294, 0.235294, 0.235294, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_l0ovc"]
+bg_color = Color(0.972549, 0.811765, 0.513726, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_p6gho"]
+bg_color = Color(0.235294, 0.235294, 0.235294, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_luvgv"]
+bg_color = Color(0.517647, 0.176471, 0.219608, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dmtsd"]
+bg_color = Color(0.235294, 0.235294, 0.235294, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dxb6n"]
+bg_color = Color(0.282353, 0.694118, 0.443137, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_btphb"]
 radius = 172.047
@@ -93,14 +133,15 @@ z_index = 10
 position = Vector2(-167, 517)
 
 [node name="TimeNow" type="Label" parent="."]
+visible = false
 z_index = 15
 offset_left = 15.0
 offset_top = 32.0
 offset_right = 123.0
 offset_bottom = 58.0
-text = "resetsdgdfhdf"
 
 [node name="SoupLevel" type="Label" parent="."]
+visible = false
 z_index = 15
 offset_left = 14.0
 offset_top = 3.0
@@ -108,52 +149,142 @@ offset_right = 156.0
 offset_bottom = 29.0
 text = "Soup level: "
 
-[node name="Filling" type="HSlider" parent="."]
-z_index = 15
-offset_left = 2.0
-offset_top = 54.0
-offset_right = 270.0
-offset_bottom = 153.0
+[node name="HUD" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("9_d6h7d")
 
-[node name="Label" type="Label" parent="Filling"]
+[node name="Filling" type="ProgressBar" parent="HUD"]
+z_index = 50
 layout_mode = 0
-offset_left = 13.0
-offset_top = 12.0
-offset_right = 59.0
-offset_bottom = 38.0
+offset_left = 92.0
+offset_top = 71.0
+offset_right = 463.0
+offset_bottom = 98.0
+theme_override_styles/background = SubResource("StyleBoxFlat_38iol")
+theme_override_styles/fill = SubResource("StyleBoxFlat_l0ovc")
+show_percentage = false
+
+[node name="Label" type="Label" parent="HUD/Filling"]
+layout_mode = 0
+offset_left = -70.0
+offset_top = -2.0
+offset_right = -5.0
+offset_bottom = 25.0
+theme_override_fonts/font = ExtResource("9_lgflv")
 text = "Filling"
 
-[node name="Power" type="HSlider" parent="."]
-z_index = 15
-offset_left = 1.0
-offset_top = 101.0
-offset_right = 269.0
-offset_bottom = 200.0
-
-[node name="Label" type="Label" parent="Power"]
+[node name="Power" type="ProgressBar" parent="HUD"]
+z_index = 50
 layout_mode = 0
-offset_left = 13.0
-offset_top = 12.0
-offset_right = 59.0
-offset_bottom = 38.0
-text = "Power"
+offset_left = 91.0
+offset_top = 42.0
+offset_right = 462.0
+offset_bottom = 69.0
+theme_override_styles/background = SubResource("StyleBoxFlat_p6gho")
+theme_override_styles/fill = SubResource("StyleBoxFlat_luvgv")
+show_percentage = false
 
-[node name="Taste" type="HSlider" parent="."]
-z_index = 15
-offset_left = 2.0
-offset_top = 148.0
-offset_right = 270.0
-offset_bottom = 247.0
-metadata/_edit_lock_ = true
-
-[node name="Label" type="Label" parent="Taste"]
+[node name="Label" type="Label" parent="HUD/Power"]
 layout_mode = 0
-offset_left = 13.0
+offset_left = -79.0
+offset_right = -2.0
+offset_bottom = 27.0
+theme_override_fonts/font = ExtResource("9_lgflv")
+text = "Protein"
+
+[node name="Taste" type="ProgressBar" parent="HUD"]
+z_index = 50
+layout_mode = 0
+offset_left = 91.0
 offset_top = 12.0
-offset_right = 59.0
-offset_bottom = 38.0
+offset_right = 462.0
+offset_bottom = 39.0
+theme_override_styles/background = SubResource("StyleBoxFlat_dmtsd")
+theme_override_styles/fill = SubResource("StyleBoxFlat_dxb6n")
+show_percentage = false
+
+[node name="Label" type="Label" parent="HUD/Taste"]
+layout_mode = 0
+offset_left = -65.0
+offset_top = -1.0
+offset_bottom = 26.0
+theme_override_fonts/font = ExtResource("9_lgflv")
 text = "Taste
 "
+
+[node name="PeopleLeft" type="Panel" parent="HUD"]
+z_index = 50
+layout_mode = 0
+offset_left = 16.0
+offset_top = 109.0
+offset_right = 102.0
+offset_bottom = 190.0
+
+[node name="Label" type="Label" parent="HUD/PeopleLeft"]
+layout_mode = 0
+offset_left = 105.0
+offset_top = 20.0
+offset_right = 355.0
+offset_bottom = 74.0
+theme_override_fonts/font = ExtResource("9_lgflv")
+theme_override_font_sizes/font_size = 30
+text = "Waiting in queue "
+
+[node name="Label2" type="Label" parent="HUD/PeopleLeft"]
+layout_mode = 0
+offset_left = 16.0
+offset_top = -7.0
+offset_right = 97.0
+offset_bottom = 84.0
+theme_override_fonts/font = ExtResource("9_lgflv")
+theme_override_font_sizes/font_size = 50
+text = "6"
+
+[node name="Money" type="Panel" parent="HUD"]
+z_index = 50
+layout_mode = 0
+offset_left = 21.0
+offset_top = 207.0
+offset_right = 201.0
+offset_bottom = 258.0
+
+[node name="Label" type="Label" parent="HUD/Money"]
+layout_mode = 0
+offset_left = 149.0
+offset_top = -6.0
+offset_right = 189.0
+offset_bottom = 50.0
+theme_override_fonts/font = ExtResource("9_lgflv")
+theme_override_font_sizes/font_size = 35
+text = "$"
+
+[node name="Label2" type="Label" parent="HUD/Money"]
+layout_mode = 0
+offset_left = 10.0
+offset_top = -7.0
+offset_right = 120.0
+offset_bottom = 49.0
+theme_override_fonts/font = ExtResource("9_lgflv")
+theme_override_font_sizes/font_size = 35
+text = "000264"
+
+[node name="Score" type="Label" parent="HUD"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 25.012
+anchor_top = 1.325
+anchor_right = 25.012
+anchor_bottom = 1.325
+offset_left = 416.52
+offset_top = -41.0
+offset_right = 903.52
+offset_bottom = 50.0
+theme_override_fonts/font = ExtResource("9_lgflv")
+theme_override_font_sizes/font_size = 60
+text = "Score: 000000"
 
 [node name="RefPoints" type="Node2D" parent="."]
 
