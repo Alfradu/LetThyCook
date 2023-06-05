@@ -1,18 +1,22 @@
-[gd_scene load_steps=21 format=3 uid="uid://64q1xapxe1i8"]
+[gd_scene load_steps=22 format=3 uid="uid://64q1xapxe1i8"]
 
 [ext_resource type="PackedScene" uid="uid://b46fycpu36fr4" path="res://Scenes/hand.tscn" id="1_ib6nh"]
 [ext_resource type="Script" path="res://Scripts/main.gd" id="1_r782s"]
 [ext_resource type="PackedScene" uid="uid://dso8a14l42uq6" path="res://Scenes/cauldron.tscn" id="1_w0w7g"]
 [ext_resource type="Texture2D" uid="uid://cfypvk4tg780y" path="res://Assets/table/table-left.png" id="3_i8y3k"]
-[ext_resource type="PackedScene" uid="uid://boknxxs4unv80" path="res://Scenes/barrel.tscn" id="4_184di"]
+[ext_resource type="PackedScene" path="res://Scenes/barrel.tscn" id="4_184di"]
 [ext_resource type="Texture2D" uid="uid://cq3t6tuoppjjq" path="res://Assets/table/table-right.png" id="4_d7h36"]
 [ext_resource type="Texture2D" uid="uid://xqjjow6xcu5x" path="res://Assets/icon.svg" id="4_xpdd1"]
 [ext_resource type="PackedScene" uid="uid://blsuuk4guurtt" path="res://Scenes/ladle.tscn" id="6_ypd41"]
+[ext_resource type="PackedScene" uid="uid://bicnfoxqw07ai" path="res://Scenes/bookRecipOpen.tscn" id="9_4s2pm"]
 [ext_resource type="Script" path="res://Scripts/HUD.gd" id="9_d6h7d"]
 [ext_resource type="Script" path="res://Scripts/spawnPoint.gd" id="9_jsjwr"]
 [ext_resource type="FontFile" uid="uid://dj2kwm3wierp1" path="res://antiquity-print.ttf" id="9_lgflv"]
 [ext_resource type="PackedScene" uid="uid://dqf4v0mcrnydu" path="res://Scenes/bookBuy.tscn" id="10_le51f"]
 [ext_resource type="PackedScene" uid="uid://cgr2rj03h2r5" path="res://Scenes/bookRecip.tscn" id="11_2wti7"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_btphb"]
+radius = 172.047
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_38iol"]
 bg_color = Color(0.235294, 0.235294, 0.235294, 1)
@@ -51,9 +55,6 @@ corner_radius_top_left = 5
 corner_radius_top_right = 5
 corner_radius_bottom_right = 5
 corner_radius_bottom_left = 5
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_btphb"]
-radius = 172.047
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_r782s")
@@ -148,6 +149,37 @@ offset_top = 3.0
 offset_right = 156.0
 offset_bottom = 29.0
 text = "Soup level: "
+
+[node name="RefPoints" type="Node2D" parent="."]
+
+[node name="humanSpawn" type="Marker2D" parent="RefPoints"]
+position = Vector2(-191, 130)
+
+[node name="cauldron" type="Marker2D" parent="RefPoints"]
+position = Vector2(932, 130)
+
+[node name="humanEnd" type="Marker2D" parent="RefPoints"]
+position = Vector2(2256, 130)
+
+[node name="spawnPoint" type="Area2D" parent="RefPoints"]
+position = Vector2(-191, 130)
+collision_layer = 4
+collision_mask = 4
+script = ExtResource("9_jsjwr")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RefPoints/spawnPoint"]
+shape = SubResource("CircleShape2D_btphb")
+metadata/_edit_lock_ = true
+
+[node name="bookBuy" parent="." instance=ExtResource("10_le51f")]
+position = Vector2(115, 974)
+
+[node name="bookRecip" parent="." instance=ExtResource("11_2wti7")]
+position = Vector2(334, 984)
+
+[node name="bookRecipOpen" parent="." instance=ExtResource("9_4s2pm")]
+visible = false
+z_index = 8
 
 [node name="HUD" type="Control" parent="."]
 layout_mode = 3
@@ -286,33 +318,6 @@ offset_bottom = 50.0
 theme_override_fonts/font = ExtResource("9_lgflv")
 theme_override_font_sizes/font_size = 60
 text = "Score: 000000"
-
-[node name="RefPoints" type="Node2D" parent="."]
-
-[node name="humanSpawn" type="Marker2D" parent="RefPoints"]
-position = Vector2(-191, 130)
-
-[node name="cauldron" type="Marker2D" parent="RefPoints"]
-position = Vector2(932, 130)
-
-[node name="humanEnd" type="Marker2D" parent="RefPoints"]
-position = Vector2(2256, 130)
-
-[node name="spawnPoint" type="Area2D" parent="RefPoints"]
-position = Vector2(-191, 130)
-collision_layer = 4
-collision_mask = 4
-script = ExtResource("9_jsjwr")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="RefPoints/spawnPoint"]
-shape = SubResource("CircleShape2D_btphb")
-metadata/_edit_lock_ = true
-
-[node name="bookBuy" parent="." instance=ExtResource("10_le51f")]
-position = Vector2(115, 974)
-
-[node name="bookRecip" parent="." instance=ExtResource("11_2wti7")]
-position = Vector2(334, 984)
 
 [connection signal="area_entered" from="RefPoints/spawnPoint" to="RefPoints/spawnPoint" method="_on_area_entered"]
 [connection signal="area_exited" from="RefPoints/spawnPoint" to="RefPoints/spawnPoint" method="_on_area_exited"]

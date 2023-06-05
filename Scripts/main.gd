@@ -137,7 +137,11 @@ func maybeChangeState():
 		untilMorning = 10
 
 func showRedBook():
-	pass
-	
+	$hand.point()
+	Globals.bookOpen = true
+	$bookRecipOpen.openBook()
+
 func showGreenBook():
-	pass
+	$hand.point()
+	Globals.bookOpen = true
+	$bookRecipOpen.openBook()

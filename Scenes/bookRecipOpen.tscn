@@ -1,6 +1,7 @@
-[gd_scene load_steps=21 format=3 uid="uid://bicnfoxqw07ai"]
+[gd_scene load_steps=26 format=3 uid="uid://bicnfoxqw07ai"]
 
 [ext_resource type="PackedScene" uid="uid://d4hyeu1c3co4" path="res://Scenes/bookOpen.tscn" id="1_farj3"]
+[ext_resource type="Script" path="res://Scripts/bookRecipOpen.gd" id="1_grxif"]
 [ext_resource type="FontFile" uid="uid://dj2kwm3wierp1" path="res://antiquity-print.ttf" id="2_spdyk"]
 [ext_resource type="Texture2D" uid="uid://dr4fd8eh7ypbi" path="res://Assets/books/woodframe.png" id="3_vovjo"]
 [ext_resource type="Texture2D" uid="uid://bud813akkc1tk" path="res://Assets/Soup/items/potato1.png" id="4_jxr7k"]
@@ -18,6 +19,8 @@
 [ext_resource type="Texture2D" uid="uid://cna5lf7p7wbqt" path="res://Assets/books/hiddenframe.png" id="13_rbeff"]
 [ext_resource type="Texture2D" uid="uid://c8yai03u2sdn1" path="res://Assets/Soup/items/dill1.png" id="14_67f5w"]
 [ext_resource type="Texture2D" uid="uid://cpj4cksepqpwk" path="res://Assets/Soup/items/potato3.png" id="18_a46n3"]
+[ext_resource type="Texture2D" uid="uid://rpbmj8genyqw" path="res://Assets/books/arrow.png" id="20_18mhk"]
+[ext_resource type="Texture2D" uid="uid://dkhyqbnhvbx7b" path="res://Assets/books/btn.png" id="20_sew1q"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_10kq7"]
 font = ExtResource("2_spdyk")
@@ -29,12 +32,24 @@ font = ExtResource("2_spdyk")
 font_size = 32
 font_color = Color(0, 0, 0, 1)
 
+[sub_resource type="LabelSettings" id="LabelSettings_khr0f"]
+font = ExtResource("2_spdyk")
+font_size = 24
+font_color = Color(0, 0, 0, 1)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_edgx2"]
+size = Vector2(236, 77)
+
 [node name="bookRecipOpen" type="Node2D"]
+position = Vector2(0, 90)
+script = ExtResource("1_grxif")
 
 [node name="BookOpen" parent="." instance=ExtResource("1_farj3")]
 metadata/_edit_lock_ = true
 
-[node name="Label" type="Label" parent="."]
+[node name="page1" type="Node2D" parent="."]
+
+[node name="Label" type="Label" parent="page1"]
 offset_left = 1077.0
 offset_top = 94.0
 offset_right = 1772.0
@@ -45,22 +60,22 @@ autowrap_mode = 2
 clip_text = true
 metadata/_edit_lock_ = true
 
-[node name="bookRecipRow" type="Node2D" parent="."]
+[node name="bookRecipRow" type="Node2D" parent="page1"]
 position = Vector2(312, 192)
 metadata/_edit_lock_ = true
 
-[node name="Sprite2D" type="Sprite2D" parent="bookRecipRow"]
+[node name="Sprite2D" type="Sprite2D" parent="page1/bookRecipRow"]
 position = Vector2(-117, 0)
 texture = ExtResource("3_vovjo")
 metadata/_edit_lock_ = true
 
-[node name="Sprite2D" type="Sprite2D" parent="bookRecipRow/Sprite2D"]
+[node name="Sprite2D" type="Sprite2D" parent="page1/bookRecipRow/Sprite2D"]
 position = Vector2(2, 0)
 scale = Vector2(0.54, 0.54)
 texture = ExtResource("4_jxr7k")
 metadata/_edit_lock_ = true
 
-[node name="label" type="Label" parent="bookRecipRow"]
+[node name="label" type="Label" parent="page1/bookRecipRow"]
 offset_left = -77.0
 offset_top = -36.0
 offset_right = 450.0
@@ -72,38 +87,38 @@ autowrap_mode = 2
 clip_text = true
 metadata/_edit_lock_ = true
 
-[node name="Sprite2D2" type="Sprite2D" parent="bookRecipRow"]
+[node name="Sprite2D2" type="Sprite2D" parent="page1/bookRecipRow"]
 position = Vector2(480, 0)
 texture = ExtResource("4_no4b4")
 metadata/_edit_lock_ = true
 
-[node name="Sprite2D" type="Sprite2D" parent="bookRecipRow/Sprite2D2"]
+[node name="Sprite2D" type="Sprite2D" parent="page1/bookRecipRow/Sprite2D2"]
 position = Vector2(1, 6)
 scale = Vector2(0.535, 0.535)
 texture = ExtResource("10_ixdtq")
 metadata/_edit_lock_ = true
 
-[node name="hidden" type="Sprite2D" parent="bookRecipRow"]
+[node name="hidden" type="Sprite2D" parent="page1/bookRecipRow"]
 position = Vector2(480, 0)
 texture = ExtResource("7_nlwq8")
 metadata/_edit_lock_ = true
 
-[node name="bookRecipRow2" type="Node2D" parent="."]
+[node name="bookRecipRow2" type="Node2D" parent="page1"]
 position = Vector2(312, 264)
 metadata/_edit_lock_ = true
 
-[node name="Sprite2D" type="Sprite2D" parent="bookRecipRow2"]
+[node name="Sprite2D" type="Sprite2D" parent="page1/bookRecipRow2"]
 position = Vector2(-117, 0)
 texture = ExtResource("4_no4b4")
 metadata/_edit_lock_ = true
 
-[node name="Sprite2D" type="Sprite2D" parent="bookRecipRow2/Sprite2D"]
+[node name="Sprite2D" type="Sprite2D" parent="page1/bookRecipRow2/Sprite2D"]
 position = Vector2(2, 0)
 scale = Vector2(0.54, 0.54)
 texture = ExtResource("7_gpjsa")
 metadata/_edit_lock_ = true
 
-[node name="label" type="Label" parent="bookRecipRow2"]
+[node name="label" type="Label" parent="page1/bookRecipRow2"]
 offset_left = -77.0
 offset_top = -36.0
 offset_right = 450.0
@@ -115,38 +130,38 @@ autowrap_mode = 2
 clip_text = true
 metadata/_edit_lock_ = true
 
-[node name="Sprite2D2" type="Sprite2D" parent="bookRecipRow2"]
+[node name="Sprite2D2" type="Sprite2D" parent="page1/bookRecipRow2"]
 position = Vector2(480, 0)
 texture = ExtResource("3_vovjo")
 metadata/_edit_lock_ = true
 
-[node name="Sprite2D" type="Sprite2D" parent="bookRecipRow2/Sprite2D2"]
+[node name="Sprite2D" type="Sprite2D" parent="page1/bookRecipRow2/Sprite2D2"]
 position = Vector2(1, 6)
 scale = Vector2(0.535, 0.535)
 texture = ExtResource("5_o7rby")
 metadata/_edit_lock_ = true
 
-[node name="hidden" type="Sprite2D" parent="bookRecipRow2"]
+[node name="hidden" type="Sprite2D" parent="page1/bookRecipRow2"]
 position = Vector2(480, 0)
 texture = ExtResource("6_6hqka")
 metadata/_edit_lock_ = true
 
-[node name="bookRecipRow3" type="Node2D" parent="."]
+[node name="bookRecipRow3" type="Node2D" parent="page1"]
 position = Vector2(312, 336)
 metadata/_edit_lock_ = true
 
-[node name="Sprite2D" type="Sprite2D" parent="bookRecipRow3"]
+[node name="Sprite2D" type="Sprite2D" parent="page1/bookRecipRow3"]
 position = Vector2(-117, 0)
 texture = ExtResource("3_vovjo")
 metadata/_edit_lock_ = true
 
-[node name="Sprite2D" type="Sprite2D" parent="bookRecipRow3/Sprite2D"]
+[node name="Sprite2D" type="Sprite2D" parent="page1/bookRecipRow3/Sprite2D"]
 position = Vector2(2, 0)
 scale = Vector2(0.54, 0.54)
 texture = ExtResource("5_o7rby")
 metadata/_edit_lock_ = true
 
-[node name="label" type="Label" parent="bookRecipRow3"]
+[node name="label" type="Label" parent="page1/bookRecipRow3"]
 offset_left = -77.0
 offset_top = -36.0
 offset_right = 450.0
@@ -158,40 +173,40 @@ autowrap_mode = 2
 clip_text = true
 metadata/_edit_lock_ = true
 
-[node name="Sprite2D2" type="Sprite2D" parent="bookRecipRow3"]
+[node name="Sprite2D2" type="Sprite2D" parent="page1/bookRecipRow3"]
 position = Vector2(480, 0)
 texture = ExtResource("9_e6my5")
 metadata/_edit_lock_ = true
 
-[node name="Sprite2D" type="Sprite2D" parent="bookRecipRow3/Sprite2D2"]
+[node name="Sprite2D" type="Sprite2D" parent="page1/bookRecipRow3/Sprite2D2"]
 self_modulate = Color(0.87451, 0.87451, 0.87451, 1)
 position = Vector2(2.62501, 6.625)
 scale = Vector2(0.5875, 0.6675)
 texture = ExtResource("8_75ulw")
 metadata/_edit_lock_ = true
 
-[node name="hidden" type="Sprite2D" parent="bookRecipRow3"]
+[node name="hidden" type="Sprite2D" parent="page1/bookRecipRow3"]
 position = Vector2(480, 0)
 texture = ExtResource("13_rbeff")
 metadata/_edit_lock_ = true
 
-[node name="bookRecipRow4" type="Node2D" parent="."]
+[node name="bookRecipRow4" type="Node2D" parent="page1"]
 position = Vector2(312, 408)
 metadata/_edit_lock_ = true
 
-[node name="Sprite2D" type="Sprite2D" parent="bookRecipRow4"]
+[node name="Sprite2D" type="Sprite2D" parent="page1/bookRecipRow4"]
 position = Vector2(-117, 0)
 texture = ExtResource("9_e6my5")
 metadata/_edit_lock_ = true
 
-[node name="Sprite2D" type="Sprite2D" parent="bookRecipRow4/Sprite2D"]
+[node name="Sprite2D" type="Sprite2D" parent="page1/bookRecipRow4/Sprite2D"]
 self_modulate = Color(0.803922, 0.803922, 0.803922, 1)
 position = Vector2(-1.75, 4.62501)
 scale = Vector2(0.615, 0.7075)
 texture = ExtResource("8_75ulw")
 metadata/_edit_lock_ = true
 
-[node name="label" type="Label" parent="bookRecipRow4"]
+[node name="label" type="Label" parent="page1/bookRecipRow4"]
 offset_left = -77.0
 offset_top = -36.0
 offset_right = 450.0
@@ -203,39 +218,39 @@ autowrap_mode = 2
 clip_text = true
 metadata/_edit_lock_ = true
 
-[node name="Sprite2D2" type="Sprite2D" parent="bookRecipRow4"]
+[node name="Sprite2D2" type="Sprite2D" parent="page1/bookRecipRow4"]
 position = Vector2(480, 0)
 texture = ExtResource("9_e6my5")
 metadata/_edit_lock_ = true
 
-[node name="Sprite2D" type="Sprite2D" parent="bookRecipRow4/Sprite2D2"]
+[node name="Sprite2D" type="Sprite2D" parent="page1/bookRecipRow4/Sprite2D2"]
 self_modulate = Color(0.87451, 0.87451, 0.87451, 1)
 position = Vector2(2.62501, 6.625)
 scale = Vector2(0.5875, 0.6675)
 texture = ExtResource("12_ly8ww")
 metadata/_edit_lock_ = true
 
-[node name="hidden" type="Sprite2D" parent="bookRecipRow4"]
+[node name="hidden" type="Sprite2D" parent="page1/bookRecipRow4"]
 position = Vector2(480, 0)
 texture = ExtResource("13_rbeff")
 metadata/_edit_lock_ = true
 
-[node name="bookRecipRow5" type="Node2D" parent="."]
+[node name="bookRecipRow5" type="Node2D" parent="page1"]
 position = Vector2(312, 480)
 metadata/_edit_lock_ = true
 
-[node name="Sprite2D" type="Sprite2D" parent="bookRecipRow5"]
+[node name="Sprite2D" type="Sprite2D" parent="page1/bookRecipRow5"]
 position = Vector2(-117, 0)
 texture = ExtResource("4_no4b4")
 metadata/_edit_lock_ = true
 
-[node name="Sprite2D" type="Sprite2D" parent="bookRecipRow5/Sprite2D"]
+[node name="Sprite2D" type="Sprite2D" parent="page1/bookRecipRow5/Sprite2D"]
 position = Vector2(5, 8)
 scale = Vector2(0.67, 0.67)
 texture = ExtResource("10_ixdtq")
 metadata/_edit_lock_ = true
 
-[node name="label" type="Label" parent="bookRecipRow5"]
+[node name="label" type="Label" parent="page1/bookRecipRow5"]
 offset_left = -77.0
 offset_top = -36.0
 offset_right = 450.0
@@ -247,39 +262,39 @@ autowrap_mode = 2
 clip_text = true
 metadata/_edit_lock_ = true
 
-[node name="Sprite2D2" type="Sprite2D" parent="bookRecipRow5"]
+[node name="Sprite2D2" type="Sprite2D" parent="page1/bookRecipRow5"]
 position = Vector2(480, 0)
 texture = ExtResource("9_e6my5")
 metadata/_edit_lock_ = true
 
-[node name="Sprite2D" type="Sprite2D" parent="bookRecipRow5/Sprite2D2"]
+[node name="Sprite2D" type="Sprite2D" parent="page1/bookRecipRow5/Sprite2D2"]
 self_modulate = Color(0.87451, 0.87451, 0.87451, 1)
 position = Vector2(2.62501, 6.625)
 scale = Vector2(0.5875, 0.6675)
 texture = ExtResource("13_5is12")
 metadata/_edit_lock_ = true
 
-[node name="hidden" type="Sprite2D" parent="bookRecipRow5"]
+[node name="hidden" type="Sprite2D" parent="page1/bookRecipRow5"]
 position = Vector2(480, 0)
 texture = ExtResource("13_rbeff")
 metadata/_edit_lock_ = true
 
-[node name="bookRecipRow6" type="Node2D" parent="."]
+[node name="bookRecipRow6" type="Node2D" parent="page1"]
 position = Vector2(312, 552)
 metadata/_edit_lock_ = true
 
-[node name="Sprite2D" type="Sprite2D" parent="bookRecipRow6"]
+[node name="Sprite2D" type="Sprite2D" parent="page1/bookRecipRow6"]
 position = Vector2(-117, 0)
 texture = ExtResource("4_no4b4")
 metadata/_edit_lock_ = true
 
-[node name="Sprite2D" type="Sprite2D" parent="bookRecipRow6/Sprite2D"]
+[node name="Sprite2D" type="Sprite2D" parent="page1/bookRecipRow6/Sprite2D"]
 position = Vector2(-3, 0)
 scale = Vector2(0.75, 0.75)
 texture = ExtResource("11_o72o4")
 metadata/_edit_lock_ = true
 
-[node name="label" type="Label" parent="bookRecipRow6"]
+[node name="label" type="Label" parent="page1/bookRecipRow6"]
 offset_left = -77.0
 offset_top = -36.0
 offset_right = 450.0
@@ -291,38 +306,38 @@ autowrap_mode = 2
 clip_text = true
 metadata/_edit_lock_ = true
 
-[node name="Sprite2D2" type="Sprite2D" parent="bookRecipRow6"]
+[node name="Sprite2D2" type="Sprite2D" parent="page1/bookRecipRow6"]
 position = Vector2(480, 0)
 texture = ExtResource("4_no4b4")
 metadata/_edit_lock_ = true
 
-[node name="Sprite2D" type="Sprite2D" parent="bookRecipRow6/Sprite2D2"]
+[node name="Sprite2D" type="Sprite2D" parent="page1/bookRecipRow6/Sprite2D2"]
 self_modulate = Color(0.87451, 0.87451, 0.87451, 1)
 scale = Vector2(0.48, 0.45375)
 texture = ExtResource("7_gpjsa")
 metadata/_edit_lock_ = true
 
-[node name="hidden" type="Sprite2D" parent="bookRecipRow6"]
+[node name="hidden" type="Sprite2D" parent="page1/bookRecipRow6"]
 position = Vector2(480, 0)
 texture = ExtResource("7_nlwq8")
 metadata/_edit_lock_ = true
 
-[node name="bookRecipRow7" type="Node2D" parent="."]
+[node name="bookRecipRow7" type="Node2D" parent="page1"]
 position = Vector2(312, 624)
 metadata/_edit_lock_ = true
 
-[node name="Sprite2D" type="Sprite2D" parent="bookRecipRow7"]
+[node name="Sprite2D" type="Sprite2D" parent="page1/bookRecipRow7"]
 position = Vector2(-117, 0)
 texture = ExtResource("9_e6my5")
 metadata/_edit_lock_ = true
 
-[node name="Sprite2D" type="Sprite2D" parent="bookRecipRow7/Sprite2D"]
+[node name="Sprite2D" type="Sprite2D" parent="page1/bookRecipRow7/Sprite2D"]
 position = Vector2(2, 0)
 scale = Vector2(0.54, 0.54)
 texture = ExtResource("12_ly8ww")
 metadata/_edit_lock_ = true
 
-[node name="label" type="Label" parent="bookRecipRow7"]
+[node name="label" type="Label" parent="page1/bookRecipRow7"]
 offset_left = -77.0
 offset_top = -36.0
 offset_right = 450.0
@@ -334,39 +349,39 @@ autowrap_mode = 2
 clip_text = true
 metadata/_edit_lock_ = true
 
-[node name="Sprite2D2" type="Sprite2D" parent="bookRecipRow7"]
+[node name="Sprite2D2" type="Sprite2D" parent="page1/bookRecipRow7"]
 position = Vector2(480, 0)
 texture = ExtResource("4_no4b4")
 metadata/_edit_lock_ = true
 
-[node name="Sprite2D" type="Sprite2D" parent="bookRecipRow7/Sprite2D2"]
+[node name="Sprite2D" type="Sprite2D" parent="page1/bookRecipRow7/Sprite2D2"]
 self_modulate = Color(0.87451, 0.87451, 0.87451, 1)
 position = Vector2(-2.6875, 1.9641)
 scale = Vector2(0.69375, 0.788218)
 texture = ExtResource("11_o72o4")
 metadata/_edit_lock_ = true
 
-[node name="hidden" type="Sprite2D" parent="bookRecipRow7"]
+[node name="hidden" type="Sprite2D" parent="page1/bookRecipRow7"]
 position = Vector2(480, 0)
 texture = ExtResource("7_nlwq8")
 metadata/_edit_lock_ = true
 
-[node name="bookRecipRow8" type="Node2D" parent="."]
+[node name="bookRecipRow8" type="Node2D" parent="page1"]
 position = Vector2(312, 696)
 metadata/_edit_lock_ = true
 
-[node name="Sprite2D" type="Sprite2D" parent="bookRecipRow8"]
+[node name="Sprite2D" type="Sprite2D" parent="page1/bookRecipRow8"]
 position = Vector2(-117, 0)
 texture = ExtResource("9_e6my5")
 metadata/_edit_lock_ = true
 
-[node name="Sprite2D" type="Sprite2D" parent="bookRecipRow8/Sprite2D"]
+[node name="Sprite2D" type="Sprite2D" parent="page1/bookRecipRow8/Sprite2D"]
 position = Vector2(-0.500003, 2.5)
 scale = Vector2(0.59, 0.59)
 texture = ExtResource("13_5is12")
 metadata/_edit_lock_ = true
 
-[node name="label" type="Label" parent="bookRecipRow8"]
+[node name="label" type="Label" parent="page1/bookRecipRow8"]
 offset_left = -77.0
 offset_top = -36.0
 offset_right = 450.0
@@ -378,39 +393,39 @@ autowrap_mode = 2
 clip_text = true
 metadata/_edit_lock_ = true
 
-[node name="Sprite2D2" type="Sprite2D" parent="bookRecipRow8"]
+[node name="Sprite2D2" type="Sprite2D" parent="page1/bookRecipRow8"]
 position = Vector2(480, 0)
 texture = ExtResource("9_e6my5")
 metadata/_edit_lock_ = true
 
-[node name="Sprite2D" type="Sprite2D" parent="bookRecipRow8/Sprite2D2"]
+[node name="Sprite2D" type="Sprite2D" parent="page1/bookRecipRow8/Sprite2D2"]
 self_modulate = Color(0.87451, 0.87451, 0.87451, 1)
 position = Vector2(2.62501, 6.625)
 scale = Vector2(0.5875, 0.6675)
 texture = ExtResource("8_75ulw")
 metadata/_edit_lock_ = true
 
-[node name="hidden" type="Sprite2D" parent="bookRecipRow8"]
+[node name="hidden" type="Sprite2D" parent="page1/bookRecipRow8"]
 position = Vector2(480, 0)
 texture = ExtResource("13_rbeff")
 metadata/_edit_lock_ = true
 
-[node name="bookRecipRow9" type="Node2D" parent="."]
+[node name="bookRecipRow9" type="Node2D" parent="page1"]
 position = Vector2(312, 768)
 metadata/_edit_lock_ = true
 
-[node name="Sprite2D" type="Sprite2D" parent="bookRecipRow9"]
+[node name="Sprite2D" type="Sprite2D" parent="page1/bookRecipRow9"]
 position = Vector2(-117, 0)
 texture = ExtResource("9_e6my5")
 metadata/_edit_lock_ = true
 
-[node name="Sprite2D" type="Sprite2D" parent="bookRecipRow9/Sprite2D"]
+[node name="Sprite2D" type="Sprite2D" parent="page1/bookRecipRow9/Sprite2D"]
 position = Vector2(2, 0)
 scale = Vector2(0.54, 0.54)
 texture = ExtResource("14_67f5w")
 metadata/_edit_lock_ = true
 
-[node name="label" type="Label" parent="bookRecipRow9"]
+[node name="label" type="Label" parent="page1/bookRecipRow9"]
 offset_left = -77.0
 offset_top = -36.0
 offset_right = 450.0
@@ -422,23 +437,23 @@ autowrap_mode = 2
 clip_text = true
 metadata/_edit_lock_ = true
 
-[node name="Sprite2D2" type="Sprite2D" parent="bookRecipRow9"]
+[node name="Sprite2D2" type="Sprite2D" parent="page1/bookRecipRow9"]
 position = Vector2(480, 0)
 texture = ExtResource("9_e6my5")
 metadata/_edit_lock_ = true
 
-[node name="Sprite2D" type="Sprite2D" parent="bookRecipRow9/Sprite2D2"]
+[node name="Sprite2D" type="Sprite2D" parent="page1/bookRecipRow9/Sprite2D2"]
 self_modulate = Color(0.87451, 0.87451, 0.87451, 1)
 scale = Vector2(0.5875, 0.6675)
 texture = ExtResource("18_a46n3")
 metadata/_edit_lock_ = true
 
-[node name="hidden" type="Sprite2D" parent="bookRecipRow9"]
+[node name="hidden" type="Sprite2D" parent="page1/bookRecipRow9"]
 position = Vector2(480, 0)
 texture = ExtResource("13_rbeff")
 metadata/_edit_lock_ = true
 
-[node name="Label2" type="Label" parent="."]
+[node name="Label2" type="Label" parent="page1"]
 offset_left = 160.0
 offset_top = 92.0
 offset_right = 852.0
@@ -449,24 +464,25 @@ autowrap_mode = 2
 clip_text = true
 metadata/_edit_lock_ = true
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="page1"]
 position = Vector2(1112, 192)
 texture = ExtResource("3_vovjo")
 metadata/_edit_lock_ = true
 
-[node name="Sprite2D" type="Sprite2D" parent="Sprite2D"]
+[node name="Sprite2D" type="Sprite2D" parent="page1/Sprite2D"]
 position = Vector2(3, -2)
 scale = Vector2(0.58, 0.58)
 texture = ExtResource("4_jxr7k")
 metadata/_edit_lock_ = true
 
-[node name="label" type="Label" parent="Sprite2D"]
+[node name="label" type="Label" parent="page1/Sprite2D"]
 anchors_preset = -1
+anchor_left = -4.14062
 anchor_right = -4.14062
-offset_left = 45.0
-offset_top = -36.0
-offset_right = 593.0
-offset_bottom = 45.0
+offset_left = 305.0
+offset_top = -32.0
+offset_right = 853.0
+offset_bottom = 49.0
 text = "Potato"
 label_settings = SubResource("LabelSettings_o7nn6")
 vertical_alignment = 1
@@ -474,9 +490,9 @@ autowrap_mode = 2
 clip_text = true
 metadata/_edit_use_anchors_ = true
 
-[node name="label2" type="Label" parent="Sprite2D"]
+[node name="label2" type="Label" parent="page1/Sprite2D"]
 anchors_preset = -1
-anchor_left = -4.14062
+anchor_left = -8.32812
 anchor_right = -8.32812
 offset_left = 649.0
 offset_top = -32.0
@@ -490,33 +506,33 @@ autowrap_mode = 2
 clip_text = true
 metadata/_edit_use_anchors_ = true
 
-[node name="Sprite2D2" type="Sprite2D" parent="."]
+[node name="Sprite2D2" type="Sprite2D" parent="page1"]
 position = Vector2(1112, 264)
 texture = ExtResource("4_no4b4")
 metadata/_edit_lock_ = true
 
-[node name="Sprite2D" type="Sprite2D" parent="Sprite2D2"]
+[node name="Sprite2D" type="Sprite2D" parent="page1/Sprite2D2"]
 position = Vector2(3, -2)
 scale = Vector2(0.58, 0.58)
 texture = ExtResource("7_gpjsa")
 metadata/_edit_lock_ = true
 
-[node name="label" type="Label" parent="Sprite2D2"]
+[node name="label" type="Label" parent="page1/Sprite2D2"]
 anchors_preset = -1
+anchor_left = -4.01562
 anchor_right = -4.01562
-offset_left = 45.0
-offset_top = -36.0
-offset_right = 593.0
-offset_bottom = 45.0
+offset_left = 297.0
+offset_top = -32.0
+offset_right = 845.0
+offset_bottom = 49.0
 text = "Mighty Carrot"
 label_settings = SubResource("LabelSettings_o7nn6")
 vertical_alignment = 1
 autowrap_mode = 2
 clip_text = true
 metadata/_edit_use_anchors_ = true
-metadata/_edit_lock_ = true
 
-[node name="label3" type="Label" parent="Sprite2D2"]
+[node name="label3" type="Label" parent="page1/Sprite2D2"]
 anchors_preset = -1
 anchor_left = -8.32812
 anchor_right = -8.32812
@@ -532,33 +548,33 @@ autowrap_mode = 2
 clip_text = true
 metadata/_edit_use_anchors_ = true
 
-[node name="Sprite2D3" type="Sprite2D" parent="."]
+[node name="Sprite2D3" type="Sprite2D" parent="page1"]
 position = Vector2(1112, 336)
 texture = ExtResource("3_vovjo")
 metadata/_edit_lock_ = true
 
-[node name="Sprite2D" type="Sprite2D" parent="Sprite2D3"]
+[node name="Sprite2D" type="Sprite2D" parent="page1/Sprite2D3"]
 position = Vector2(1, 6)
 scale = Vector2(0.58, 0.58)
 texture = ExtResource("5_o7rby")
 metadata/_edit_lock_ = true
 
-[node name="label" type="Label" parent="Sprite2D3"]
+[node name="label" type="Label" parent="page1/Sprite2D3"]
 anchors_preset = -1
+anchor_left = -4.01562
 anchor_right = -4.01562
-offset_left = 45.0
-offset_top = -36.0
-offset_right = 593.0
-offset_bottom = 45.0
+offset_left = 297.0
+offset_top = -32.0
+offset_right = 845.0
+offset_bottom = 49.0
 text = "Cabbage"
 label_settings = SubResource("LabelSettings_o7nn6")
 vertical_alignment = 1
 autowrap_mode = 2
 clip_text = true
 metadata/_edit_use_anchors_ = true
-metadata/_edit_lock_ = true
 
-[node name="label4" type="Label" parent="Sprite2D3"]
+[node name="label4" type="Label" parent="page1/Sprite2D3"]
 anchors_preset = -1
 anchor_left = -8.32812
 anchor_right = -8.32812
@@ -574,34 +590,34 @@ autowrap_mode = 2
 clip_text = true
 metadata/_edit_use_anchors_ = true
 
-[node name="Sprite2D4" type="Sprite2D" parent="."]
+[node name="Sprite2D4" type="Sprite2D" parent="page1"]
 position = Vector2(1112, 408)
 texture = ExtResource("9_e6my5")
 metadata/_edit_lock_ = true
 
-[node name="Sprite2D" type="Sprite2D" parent="Sprite2D4"]
+[node name="Sprite2D" type="Sprite2D" parent="page1/Sprite2D4"]
 self_modulate = Color(0.780392, 0.780392, 0.780392, 1)
 position = Vector2(0, 10)
 scale = Vector2(0.595, 0.75)
 texture = ExtResource("8_75ulw")
 metadata/_edit_lock_ = true
 
-[node name="label" type="Label" parent="Sprite2D4"]
+[node name="label" type="Label" parent="page1/Sprite2D4"]
 anchors_preset = -1
+anchor_left = -4.14062
 anchor_right = -4.14062
-offset_left = 45.0
-offset_top = -36.0
-offset_right = 593.0
-offset_bottom = 45.0
+offset_left = 305.0
+offset_top = -32.0
+offset_right = 853.0
+offset_bottom = 49.0
 text = "Royal beef"
 label_settings = SubResource("LabelSettings_o7nn6")
 vertical_alignment = 1
 autowrap_mode = 2
 clip_text = true
 metadata/_edit_use_anchors_ = true
-metadata/_edit_lock_ = true
 
-[node name="label5" type="Label" parent="Sprite2D4"]
+[node name="label5" type="Label" parent="page1/Sprite2D4"]
 anchors_preset = -1
 anchor_left = -8.32812
 anchor_right = -8.32812
@@ -617,33 +633,33 @@ autowrap_mode = 2
 clip_text = true
 metadata/_edit_use_anchors_ = true
 
-[node name="Sprite2D5" type="Sprite2D" parent="."]
+[node name="Sprite2D5" type="Sprite2D" parent="page1"]
 position = Vector2(1112, 480)
 texture = ExtResource("4_no4b4")
 metadata/_edit_lock_ = true
 
-[node name="Sprite2D" type="Sprite2D" parent="Sprite2D5"]
+[node name="Sprite2D" type="Sprite2D" parent="page1/Sprite2D5"]
 position = Vector2(3.99997, 3.00003)
 scale = Vector2(0.7, 0.7)
 texture = ExtResource("10_ixdtq")
 metadata/_edit_lock_ = true
 
-[node name="label" type="Label" parent="Sprite2D5"]
+[node name="label" type="Label" parent="page1/Sprite2D5"]
 anchors_preset = -1
+anchor_left = -4.14062
 anchor_right = -4.14062
-offset_left = 45.0
-offset_top = -36.0
-offset_right = 593.0
-offset_bottom = 45.0
+offset_left = 305.0
+offset_top = -32.0
+offset_right = 853.0
+offset_bottom = 49.0
 text = "Pork"
 label_settings = SubResource("LabelSettings_o7nn6")
 vertical_alignment = 1
 autowrap_mode = 2
 clip_text = true
 metadata/_edit_use_anchors_ = true
-metadata/_edit_lock_ = true
 
-[node name="label6" type="Label" parent="Sprite2D5"]
+[node name="label6" type="Label" parent="page1/Sprite2D5"]
 anchors_preset = -1
 anchor_left = -8.32812
 anchor_right = -8.32812
@@ -659,34 +675,34 @@ autowrap_mode = 2
 clip_text = true
 metadata/_edit_use_anchors_ = true
 
-[node name="Sprite2D6" type="Sprite2D" parent="."]
+[node name="Sprite2D6" type="Sprite2D" parent="page1"]
 position = Vector2(1112, 552)
 texture = ExtResource("4_no4b4")
 metadata/_edit_lock_ = true
 
-[node name="Sprite2D" type="Sprite2D" parent="Sprite2D6"]
+[node name="Sprite2D" type="Sprite2D" parent="page1/Sprite2D6"]
 self_modulate = Color(0.8, 0.8, 0.8, 1)
 position = Vector2(-4, -1.52588e-05)
 scale = Vector2(0.745, 0.745)
 texture = ExtResource("11_o72o4")
 metadata/_edit_lock_ = true
 
-[node name="label" type="Label" parent="Sprite2D6"]
+[node name="label" type="Label" parent="page1/Sprite2D6"]
 anchors_preset = -1
+anchor_left = -4.01562
 anchor_right = -4.01562
-offset_left = 45.0
-offset_top = -36.0
-offset_right = 593.0
-offset_bottom = 45.0
+offset_left = 297.0
+offset_top = -32.0
+offset_right = 845.0
+offset_bottom = 49.0
 text = "Chicken"
 label_settings = SubResource("LabelSettings_o7nn6")
 vertical_alignment = 1
 autowrap_mode = 2
 clip_text = true
 metadata/_edit_use_anchors_ = true
-metadata/_edit_lock_ = true
 
-[node name="label7" type="Label" parent="Sprite2D6"]
+[node name="label7" type="Label" parent="page1/Sprite2D6"]
 anchors_preset = -1
 anchor_left = -8.32812
 anchor_right = -8.32812
@@ -702,33 +718,33 @@ autowrap_mode = 2
 clip_text = true
 metadata/_edit_use_anchors_ = true
 
-[node name="Sprite2D7" type="Sprite2D" parent="."]
+[node name="Sprite2D7" type="Sprite2D" parent="page1"]
 position = Vector2(1112, 624)
 texture = ExtResource("9_e6my5")
 metadata/_edit_lock_ = true
 
-[node name="Sprite2D" type="Sprite2D" parent="Sprite2D7"]
+[node name="Sprite2D" type="Sprite2D" parent="page1/Sprite2D7"]
 position = Vector2(-1, 1.99997)
 scale = Vector2(0.61, 0.61)
 texture = ExtResource("12_ly8ww")
 metadata/_edit_lock_ = true
 
-[node name="label" type="Label" parent="Sprite2D7"]
+[node name="label" type="Label" parent="page1/Sprite2D7"]
 anchors_preset = -1
+anchor_left = -4.14062
 anchor_right = -4.14062
-offset_left = 45.0
-offset_top = -36.0
-offset_right = 593.0
-offset_bottom = 45.0
+offset_left = 305.0
+offset_top = -32.0
+offset_right = 853.0
+offset_bottom = 49.0
 text = "Thyme of time"
 label_settings = SubResource("LabelSettings_o7nn6")
 vertical_alignment = 1
 autowrap_mode = 2
 clip_text = true
 metadata/_edit_use_anchors_ = true
-metadata/_edit_lock_ = true
 
-[node name="label8" type="Label" parent="Sprite2D7"]
+[node name="label8" type="Label" parent="page1/Sprite2D7"]
 anchors_preset = -1
 anchor_left = -8.32812
 anchor_right = -8.32812
@@ -744,33 +760,33 @@ autowrap_mode = 2
 clip_text = true
 metadata/_edit_use_anchors_ = true
 
-[node name="Sprite2D8" type="Sprite2D" parent="."]
+[node name="Sprite2D8" type="Sprite2D" parent="page1"]
 position = Vector2(1112, 696)
 texture = ExtResource("9_e6my5")
 metadata/_edit_lock_ = true
 
-[node name="Sprite2D" type="Sprite2D" parent="Sprite2D8"]
+[node name="Sprite2D" type="Sprite2D" parent="page1/Sprite2D8"]
 position = Vector2(-1, 1.99997)
 scale = Vector2(0.61, 0.61)
 texture = ExtResource("13_5is12")
 metadata/_edit_lock_ = true
 
-[node name="label" type="Label" parent="Sprite2D8"]
+[node name="label" type="Label" parent="page1/Sprite2D8"]
 anchors_preset = -1
+anchor_left = -4.26562
 anchor_right = -4.26562
-offset_left = 45.0
-offset_top = -36.0
-offset_right = 593.0
-offset_bottom = 45.0
+offset_left = 313.0
+offset_top = -32.0
+offset_right = 861.0
+offset_bottom = 49.0
 text = "Parsley"
 label_settings = SubResource("LabelSettings_o7nn6")
 vertical_alignment = 1
 autowrap_mode = 2
 clip_text = true
 metadata/_edit_use_anchors_ = true
-metadata/_edit_lock_ = true
 
-[node name="label10" type="Label" parent="Sprite2D8"]
+[node name="label10" type="Label" parent="page1/Sprite2D8"]
 anchors_preset = -1
 anchor_left = -8.32812
 anchor_right = -8.32812
@@ -786,33 +802,33 @@ autowrap_mode = 2
 clip_text = true
 metadata/_edit_use_anchors_ = true
 
-[node name="Sprite2D9" type="Sprite2D" parent="."]
+[node name="Sprite2D9" type="Sprite2D" parent="page1"]
 position = Vector2(1112, 768)
 texture = ExtResource("9_e6my5")
 metadata/_edit_lock_ = true
 
-[node name="Sprite2D" type="Sprite2D" parent="Sprite2D9"]
+[node name="Sprite2D" type="Sprite2D" parent="page1/Sprite2D9"]
 position = Vector2(-1, 1.99997)
 scale = Vector2(0.61, 0.61)
 texture = ExtResource("14_67f5w")
 metadata/_edit_lock_ = true
 
-[node name="label" type="Label" parent="Sprite2D9"]
+[node name="label" type="Label" parent="page1/Sprite2D9"]
 anchors_preset = -1
+anchor_left = -4.14062
 anchor_right = -4.14062
-offset_left = 45.0
-offset_top = -36.0
-offset_right = 593.0
-offset_bottom = 45.0
+offset_left = 305.0
+offset_top = -32.0
+offset_right = 853.0
+offset_bottom = 49.0
 text = "Dill"
 label_settings = SubResource("LabelSettings_o7nn6")
 vertical_alignment = 1
 autowrap_mode = 2
 clip_text = true
 metadata/_edit_use_anchors_ = true
-metadata/_edit_lock_ = true
 
-[node name="label9" type="Label" parent="Sprite2D9"]
+[node name="label9" type="Label" parent="page1/Sprite2D9"]
 anchors_preset = -1
 anchor_left = -8.32812
 anchor_right = -8.32812
@@ -827,3 +843,100 @@ vertical_alignment = 1
 autowrap_mode = 2
 clip_text = true
 metadata/_edit_use_anchors_ = true
+
+[node name="page2" type="Node2D" parent="."]
+visible = false
+
+[node name="backbtn" type="Node2D" parent="."]
+position = Vector2(842, 835)
+
+[node name="Sprite2D" type="Sprite2D" parent="backbtn"]
+position = Vector2(114.75, 39.8962)
+scale = Vector2(4.66406, 3.21589)
+texture = ExtResource("20_sew1q")
+metadata/_edit_lock_ = true
+
+[node name="Label2" type="Label" parent="backbtn"]
+offset_right = 234.0
+offset_bottom = 78.0
+text = "Close"
+label_settings = SubResource("LabelSettings_khr0f")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+clip_text = true
+uppercase = true
+metadata/_edit_lock_ = true
+
+[node name="backArea" type="Area2D" parent="backbtn"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="backbtn/backArea"]
+position = Vector2(117.5, 39.5)
+shape = SubResource("RectangleShape2D_edgx2")
+
+[node name="nextbtn" type="Node2D" parent="."]
+position = Vector2(1086, 833)
+
+[node name="Sprite2D" type="Sprite2D" parent="nextbtn"]
+position = Vector2(136, 40)
+scale = Vector2(5.41602, 3.34613)
+texture = ExtResource("20_18mhk")
+metadata/_edit_lock_ = true
+
+[node name="Label2" type="Label" parent="nextbtn"]
+offset_right = 240.0
+offset_bottom = 80.0
+text = "Next"
+label_settings = SubResource("LabelSettings_khr0f")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+clip_text = true
+uppercase = true
+metadata/_edit_lock_ = true
+
+[node name="nextArea" type="Area2D" parent="nextbtn"]
+position = Vector2(6, -1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="nextbtn/nextArea"]
+position = Vector2(117.5, 39.5)
+shape = SubResource("RectangleShape2D_edgx2")
+
+[node name="prevbtn" type="Node2D" parent="."]
+position = Vector2(560, 834)
+
+[node name="Sprite2D" type="Sprite2D" parent="prevbtn"]
+self_modulate = Color(0.497474, 0.497474, 0.497474, 0.5)
+position = Vector2(136, 40)
+scale = Vector2(5.41602, 3.34613)
+texture = ExtResource("20_18mhk")
+flip_h = true
+flip_v = true
+metadata/_edit_lock_ = true
+
+[node name="Label2" type="Label" parent="prevbtn"]
+offset_right = 267.0
+offset_bottom = 80.0
+text = "  Previous"
+label_settings = SubResource("LabelSettings_khr0f")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+clip_text = true
+uppercase = true
+metadata/_edit_lock_ = true
+
+[node name="prevArea" type="Area2D" parent="prevbtn"]
+position = Vector2(34, 1)
+monitoring = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="prevbtn/prevArea"]
+position = Vector2(115, 39)
+shape = SubResource("RectangleShape2D_edgx2")
+
+[connection signal="area_entered" from="backbtn/backArea" to="." method="_on_back_area_area_entered"]
+[connection signal="area_exited" from="backbtn/backArea" to="." method="_on_back_area_area_exited"]
+[connection signal="area_entered" from="nextbtn/nextArea" to="." method="_on_next_area_area_entered"]
+[connection signal="area_exited" from="nextbtn/nextArea" to="." method="_on_next_area_area_exited"]
+[connection signal="area_entered" from="prevbtn/prevArea" to="." method="_on_prev_area_area_entered"]
+[connection signal="area_exited" from="prevbtn/prevArea" to="." method="_on_prev_area_area_exited"]

@@ -11,7 +11,7 @@ func _process(_delta):
 	pass
 
 func _on_area_2d_area_entered(area):
-	if (area.name == "SpoonPart"):
+	if (area.name == "SpoonPart") && !Globals.bookOpen:
 		ladle.onBarrel = true
 
 func _on_area_2d_area_exited(area):
