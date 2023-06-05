@@ -65,8 +65,9 @@ func _process(delta):
 	time += delta * diffuculty
 	delivery += delta * diffuculty
 	if (delivery > 5):
+		delivery = 0
 		maybeSendInHuman(Globals.Orders)
-	if (time > 1):
+	elif (time > 1):
 		time = 0
 		Globals.degradeSoupItems(1)
 		Globals.calculateSoup()
@@ -78,7 +79,7 @@ func _process(delta):
 		if (state == Globals.TimeOfDay.NIGHT):
 			untilMorning -= 1
 		maybeChangeState()
-	
+
 func updateLabels():
 	$/root/Main/Filling.value = Globals.SOUPSTATS.filling
 	$/root/Main/Filling/Label.text = "Filling: %d%%" % Globals.SOUPSTATS.filling
@@ -88,7 +89,7 @@ func updateLabels():
 	$/root/Main/Taste/Label.text = "Taste: %d%%" % Globals.SOUPSTATS.taste
 	$/root/Main/TimeNow.text = str(Globals.TimeOfDay.keys()[state]) + " " + str(untilDay if state == Globals.TimeOfDay.MORNING else untilMorning)
 	$/root/Main/SoupLevel.text = "Soup level: " + str(Globals.cauldronLevels.keys()[Globals.soupLevel])
-		
+
 func maybeSendInHuman(list):
 	if (!spawnPoint.isOccupied):
 		var human = list.pop_front()

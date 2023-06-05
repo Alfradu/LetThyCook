@@ -23,6 +23,7 @@ var timeSinceBubble = 0
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	$soup.scale = Vector2(levelScales[level],levelScales[level])
+	$soupStatic.scale = Vector2(levelScales[level],levelScales[level])
 	$tempSoup.scale = Vector2(levelScales[level],levelScales[level])
 	$soup.texture = stateImages[state]
 	$tempSoup.texture = stateImages[state]

@@ -192,24 +192,24 @@ func getFoodFromLibrary(foodName):
 
 func getFilling(item):
 	if (item.type == FoodType.VEGETABLE):
-		return rng.randi_range(20, 40)+item.modifier
+		return rng.randi_range(5, 14)
 	if (item.type == FoodType.PROTEIN):
-		return rng.randi_range(5, 30)+item.modifier
+		return rng.randi_range(3, 9)
 	if (item.type == FoodType.HERB):
-		return rng.randi_range(0, 15)+item.modifier
+		return rng.randi_range(0, 2)
 
 func getPower(item):
 	if (item.type == FoodType.VEGETABLE):
-		return rng.randi_range(0, 25)+item.modifier
+		return rng.randi_range(3, 10)
 	if (item.type == FoodType.PROTEIN):
-		return rng.randi_range(30, 50)+item.modifier
+		return rng.randi_range(8, 15)
 	if (item.type == FoodType.HERB):
-		return rng.randi_range(0, 15)+item.modifier
+		return rng.randi_range(0, 2)
 
 func getTaste(item):
 	if (item.type == FoodType.VEGETABLE):
-		return rng.randi_range(10, 30)+item.modifier
+		return rng.randi_range(0, 5)
 	if (item.type == FoodType.PROTEIN):
-		return rng.randi_range(40, 50)+item.modifier
+		return rng.randi_range(0, 5)
 	if (item.type == FoodType.HERB):
-		return rng.randi_range(40, 60)+item.modifier
+		return rng.randi_range(15, 30)
