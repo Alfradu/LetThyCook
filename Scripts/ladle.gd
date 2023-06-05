@@ -47,7 +47,7 @@ func _input(event):
 			dragging = false;
 
 func _on_area_2d_area_entered(area):
-	if area.name == "HandCollision":
+	if area.name == "HandCollision" && !Globals.bookOpen:
 		hand.pickedItem = self
 		hand.setText("Ladle")
 

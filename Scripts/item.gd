@@ -53,7 +53,7 @@ func _input(event):
 				$AnimationPlayer.play("plums");
 
 func _on_area_2d_area_entered(area):
-	if area.name == "HandCollision":
+	if area.name == "HandCollision" && !Globals.bookOpen:
 		hand.pickedItem = self
 		if !overCauldron:
 			hand.setText(foodItem.name if foodItem != null else "")

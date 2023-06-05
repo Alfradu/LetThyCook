@@ -28,6 +28,7 @@ var Money = 0
 
 var soupLevel
 var soupedPeople = 0
+var bookOpen = false
 
 class FoodStats:
 	var filling: int
