@@ -76,3 +76,4 @@ func _plums():
 		$plums.visible = true
 		$plums/AnimationPlayer.play("splash")
 	foodItem.inSoup = true
+	Globals.calculateSoup()

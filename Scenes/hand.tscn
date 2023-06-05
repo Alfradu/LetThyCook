@@ -9,7 +9,7 @@ radius = 0.484863
 
 [sub_resource type="LabelSettings" id="LabelSettings_qdlt6"]
 font = ExtResource("3_4x6hu")
-font_size = 64
+font_size = 42
 shadow_size = 5
 shadow_color = Color(0, 0, 0, 0.235294)
 shadow_offset = Vector2(5, 5)
@@ -31,7 +31,7 @@ shape = SubResource("CircleShape2D_k4y0s")
 
 [node name="HoverText" type="Label" parent="."]
 offset_left = -820.0
-offset_top = -274.0
+offset_top = -222.0
 offset_right = 820.0
 offset_bottom = -146.0
 text = "test"

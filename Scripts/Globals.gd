@@ -55,36 +55,33 @@ class Human:
 	var rng = RandomNumberGenerator.new()
 	
 	func humandideat():
-		if Globals.soupLevel == cauldronLevels.EMPTY: return
-		var partOfSoupWithpreference = 0.0
-		var itemsInSoup = 0
-		for item in Globals.FoodItems:
-			if item.inSoup:
-				itemsInSoup += 1
-				if item.type == foodType:
-					partOfSoupWithpreference += 1
-		partOfSoupWithpreference = partOfSoupWithpreference / itemsInSoup if itemsInSoup > 0 else 1.0
-		
-		self.ateSoupLevel = Globals.SOUPSTATS.umami
-		self.satisfaction = (Globals.SOUPSTATS.filling + Globals.SOUPSTATS.power + Globals.SOUPSTATS.taste) / 3 + (40 * partOfSoupWithpreference)
-		var willBeFat = self.hunger == Globals.Hunger.FULL
-		self.hunger = self.hunger + 2 as Globals.Hunger if self.hunger+2 < Globals.Hunger.FULL else Globals.Hunger.FULL
-		Globals.soupedPeople +=1
-		if self.fat:
-			Globals.soupedPeople = 0
-			Globals.updateCauldronLevel(-2)
-		elif Globals.soupedPeople % 3 == 0:
-			Globals.soupedPeople = 0
-			Globals.updateCauldronLevel(-1)
-			
-		if self.satisfaction > 80 && rng.randf_range(0, 10) > 5:
-			self.holdingBowl = false
-			self.holdingBox = true
-			for i in range(rng.randi_range(1,3)):
-				self.boxContent.append(Globals.getFoodItem())
-			Globals.Orders.append(self)
-			
-		self.fat = willBeFat
+		self.fat = self.hunger == Globals.Hunger.FULL && Globals.soupLevel != cauldronLevels.EMPTY
+		if Globals.soupLevel != cauldronLevels.EMPTY: 
+			var partOfSoupWithpreference = 0.0
+			var itemsInSoup = 0
+			for item in Globals.FoodItems:
+				if item.inSoup:
+					itemsInSoup += 1
+					if item.type == foodType:
+						partOfSoupWithpreference += 1
+			partOfSoupWithpreference = partOfSoupWithpreference / itemsInSoup if itemsInSoup > 0 else 1.0
+			self.ateSoupLevel = Globals.SOUPSTATS.umami
+			self.satisfaction = (Globals.SOUPSTATS.filling + Globals.SOUPSTATS.power + Globals.SOUPSTATS.taste) / 3 + (40 * partOfSoupWithpreference)
+			self.hunger = self.hunger + 2 as Globals.Hunger if self.hunger+2 < Globals.Hunger.FULL else Globals.Hunger.FULL
+			Globals.soupedPeople +=1
+			if self.fat:
+				Globals.soupedPeople = 0
+				Globals.updateCauldronLevel(-2)
+			elif Globals.soupedPeople % 3 == 0:
+				Globals.soupedPeople = 0
+				Globals.updateCauldronLevel(-1)
+				
+			if self.satisfaction > 80 && rng.randf_range(0, 10) > 7:
+				self.holdingBowl = false
+				self.holdingBox = true
+				for i in range(rng.randi_range(1,3)):
+					self.boxContent.append(Globals.getFoodItem())
+				Globals.Orders.append(self)
 	
 	func degradehuman():
 		self.hunger = self.hunger - 1 as Globals.Hunger if self.hunger-1 > Globals.Hunger.ALMOSTDEAD else Globals.Hunger.ALMOSTDEAD
@@ -148,6 +145,7 @@ func calculateSoup():
 	
 	if oldSoupState != SOUPSTATS.umami:
 		$/root/Main/cauldron.stateupdate = true
+	$/root/Main.updateLabels()
 
 func updateCauldronLevel(nr):
 	$/root/Main/cauldron.updateLevel(nr)
@@ -185,7 +183,7 @@ func getFoodItem(itemName = "", stats: FoodStats = null):
 	return i
 	
 func getRandomItem():
-	return foodLibrary[rng.randi_range(0, foodLibrary.size()-1)];
+	return foodLibrary.pick_random()
 	
 func getFoodFromLibrary(foodName):
 	for item in foodLibrary:

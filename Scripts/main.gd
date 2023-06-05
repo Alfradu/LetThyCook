@@ -70,7 +70,6 @@ func _process(delta):
 		time = 0
 		Globals.degradeSoupItems(1)
 		Globals.calculateSoup()
-		updateLabels()
 		if (state == Globals.TimeOfDay.MORNING):
 			untilDay -= 1
 		if (state == Globals.TimeOfDay.DAY):
