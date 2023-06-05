@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://cbisx2e3hxe1l"]
+[gd_scene load_steps=10 format=3 uid="uid://cbisx2e3hxe1l"]
 
 [ext_resource type="Script" path="res://Scripts/human.gd" id="1_3ms4j"]
 [ext_resource type="Script" path="res://Scripts/Holding.gd" id="2_4jtkn"]
@@ -35,6 +35,30 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Vector2(1.4, 1.4)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("foodEffect:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("foodEffect:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
 }
 
 [sub_resource type="Animation" id="Animation_5q040"]
@@ -120,11 +144,40 @@ tracks/2/keys = {
 }]
 }
 
+[sub_resource type="Animation" id="Animation_qvljv"]
+resource_name = "react"
+length = 2.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("foodEffect:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(2),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("foodEffect:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.1, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(-300, -150)]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_vkwtv"]
 _data = {
 "RESET": SubResource("Animation_xbirm"),
 "dipbowl": SubResource("Animation_5q040"),
-"leaveCrate": SubResource("Animation_fvxf1")
+"leaveCrate": SubResource("Animation_fvxf1"),
+"react": SubResource("Animation_qvljv")
 }
 
 [node name="human" type="Node2D"]
@@ -158,16 +211,14 @@ libraries = {
 }
 
 [node name="RayCast2D" type="RayCast2D" parent="."]
-target_position = Vector2(73.3333, 0)
+target_position = Vector2(93.3333, -0.222222)
 collision_mask = 4
 collide_with_areas = true
 
-[node name="Label" type="Label" parent="."]
-offset_left = 25.7778
-offset_top = -24.4444
-offset_right = 65.7778
-offset_bottom = -1.44444
+[node name="foodEffect" type="Sprite2D" parent="."]
+z_index = 15
 
+[connection signal="area_entered" from="Holding/BowlHitBox" to="." method="_on_bowl_hit_box_area_entered"]
 [connection signal="area_entered" from="Holding/BowlHitBox" to="Holding" method="_on_bowl_hit_box_area_entered"]
 [connection signal="area_exited" from="Holding/BowlHitBox" to="Holding" method="_on_bowl_hit_box_area_exited"]
 [connection signal="area_entered" from="humanArea" to="." method="_on_area_2d_area_entered"]

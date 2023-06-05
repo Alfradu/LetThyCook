@@ -56,7 +56,7 @@ func _ready():
 		item.inSoup = true
 	
 	for i in range(3, len(Globals.FoodItems)):
-		var item = Globals.FoodItems[i]		
+		var item = Globals.FoodItems[i]
 		var instantiateditem = foodItem.instantiate()
 		$ItemContainer.add_child(instantiateditem)
 		instantiateditem.init(item)
@@ -67,6 +67,7 @@ var untilDay = 2
 var untilMorning = 4
 var delivery = 0
 var diffuculty = 1
+var chillWithHumans = 0
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	time += delta * diffuculty
@@ -76,6 +77,7 @@ func _process(delta):
 		maybeSendInHuman(Globals.Orders)
 	elif (time > 1):
 		time = 0
+		chillWithHumans -= 1
 		Globals.degradeSoupItems(1)
 		Globals.calculateSoup()
 		if (state == Globals.TimeOfDay.MORNING):
@@ -86,20 +88,18 @@ func _process(delta):
 		if (state == Globals.TimeOfDay.NIGHT):
 			untilMorning -= 1
 		maybeChangeState()
+		Globals.Score += 1
 
 func updateLabels():
 	$/root/Main/HUD/Filling.value = Globals.SOUPSTATS.filling
 	$/root/Main/HUD/Power.value = Globals.SOUPSTATS.power
 	$/root/Main/HUD/Taste.value = Globals.SOUPSTATS.taste
 	$/root/Main/HUD/PeopleLeft/Label2.text = str(toFeed())
-	$/root/Main/HUD/Money/Label2.text = formatScore()
-	$/root/Main/HUD/Score.text = "Score: " + formatScore()
-	#$/root/Main/TimeNow.text = str(Globals.TimeOfDay.keys()[state]) + " " + str(untilDay if state == Globals.TimeOfDay.MORNING else untilMorning)
-	#$/root/Main/SoupLevel.text = "Soup level: " + str(Globals.cauldronLevels.keys()[Globals.soupLevel])
-
-func formatScore():
-	var score = 123
-	return "%06d" % score
+	$/root/Main/HUD/Money/Label2.text = formatScore(Globals.Money)
+	$/root/Main/HUD/Score.text = "Score: " + formatScore(Globals.Score)
+	
+func formatScore(num):
+	return "%06d" % num
 
 func toFeed():
 	var count = 0
@@ -109,12 +109,15 @@ func toFeed():
 	return count
 
 func maybeSendInHuman(list):
+	if chillWithHumans > 0:
+		return
 	if (!spawnPoint.isOccupied):
 		var human = list.pop_front()
 		if (human != null):
 			var instantiateditem = humanItem.instantiate()
 			$HumanContainer.add_child(instantiateditem)
 			instantiateditem.init(human)
+			chillWithHumans = 2
 			
 func checkRoundOver():
 	if ($HumanContainer.get_child_count() == 0 && Globals.Population.is_empty()):

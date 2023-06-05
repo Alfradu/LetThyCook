@@ -24,7 +24,6 @@ func _input(event):
 		onTable = false
 		queue_free()
 
-
 func _on_bowl_hit_box_area_entered(area):
 	if area.name == "HandCollision":
 		hovering = true

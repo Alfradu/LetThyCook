@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://dso8a14l42uq6"]
+[gd_scene load_steps=13 format=3 uid="uid://dso8a14l42uq6"]
 
 [ext_resource type="Texture2D" uid="uid://dw7slyh67nwrk" path="res://Assets/Soup/pixil-layer-0.png" id="1_drmva"]
 [ext_resource type="Script" path="res://Scripts/cauldron.gd" id="1_vxttm"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://d2obvgln851sq" path="res://Assets/Soup/pixil-layer-5.png" id="3_7ndse"]
 [ext_resource type="Texture2D" uid="uid://c6u5n4vp1ps3c" path="res://Assets/Soup/pixil-layer-3.png" id="4_l2cik"]
 [ext_resource type="AudioStream" uid="uid://bvlvm38j6kp2s" path="res://Audio/boiling-pot-of-water-29626.mp3" id="6_cv6yd"]
+[ext_resource type="Script" path="res://Scripts/ItemToolTips.gd" id="7_jei76"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_6tvo5"]
 
@@ -223,6 +224,16 @@ libraries = {
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("6_cv6yd")
+
+[node name="ItemToolTips" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("7_jei76")
+
+[node name="toolTipAnchor" type="Marker2D" parent="."]
+position = Vector2(493, 267)
 
 [connection signal="area_entered" from="cauldronArea" to="." method="_on_cauldron_area_area_entered"]
 [connection signal="area_exited" from="cauldronArea" to="." method="_on_cauldron_area_area_exited"]

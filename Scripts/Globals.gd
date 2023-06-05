@@ -23,6 +23,9 @@ enum cauldronLevels { EMPTY = 0, ALMOSTEMPTY = 1, PRETTYFULL = 2, FULL = 3}
 @export var Orders = []
 var ToBePopulated = []
 
+var Score = 0
+var Money = 0
+
 var soupLevel
 var soupedPeople = 0
 

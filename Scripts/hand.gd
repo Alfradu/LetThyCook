@@ -32,7 +32,6 @@ func _process(_delta):
 		arm.scale.y = armScaleY + expansion * 4
 		arm.scale.x = armScaleX - expansion
 		arm.position.y = armY + expansion * 1000
-		print(arm.position.y)
 	
 func _input(event):
 	if event is InputEventMouseButton && event.button_index == MOUSE_BUTTON_LEFT:

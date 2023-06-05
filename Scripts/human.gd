@@ -2,6 +2,7 @@ extends Node2D
 
 @onready var body = $Body
 @onready var holding = $Holding
+@onready var foodEffect = $foodEffect
 @onready var bowl = load("res://Assets/People/Bowl.png")
 @onready var bowlFull = load("res://Assets/People/BowlFull.png")
 @onready var box = load("res://Assets/People/Box.png")
@@ -9,6 +10,10 @@ extends Node2D
 @onready var peasantWIDE = load("res://Assets/People/PeasantWIDE.png")
 @onready var soldier = load("res://Assets/People/Soldier.png")
 @onready var soldierWIDE = load("res://Assets/People/SoldierWIDE.png")
+@onready var amazing = load("res://Assets/People/amazing.png")
+@onready var happy = load("res://Assets/People/happy.png")
+@onready var didnoteat = load("res://Assets/People/didnoteat.png")
+@onready var dead = load("res://Assets/People/dead.png")
 @onready var cauldron = $/root/Main/RefPoints/cauldron
 
 var state
@@ -52,7 +57,6 @@ func setBodyTexture(status, fat):
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	$Label.text = str(human.satisfaction)
 	if (state == Globals.HumanState.WALKING_TO_CAULDRON):
 		var collider = $RayCast2D.get_collider()
 		if collider == null || collider.name != "humanArea":
@@ -81,23 +85,27 @@ func _input(event):
 		if event.is_pressed() && isHovered && state == Globals.HumanState.TAKING && !hasEaten:
 			$AnimationPlayer.play_backwards("dipbowl");
 
-func _on_area_2d_area_entered(area):
-	if area.name == "HandCollision":
-		isHovered = true
-		print($/root/Main/hand.state)
-		if $/root/Main/hand.state == Globals.handState.CLOSED && state == Globals.HumanState.TAKING && !hasEaten:
-			$AnimationPlayer.speed_scale = 2
-			$AnimationPlayer.play_backwards("dipbowl")
-
 func _on_area_2d_area_exited(area):
 	if area.name == "HandCollision":
 		isHovered = false
 
-func _on_animation_player_animation_finished(_anim_name):
-#	if (anim_name == "dipbowl"):
-#		holding.texture = bowl
-	targetPos = $/root/Main/RefPoints/humanEnd.position
-	state = Globals.HumanState.WALKING_TO_END
+func _on_animation_player_animation_finished(anim_name):
+	if (anim_name == "dipbowl" or anim_name == "leaveCrate"):
+		targetPos = $/root/Main/RefPoints/humanEnd.position
+		state = Globals.HumanState.WALKING_TO_END
+		if (anim_name == "dipbowl"):
+			foodEffect.texture = getEffectTexture(human.satisfaction)
+			$AnimationPlayer.play("react")
+			Globals.Score += 100 * (human.status + 1) + human.satisfaction
+			Globals.Money += 10 * (human.status + 1)
+		
+func getEffectTexture(satisfaction):
+	if satisfaction > 100:
+		return amazing
+	if satisfaction > 20:
+		return happy
+	else:
+		return didnoteat
 
 func eat():
 	human.humandideat()
@@ -105,6 +113,14 @@ func eat():
 	hasEaten = true
 	
 func leftBox():
+	human.satisfaction = 0
 	$Holding.onTable = true
 	$Holding.items = human.boxContent
 	$Holding.reparent($/root/Main/ItemContainer)
+
+func _on_bowl_hit_box_area_entered(area):
+	if area.name == "HandCollision":
+		isHovered = true
+		if $/root/Main/hand.state == Globals.handState.CLOSED && state == Globals.HumanState.TAKING && !hasEaten && human.holdingBowl && !human.holdingBox:
+			$AnimationPlayer.speed_scale = 2
+			$AnimationPlayer.play_backwards("dipbowl")

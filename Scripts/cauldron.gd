@@ -87,7 +87,7 @@ func updateLevel(nr):
 
 func changeSound(level):
 	soundLevel = level * (level + 1) if level * (level + 1) != 0 else -80
-	isChangingSound = true	
+	isChangingSound = true
 
 func spawnBubble():
 	var bubblespawn = bubble.instantiate()

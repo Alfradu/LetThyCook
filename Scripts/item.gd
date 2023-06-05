@@ -3,9 +3,11 @@ extends Node2D
 @onready var sprite = $Sprite2D
 @onready var shadow = $Sprite2D/shadow
 @onready var hand = get_node("/root/Main/hand")
+@onready var toolTip = load("res://Scenes/toolTip.tscn")
 @onready var VeggieSpawn = $/root/Main/tableLeft/SpawnAreaVeggies
 @onready var HerbSpawn = $/root/Main/tableRight/SpawnAreaHerbs
 @onready var ProteinSpawn = $/root/Main/tableMid/SpawnAreaProtein
+
 
 var foodItem
 var dragging = false
@@ -69,11 +71,18 @@ func _on_area_2d_area_exited(area):
 func _souped():
 	#add stats n point to soup
 	self.visible = false
+	spawnToolTip()
 	queue_free();
+
+func spawnToolTip():
+	var instantiateditem = toolTip.instantiate()
+	$/root/Main/cauldron/ItemToolTips.add_child(instantiateditem)
+	instantiateditem.init(foodItem, load(getTexture(foodItem.name)))
 
 func _plums():
 	if Globals.soupLevel > 1:
 		$plums.visible = true
 		$plums/AnimationPlayer.play("splash")
 	foodItem.inSoup = true
+	Globals.Score += foodItem.ttl
 	Globals.calculateSoup()

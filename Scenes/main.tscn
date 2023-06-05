@@ -272,6 +272,7 @@ theme_override_font_sizes/font_size = 35
 text = "000264"
 
 [node name="Score" type="Label" parent="HUD"]
+z_index = 50
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 25.012
