@@ -1,6 +1,5 @@
 extends Control
 
-var tooltips = []
 @onready var anchor = $/root/Main/cauldron/toolTipAnchor
 
 # Called when the node enters the scene tree for the first time.

@@ -238,6 +238,4 @@ theme_override_fonts/font = ExtResource("3_6o0w1")
 [connection signal="area_entered" from="Holding/BowlHitBox" to="." method="_on_bowl_hit_box_area_entered"]
 [connection signal="area_entered" from="Holding/BowlHitBox" to="Holding" method="_on_bowl_hit_box_area_entered"]
 [connection signal="area_exited" from="Holding/BowlHitBox" to="Holding" method="_on_bowl_hit_box_area_exited"]
-[connection signal="area_entered" from="humanArea" to="." method="_on_area_2d_area_entered"]
-[connection signal="area_exited" from="humanArea" to="." method="_on_area_2d_area_exited"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
