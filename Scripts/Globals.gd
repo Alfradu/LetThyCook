@@ -109,7 +109,7 @@ class Human:
 		if hunger <= 0:
 			isDead = true
 
-func setupPopulation(Population):
+func setupPopulation(pop):
 	for i in range(2):
 		var human = Human.new()
 		human.name = "Jörgen"
@@ -118,7 +118,7 @@ func setupPopulation(Population):
 		human.holdingBowl = true
 		human.hunger = Globals.Hunger.HUNGRY
 		human.fat = false
-		Population.append(human)
+		pop.append(human)
 	for i in range(2):
 		var human = Human.new()
 		human.name = "Jörgen"
@@ -127,7 +127,7 @@ func setupPopulation(Population):
 		human.holdingBowl = true
 		human.hunger = Hunger.HUNGRY
 		human.fat = true
-		Population.append(human)
+		pop.append(human)
 	for i in range(3):
 		var human = Human.new()
 		human.name = "Bengt"
@@ -136,16 +136,16 @@ func setupPopulation(Population):
 		human.holdingBowl = true
 		human.fat = false
 		human.hunger = Globals.Hunger.CONTEMPT
-		Population.append(human)
+		pop.append(human)
 	for i in range(1):
 		var human = Human.new()
 		human.name = "Gaylord"
-		human.status = Rank.NOBLE
+		human.status = Rank.PEASANT
 		human.foodType = FoodType.HERB
 		human.holdingBowl = true
 		human.fat = false
 		human.hunger = Globals.Hunger.FULL
-		Population.append(human)
+		pop.append(human)
 
 var foodLibrary = [
 	{ name = "Potato",  type = FoodType.VEGETABLE, combo = "Pork",   discovered = false, cost = 5,  modifier = 0},
@@ -165,6 +165,25 @@ var foodLibrary = [
 #	{ name = "Salt",    type = FoodType.HERB,      combo = "",       discovered = false, cost = 50, modifier = 50},
 #	{ name = "Pepper",  type = FoodType.HERB,      combo = "",       discovered = false, cost = 50, modifier = 50}
 ]
+
+var stories = [
+	["A new beginning", "As the new Tender of the village perpetual stew it will be your job to make sure it stays tasty and keeps the folk around fed! 
+
+Use this cookbook belonging to the old Stew Tender to familiarize yourself with your ingreedients and the locals. 
+
+Good luck!"],
+["The Forgotten Legacy", "As the last villager succumbs to starvation, the once-thriving medieval village fades into obscurity, its existence forever erased from the annals of history. 
+The land that once teemed with life now stands as a haunting reminder of the consequences of neglect and mismanagement. 
+The spirits of the villagers linger, their whispers carried on the wind, a reminder of the forgotten legacy of a village that lost its fight for survival." ],
+["A Grim Reminder", "Word spreads of the abandoned village, its desolation becoming a cautionary tale for neighboring towns and kingdoms. 
+The empty homes stand as a chilling reminder of the consequences of greed and incompetence. 
+The villagers' plight becomes a subject of folklore, a grim tale shared around campfires, reminding generations to come of the fragility of life and the importance of communal support."],
+["Rebirth from Ashes", "As the village falls into ruin, its story catches the attention of a wandering group of benevolent travelers. 
+Filled with compassion, they gather the strength to rebuild the village, striving to create a brighter future. 
+The once-starved land becomes a symbol of resilience and redemption, as the village transforms into a flourishing community, nurturing life and prosperity. 
+The memory of the famine remains, but the villagers' tenacity prevails, offering hope to others facing similar challenges."]
+]
+
 var comboPrev = ""
 var combo = 1
 func calculateCombo(itemName):
@@ -213,19 +232,37 @@ func startGame():
 	setupFoodItems()
 	setupPopulation(Population)
 	Population.shuffle()
+	$/root/Main.startGame()
 	$/root/Main.updateLabels()
 	$/root/Main/HUD.visible = true
+	$/root/Main/bookRecipOpen/page3/Gameover.visible = false
 	$/root/Main/bookRecipOpen.startGame()
+	$/root/Main/bookRecipOpen.setPageRec()
 	gameState = gameStateType.START
 
 func endGame():
+	updateHighscore()
+	updateStory()
+	$/root/Main/bookRecipOpen/page3/Gameover.visible = true
 	$/root/Main/HUD.visible = false
 	$/root/Main/bookRecipOpen.endGame()
-	updateHighscore()
+	$/root/Main/bookRecipOpen.setPageMenu()
 	gameState = gameStateType.END
 	
 func updateHighscore():
-	pass
+	var highScoreNode = $/root/Main/bookRecipOpen/page3/Highscore
+	var highScore = int(highScoreNode.text.split(" ")[1])
+	if highScore < Score:
+		highScoreNode.text = highScoreNode.text.split(" ")[0] + " " + str(Score)
+
+func updateStory():
+	var storyHeaderNode = $/root/Main/bookRecipOpen/page3/StoryHeader
+	var storyBodyNode = $/root/Main/bookRecipOpen/page3/Story
+	var story = rng.randi_range(1,3)
+	var storyHeaderText = stories[story][0]
+	var storyBodyText = stories[story][1]
+	storyHeaderNode.text = storyHeaderText
+	storyBodyNode.text = storyBodyText
 
 func _process(_delta):
 	pass

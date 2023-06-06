@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=3 uid="uid://bicnfoxqw07ai"]
+[gd_scene load_steps=34 format=3 uid="uid://bicnfoxqw07ai"]
 
 [ext_resource type="PackedScene" uid="uid://d4hyeu1c3co4" path="res://Scenes/bookOpen.tscn" id="1_farj3"]
 [ext_resource type="Script" path="res://Scripts/bookRecipOpen.gd" id="1_grxif"]
@@ -43,23 +43,28 @@ font = ExtResource("2_spdyk")
 font_size = 87
 font_color = Color(0, 0, 0, 1)
 
+[sub_resource type="LabelSettings" id="LabelSettings_d6vbp"]
+font = ExtResource("2_spdyk")
+font_size = 52
+font_color = Color(0, 0, 0, 1)
+
 [sub_resource type="LabelSettings" id="LabelSettings_2pfcb"]
 font = ExtResource("2_spdyk")
-font_size = 34
+font_size = 26
 font_color = Color(0, 0, 0, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_alv65"]
 font = ExtResource("2_spdyk")
-font_size = 48
+font_size = 52
 font_color = Color(0, 0, 0, 1)
-
-[sub_resource type="CanvasTexture" id="CanvasTexture_c7vf5"]
-diffuse_texture = ExtResource("20_sew1q")
 
 [sub_resource type="LabelSettings" id="LabelSettings_8nofx"]
 font = ExtResource("2_spdyk")
 font_size = 46
 font_color = Color(0, 0, 0, 1)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_p1fgg"]
+size = Vector2(272, 106.5)
 
 [sub_resource type="LabelSettings" id="LabelSettings_khr0f"]
 font = ExtResource("2_spdyk")
@@ -67,13 +72,14 @@ font_size = 24
 font_color = Color(0, 0, 0, 1)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_edgx2"]
-size = Vector2(236, 77)
+size = Vector2(231, 77)
 
 [node name="bookRecipOpen" type="Node2D"]
 position = Vector2(0, 90)
 script = ExtResource("1_grxif")
 
 [node name="BookOpen" parent="." instance=ExtResource("1_farj3")]
+z_index = -2
 metadata/_edit_lock_ = true
 
 [node name="page1" type="Node2D" parent="."]
@@ -888,7 +894,7 @@ uppercase = true
 
 [node name="page3" type="Node2D" parent="."]
 
-[node name="Label" type="Label" parent="page3"]
+[node name="Big L" type="Label" parent="page3"]
 offset_left = 151.0
 offset_top = 88.0
 offset_right = 422.0
@@ -897,7 +903,7 @@ text = "L"
 label_settings = SubResource("LabelSettings_ofn0k")
 uppercase = true
 
-[node name="Label2" type="Label" parent="page3"]
+[node name="Title" type="Label" parent="page3"]
 offset_left = 144.0
 offset_top = 180.0
 offset_right = 881.0
@@ -907,11 +913,20 @@ label_settings = SubResource("LabelSettings_y1vjt")
 autowrap_mode = 2
 uppercase = true
 
-[node name="Label3" type="Label" parent="page3"]
-offset_left = 1036.0
-offset_top = 83.0
-offset_right = 1770.0
-offset_bottom = 562.0
+[node name="StoryHeader" type="Label" parent="page3"]
+offset_left = 1043.0
+offset_top = 78.0
+offset_right = 1780.0
+offset_bottom = 173.0
+text = "A new beginning"
+label_settings = SubResource("LabelSettings_d6vbp")
+autowrap_mode = 2
+
+[node name="Story" type="Label" parent="page3"]
+offset_left = 1042.0
+offset_top = 172.0
+offset_right = 1776.0
+offset_bottom = 755.0
 text = "As the new Tender of the village perpetual stew it will be your job to make sure it stays tasty and keeps the folk around fed! 
 
 Use this cookbook belonging to the old Stew Tender to familiarize yourself with your ingreedients and the locals. 
@@ -921,12 +936,22 @@ label_settings = SubResource("LabelSettings_2pfcb")
 autowrap_mode = 2
 
 [node name="Highscore" type="Label" parent="page3"]
-offset_left = 230.0
-offset_top = 508.0
-offset_right = 782.0
-offset_bottom = 588.0
+offset_left = 223.0
+offset_top = 728.0
+offset_right = 812.0
+offset_bottom = 808.0
 text = "Highscore: 0000000"
 label_settings = SubResource("LabelSettings_alv65")
+
+[node name="Gameover" type="Label" parent="page3"]
+visible = false
+offset_left = 223.0
+offset_top = 513.0
+offset_right = 812.0
+offset_bottom = 593.0
+text = "Game over!"
+label_settings = SubResource("LabelSettings_alv65")
+horizontal_alignment = 1
 
 [node name="Label5" type="Label" parent="page3"]
 offset_left = 1393.0
@@ -939,47 +964,61 @@ horizontal_alignment = 2
 autowrap_mode = 2
 
 [node name="Sprite2D" type="Sprite2D" parent="page3"]
+z_index = -1
 position = Vector2(511.75, 652.5)
 scale = Vector2(11.3516, 6.07812)
 texture = ExtResource("20_xd0uw")
 
-[node name="TextureButton" type="TextureButton" parent="page3"]
-offset_left = 188.0
-offset_top = 513.0
-offset_right = 529.0
-offset_bottom = 808.0
-texture_normal = SubResource("CanvasTexture_c7vf5")
-stretch_mode = 0
+[node name="playBtn" type="Node2D" parent="page3"]
+position = Vector2(361, 663)
 
-[node name="Label" type="Label" parent="page3/TextureButton"]
-layout_mode = 0
-offset_left = 49.0
-offset_top = 118.0
-offset_right = 304.0
-offset_bottom = 193.0
+[node name="Sprite2D" type="Sprite2D" parent="page3/playBtn"]
+scale = Vector2(5.34375, 4.48438)
+texture = ExtResource("20_sew1q")
+
+[node name="Label" type="Label" parent="page3/playBtn"]
+offset_left = -133.0
+offset_top = -53.0
+offset_right = 138.0
+offset_bottom = 53.0
 text = "Play"
 label_settings = SubResource("LabelSettings_8nofx")
 horizontal_alignment = 1
+vertical_alignment = 1
 uppercase = true
 
-[node name="TextureButton2" type="TextureButton" parent="page3"]
-offset_left = 491.0
-offset_top = 513.0
-offset_right = 827.0
-offset_bottom = 808.0
-texture_normal = SubResource("CanvasTexture_c7vf5")
-stretch_mode = 0
+[node name="playArea" type="Area2D" parent="page3/playBtn"]
+position = Vector2(-130, -48)
 
-[node name="Label" type="Label" parent="page3/TextureButton2"]
-layout_mode = 0
-offset_left = 45.0
-offset_top = 116.0
-offset_right = 300.0
-offset_bottom = 191.0
-text = "Quit"
+[node name="CollisionShape2D" type="CollisionShape2D" parent="page3/playBtn/playArea"]
+position = Vector2(132, 47.75)
+shape = SubResource("RectangleShape2D_p1fgg")
+
+[node name="quitBtn" type="Node2D" parent="page3"]
+position = Vector2(661, 664)
+
+[node name="Sprite2D" type="Sprite2D" parent="page3/quitBtn"]
+scale = Vector2(5.34375, 4.48438)
+texture = ExtResource("20_sew1q")
+
+[node name="Label" type="Label" parent="page3/quitBtn"]
+offset_left = -133.0
+offset_top = -53.0
+offset_right = 138.0
+offset_bottom = 53.0
+text = "Quit
+"
 label_settings = SubResource("LabelSettings_8nofx")
 horizontal_alignment = 1
+vertical_alignment = 1
 uppercase = true
+
+[node name="quitArea" type="Area2D" parent="page3/quitBtn"]
+position = Vector2(-130, -48)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="page3/quitBtn/quitArea"]
+position = Vector2(132, 47.75)
+shape = SubResource("RectangleShape2D_p1fgg")
 
 [node name="backbtn" type="Node2D" parent="."]
 position = Vector2(842, 835)
@@ -1066,6 +1105,10 @@ position = Vector2(34, 1)
 position = Vector2(115, 39)
 shape = SubResource("RectangleShape2D_edgx2")
 
+[connection signal="area_entered" from="page3/playBtn/playArea" to="." method="_on_play_area_area_entered"]
+[connection signal="area_exited" from="page3/playBtn/playArea" to="." method="_on_play_area_area_exited"]
+[connection signal="area_entered" from="page3/quitBtn/quitArea" to="." method="_on_quit_area_area_entered"]
+[connection signal="area_exited" from="page3/quitBtn/quitArea" to="." method="_on_quit_area_area_exited"]
 [connection signal="area_entered" from="backbtn/backArea" to="." method="_on_back_area_area_entered"]
 [connection signal="area_exited" from="backbtn/backArea" to="." method="_on_back_area_area_exited"]
 [connection signal="area_entered" from="nextbtn/nextArea" to="." method="_on_next_area_area_entered"]

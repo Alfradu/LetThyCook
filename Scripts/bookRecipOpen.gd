@@ -3,6 +3,8 @@ extends Node2D
 var hoveringBackBtn = false
 var hoveringNextBtn = false
 var hoveringPrevBtn = false
+var hoveringPlayBtn = false
+var hoveringQuitBtn = false
 
 var page = 3
 var maxPage = 3
@@ -19,6 +21,10 @@ func _process(_delta):
 	
 func _input(event):
 	if event is InputEventMouseButton && event.button_index == MOUSE_BUTTON_LEFT && Globals.bookOpen && Globals.book == self:
+		if event.is_pressed() && hoveringPlayBtn:
+			Globals.startGame()
+		if event.is_pressed() && hoveringQuitBtn:
+			get_tree().quit()
 		if event.is_pressed() && hoveringBackBtn: 
 			closeBook()
 		elif event.is_pressed() && hoveringNextBtn: 
@@ -28,10 +34,12 @@ func _input(event):
 
 func startGame():
 	enableButton($backbtn/Sprite2D, $backbtn/backArea)
+	disableButton($page3/playBtn/Sprite2D, $page3/playBtn/playArea)
 	closeBook()
 
 func endGame():
 	disableButton($backbtn/Sprite2D, $backbtn/backArea)
+	enableButton($page3/playBtn/Sprite2D, $page3/playBtn/playArea)
 	openBook()
 
 func openBook():
@@ -43,11 +51,23 @@ func openBook():
 	hoveringBackBtn = false
 	hoveringNextBtn = false
 	hoveringPrevBtn = false
+	hoveringPlayBtn = false
+	hoveringQuitBtn = false
 	
 func closeBook():
 	$/root/Main/hand.grab()
 	self.visible = false
 	Globals.bookOpen = false
+
+func setPageMenu():
+	$page1.visible = false
+	$page2.visible = false
+	$page3.visible = true
+
+func setPageRec():
+	$page1.visible = true
+	$page2.visible = false
+	$page3.visible = false
 
 func nextPage():
 	var prevNode = get_node("page"+str(page))
@@ -123,3 +143,19 @@ func _on_prev_area_area_entered(area):
 func _on_prev_area_area_exited(area):
 	if area.name == "HandCollision" && visible:
 		hoveringPrevBtn = false
+
+func _on_quit_area_area_entered(area):
+	if area.name == "HandCollision" && visible && page == 3:
+		hoveringQuitBtn = true
+
+func _on_quit_area_area_exited(area):
+	if area.name == "HandCollision" && visible:
+		hoveringQuitBtn = false
+
+func _on_play_area_area_entered(area):
+	if area.name == "HandCollision" && visible && page == 3:
+		hoveringPlayBtn = true
+
+func _on_play_area_area_exited(area):
+	if area.name == "HandCollision" && visible:
+		hoveringPlayBtn = false

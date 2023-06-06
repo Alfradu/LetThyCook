@@ -14,11 +14,14 @@ var chillWithHumans = 0
 var scoreAtStart = 0
 
 func _ready():
+	pass
+
+func startGame():
 	for item in Globals.FoodItems:
 		var instantiateditem = foodItem.instantiate()
 		$ItemContainer.add_child(instantiateditem)
 		instantiateditem.init(item)
-
+ 
 func _process(delta):
 	if Globals.gameState == Globals.gameStateType.MENU: return 
 	if Globals.gameState == Globals.gameStateType.END: return 
@@ -80,9 +83,13 @@ func checkRoundOver():
 	if ($HumanContainer.get_child_count()-Globals.deliveryBoys == 0 && Globals.Population.is_empty()):
 		state = Globals.TimeOfDay.NIGHT
 		$AnimationPlayer.play("set")
-		$HUD.setupMessage("Good job!")
-		$HUD.setupMessage("Money Earned Today: " + str(Globals.MoneyToday))
-		$HUD.setupMessage("Score Earned Today: " + str(Globals.Score - scoreAtStart))
+		if Globals.ToBePopulated.is_empty():
+			Globals.endGame()
+		else:
+			state = Globals.TimeOfDay.NIGHT
+			$HUD.setupMessage("Good job!")
+			$HUD.setupMessage("Money Earned Today: " + str(Globals.MoneyToday))
+			$HUD.setupMessage("Score Earned Today: " + str(Globals.Score - scoreAtStart))
 
 func maybeChangeState():
 	if (state == Globals.TimeOfDay.MORNING && untilDay <= 0):
