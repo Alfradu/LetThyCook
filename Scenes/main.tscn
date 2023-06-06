@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://64q1xapxe1i8"]
+[gd_scene load_steps=32 format=3 uid="uid://64q1xapxe1i8"]
 
 [ext_resource type="PackedScene" uid="uid://b46fycpu36fr4" path="res://Scenes/hand.tscn" id="1_ib6nh"]
 [ext_resource type="Script" path="res://Scripts/main.gd" id="1_r782s"]
@@ -15,6 +15,7 @@
 [ext_resource type="PackedScene" uid="uid://dqf4v0mcrnydu" path="res://Scenes/bookBuy.tscn" id="10_le51f"]
 [ext_resource type="PackedScene" uid="uid://cgr2rj03h2r5" path="res://Scenes/bookRecip.tscn" id="11_2wti7"]
 [ext_resource type="PackedScene" uid="uid://5iwr6ovp0oo2" path="res://Scenes/bookShopOpen.tscn" id="13_axuml"]
+[ext_resource type="Shader" path="res://Scenes/main.gdshader" id="16_s772k"]
 [ext_resource type="AudioStream" uid="uid://ka1ja63xbq3l" path="res://Audio/the-virgin-medieval-music-4238.mp3" id="16_t1v2j"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_btphb"]
@@ -63,6 +64,129 @@ font_size = 59
 shadow_size = 2
 shadow_color = Color(0.329412, 0.329412, 0.329412, 0.537255)
 shadow_offset = Vector2(2, 2)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_0ggq3"]
+shader = ExtResource("16_s772k")
+shader_parameter/start_frame = 0
+shader_parameter/current_frame = 0
+shader_parameter/mix_ratio = 1.0
+
+[sub_resource type="LabelSettings" id="LabelSettings_n5cgn"]
+font = ExtResource("9_lgflv")
+font_size = 68
+shadow_size = 2
+shadow_color = Color(0.458824, 0.458824, 0.458824, 0.486275)
+shadow_offset = Vector2(2, 2)
+
+[sub_resource type="Animation" id="Animation_6huc3"]
+resource_name = "pulse"
+length = 1.2
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:material:shader_parameter/current_frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5]
+}
+
+[sub_resource type="Animation" id="Animation_t5fi4"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:material:shader_parameter/current_frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("..:scale:x")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("..:scale:y")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/3/type = "bezier"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("..:rotation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+
+[sub_resource type="Animation" id="Animation_jnmh8"]
+resource_name = "pulse2"
+length = 1.6
+loop_mode = 1
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("..:scale:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0),
+"points": PackedFloat32Array(0.8, -0.25, 0, 0.25, 0, 1.2, -0.25, 0, 0.25, 0, 0.8, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.9, 1.6)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("..:scale:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0),
+"points": PackedFloat32Array(0.8, -0.25, 0, 0.25, 0, 1.2, -0.25, 0, 0.25, 0, 0.8, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.7, 1.6)
+}
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("..:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0),
+"points": PackedFloat32Array(0.139626, -0.25, 0, 0.25, 0, -0.139626, -0.25, 0, 0.25, 0, 0.139626, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.8, 1.6)
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_o6dkw"]
+_data = {
+"RESET": SubResource("Animation_t5fi4"),
+"pulse": SubResource("Animation_6huc3"),
+"pulse2": SubResource("Animation_jnmh8")
+}
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_r782s")
@@ -321,6 +445,31 @@ label_settings = SubResource("LabelSettings_w4p2d")
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
+
+[node name="container" type="Node2D" parent="HUD"]
+position = Vector2(920, 840)
+
+[node name="combo" type="Label" parent="HUD/container"]
+material = SubResource("ShaderMaterial_0ggq3")
+offset_left = -233.846
+offset_top = -49.231
+offset_right = 238.154
+offset_bottom = 53.769
+text = "Combo! x"
+label_settings = SubResource("LabelSettings_n5cgn")
+metadata/_edit_lock_ = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="HUD/container"]
+root_node = NodePath("../combo")
+libraries = {
+"": SubResource("AnimationLibrary_o6dkw")
+}
+
+[node name="AnimationPlayer2" type="AnimationPlayer" parent="HUD/container"]
+root_node = NodePath("../combo")
+libraries = {
+"": SubResource("AnimationLibrary_o6dkw")
+}
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("16_t1v2j")

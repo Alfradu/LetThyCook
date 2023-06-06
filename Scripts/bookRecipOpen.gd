@@ -67,6 +67,12 @@ func prevPage():
 	else:
 		enableButton($prevbtn/Sprite2D, $prevbtn/prevArea)
 
+func revealCombo(itemName):
+	var nodes = get_tree().get_nodes_in_group("comboNodes")
+	for node in nodes:
+		if node.name == itemName && node.get_node("hidden").visible:
+			node.get_node("hidden").visible = false
+
 func enableButton(sprite, area):
 	sprite.self_modulate = Color(1, 1, 1, 1)
 	area.monitoring = true

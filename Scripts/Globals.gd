@@ -125,6 +125,35 @@ var foodLibrary = [
 #	{ name = "Salt",    type = FoodType.HERB,      combo = "",       discovered = false, cost = 50, modifier = 50},
 #	{ name = "Pepper",  type = FoodType.HERB,      combo = "",       discovered = false, cost = 50, modifier = 50}
 ] 
+var comboPrev = ""
+var combo = 1
+func calculateCombo(itemName):
+	if (comboPrev != ""):
+		var newCombo = false
+		for food in foodLibrary:
+			if food.name == comboPrev && food.combo == itemName && !food.discovered:
+				food.discovered = true
+				$/root/Main/bookRecipOpen.revealCombo(comboPrev)
+				comboPrev = itemName
+				combo += 1
+				newCombo = true
+		if !newCombo:
+			comboPrev = itemName
+			combo = 1
+	else:
+		comboPrev = itemName
+		combo = 1
+
+func combofy(foodItem):
+	var modifier = 0
+	for i in foodLibrary:
+		if i.name == foodItem.name:
+			modifier = combo * i.modifier
+	foodItem.ttl -= modifier
+	foodItem.stats.filling += modifier
+	foodItem.stats.power += modifier
+	foodItem.stats.taste += modifier
+	return foodItem
 
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)

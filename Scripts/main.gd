@@ -82,12 +82,22 @@ func _process(delta):
 		Globals.Score += 1
 
 func updateLabels():
-	$/root/Main/HUD/Filling.value = Globals.SOUPSTATS.filling
-	$/root/Main/HUD/Power.value = Globals.SOUPSTATS.power
-	$/root/Main/HUD/Taste.value = Globals.SOUPSTATS.taste
-	$/root/Main/HUD/PeopleLeft/Label2.text = str(toFeed())
-	$/root/Main/HUD/Money/Label2.text = formatScore(Globals.Money)
-	$/root/Main/HUD/Score.text = "Score: " + formatScore(Globals.Score)
+	$HUD/Filling.value = Globals.SOUPSTATS.filling
+	$HUD/Power.value = Globals.SOUPSTATS.power
+	$HUD/Taste.value = Globals.SOUPSTATS.taste
+	$HUD/PeopleLeft/Label2.text = str(toFeed())
+	$HUD/Money/Label2.text = formatScore(Globals.Money)
+	$HUD/Score.text = "Score: " + formatScore(Globals.Score)
+	if Globals.combo > 1: 
+		$HUD/container/AnimationPlayer.play("pulse")
+		$HUD/container/AnimationPlayer2.play("pulse2")
+		$HUD/container.visible = true
+		$HUD/container/combo.text = "Combo! x" + str(Globals.combo)
+	else:
+		$HUD/container/AnimationPlayer.pause()
+		$HUD/container/AnimationPlayer2.pause()
+		$HUD/container.visible = false
+	
 	
 func formatScore(num):
 	return "%06d" % num

@@ -85,5 +85,7 @@ func _plums():
 		$plums.visible = true
 		$plums/AnimationPlayer.play("splash")
 	foodItem.inSoup = true
+	Globals.calculateCombo(foodItem.name)
+	foodItem = Globals.combofy(foodItem)
 	Globals.Score += foodItem.ttl
 	Globals.calculateSoup()
