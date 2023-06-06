@@ -187,21 +187,16 @@ The memory of the famine remains, but the villagers' tenacity prevails, offering
 var comboPrev = ""
 var combo = 1
 func calculateCombo(itemName):
-	if (comboPrev != ""):
-		var newCombo = false
-		for food in foodLibrary:
-			if food.name == comboPrev && food.combo == itemName && !food.discovered:
-				food.discovered = true
-				$/root/Main/bookRecipOpen.revealCombo(comboPrev)
-				comboPrev = itemName
-				combo += 1
-				newCombo = true
-		if !newCombo:
-			comboPrev = itemName
-			combo = 1
-	else:
-		comboPrev = itemName
+	var newCombo = false
+	for food in foodLibrary:
+		if food.name == comboPrev && food.combo == itemName:
+			food.discovered = true
+			$/root/Main/bookRecipOpen.revealCombo(comboPrev)
+			combo += 1
+			newCombo = true
+	if !newCombo:
 		combo = 1
+	comboPrev = itemName
 
 func combofy(foodItem):
 	var modifier = 0

@@ -6,7 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://bfte1ehnif82v" path="res://Assets/floor.png" id="2_5cq2w"]
 [ext_resource type="Texture2D" uid="uid://bsvexv5cvcjp7" path="res://Assets/sun.png" id="2_ydkoo"]
 [ext_resource type="Texture2D" uid="uid://cfypvk4tg780y" path="res://Assets/table/table-left.png" id="3_i8y3k"]
-[ext_resource type="PackedScene" path="res://Scenes/barrel.tscn" id="4_184di"]
+[ext_resource type="PackedScene" uid="uid://boknxxs4unv80" path="res://Scenes/barrel.tscn" id="4_184di"]
 [ext_resource type="Texture2D" uid="uid://cq3t6tuoppjjq" path="res://Assets/table/table-right.png" id="4_d7h36"]
 [ext_resource type="Texture2D" uid="uid://xqjjow6xcu5x" path="res://Assets/icon.svg" id="4_xpdd1"]
 [ext_resource type="PackedScene" uid="uid://blsuuk4guurtt" path="res://Scenes/ladle.tscn" id="6_ypd41"]
@@ -160,6 +160,9 @@ corner_radius_bottom_left = 5
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dmtsd"]
 bg_color = Color(0.235294, 0.235294, 0.235294, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dxb6n"]
 bg_color = Color(0.282353, 0.694118, 0.443137, 1)
