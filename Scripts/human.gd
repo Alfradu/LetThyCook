@@ -36,12 +36,43 @@ func init(init_human):
 		holding.texture = bowl
 	if (init_human.holdingBox):
 		holding.texture = box
+		populateBox(init_human.boxContent)
 	holding.scale.x = 1
 	holding.scale.y = 1
 	setBodyTexture(init_human.status, init_human.fat)
 	human = init_human
 	state = Globals.HumanState.WALKING_TO_CAULDRON
 	self.position = $/root/Main/RefPoints/humanSpawn.position
+
+func populateBox(itemArr):
+	if itemArr.size() == 1:
+		var itemTexture = load(Globals.getTexture(itemArr[0].name))
+		$Holding/item1.texture = itemTexture
+		$Holding/item2.texture = itemTexture
+		$Holding/item3.texture = itemTexture
+	elif itemArr.size() == 2:
+		var itemTexture = load(Globals.getTexture(itemArr[0].name))
+		var itemTexture2 = load(Globals.getTexture(itemArr[1].name))
+		$Holding/item1.texture = itemTexture
+		$Holding/item2.texture = itemTexture2
+		$Holding/item3.texture = itemTexture
+	elif itemArr.size() >= 3:
+		var itemTexture = load(Globals.getTexture(itemArr[0].name))
+		var itemTexture2 = load(Globals.getTexture(itemArr[1].name))
+		var itemTexture3 = load(Globals.getTexture(itemArr[2].name))
+		$Holding/item1.texture = itemTexture
+		$Holding/item2.texture = itemTexture2
+		$Holding/item3.texture = itemTexture3
+	else:
+		var itemTexture = load(Globals.getTexture("Cabbage"))
+		var itemTexture2 = load(Globals.getTexture("Beef"))
+		var itemTexture3 = load(Globals.getTexture("Parsley"))
+		$Holding/item1.texture = itemTexture
+		$Holding/item2.texture = itemTexture2
+		$Holding/item3.texture = itemTexture3
+	$Holding/item1.visible = true
+	$Holding/item2.visible = true
+	$Holding/item3.visible = true
 
 func setBodyTexture(status, fat):
 	if (status == Globals.Rank.PEASANT):
@@ -81,10 +112,11 @@ func _process(delta):
 				Globals.ToBePopulated.append(human)
 			queue_free()
 		if (human.holdingBox):
+			Globals.deliveryBoys -= 1
 			queue_free()
 
 func _input(event):
-	if event is InputEventMouseButton && event.button_index == MOUSE_BUTTON_LEFT:
+	if event is InputEventMouseButton && event.button_index == MOUSE_BUTTON_LEFT && !Globals.bookOpen:
 		if event.is_pressed() && isHovered && state == Globals.HumanState.TAKING && !hasEaten:
 			$AnimationPlayer.speed_scale = 2			
 			$AnimationPlayer.play_backwards("dipbowl");
@@ -98,7 +130,6 @@ func _on_animation_player_animation_finished(anim_name):
 			foodEffect.texture = getEffectTexture(human.satisfaction)
 			var score = 100 * (human.status + 1) + human.satisfaction
 			var money = (50 + human.satisfaction) * human.status
-			Globals.checkMoneyShop()
 			self.get_node("foodEffect/ScoreEarned").text = str(score)
 			self.get_node("foodEffect/MoneyEarned").text = ("$" + str(money)) if money != 0 else ""
 			$AnimationPlayer.play("react")
@@ -107,6 +138,7 @@ func _on_animation_player_animation_finished(anim_name):
 			Globals.Score += score
 			Globals.Money += money
 			Globals.MoneyToday += money
+			Globals.checkMoneyShop()
 			
 		
 func getEffectTexture(satisfaction):

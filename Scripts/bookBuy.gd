@@ -10,7 +10,7 @@ func _process(_delta):
 	pass
 
 func _input(event):
-	if event is InputEventMouseButton && event.button_index == MOUSE_BUTTON_LEFT && hovering:
+	if event is InputEventMouseButton && event.button_index == MOUSE_BUTTON_LEFT && hovering && !Globals.bookOpen:
 		if event.is_pressed(): 
 			$/root/Main.showGreenBook()
 			#open shop greenbook

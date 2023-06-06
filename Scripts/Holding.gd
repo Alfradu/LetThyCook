@@ -15,7 +15,7 @@ func _process(_delta):
 	pass
 		
 func _input(event):
-	if event is InputEventMouseButton && event.button_index == MOUSE_BUTTON_LEFT && onTable && hovering:
+	if event is InputEventMouseButton && event.button_index == MOUSE_BUTTON_LEFT && onTable && hovering && !Globals.bookOpen:
 		for item in items:
 			var instantiateditem = foodItem.instantiate()
 			$/root/Main/ItemContainer.add_child(instantiateditem)

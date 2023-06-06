@@ -121,8 +121,6 @@ texture = ExtResource("4_xpdd1")
 centered = false
 
 [node name="ItemContainer" type="Node2D" parent="."]
-visible = false
-position = Vector2(-512, 0)
 
 [node name="barrel" parent="." instance=ExtResource("4_184di")]
 position = Vector2(1744, 983)

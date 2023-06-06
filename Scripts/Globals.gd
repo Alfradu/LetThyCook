@@ -31,6 +31,8 @@ var MoneyToday = 0
 var soupLevel
 var soupedPeople = 0
 var bookOpen = false
+var book = null
+var deliveryBoys = 0
 
 class FoodStats:
 	var filling: int
@@ -83,14 +85,21 @@ class Human:
 				Globals.updateCauldronLevel(-1)
 				
 			if self.satisfaction > 80 && rng.randf_range(0, 10) > 7:
-				self.holdingBowl = false
-				self.holdingBox = true
-				self.boxContent = []
+				var deliveryGuy = Human.new()
+				deliveryGuy.name = "Karl-Bertil"
+				deliveryGuy.status = Rank.PEASANT
+				deliveryGuy.foodType = FoodType.VEGETABLE
+				deliveryGuy.holdingBowl = false
+				deliveryGuy.holdingBox = true
+				deliveryGuy.hunger = Hunger.CONTEMPT
+				deliveryGuy.fat = false
 				for i in range(rng.randi_range(1,3)):
 					var item = Globals.getFoodItem()
+					deliveryGuy.boxContent.append(item)
 					Globals.FoodItems.append(item)
 					self.boxContent.append(item)
-				Globals.Orders.append(self)
+				
+				Globals.Orders.append(deliveryGuy)
 	
 	func degradehuman():
 		self.hunger = self.hunger - 1 as Globals.Hunger if self.hunger-1 > Globals.Hunger.ALMOSTDEAD else Globals.Hunger.ALMOSTDEAD
@@ -117,19 +126,9 @@ var foodLibrary = [
 #	{ name = "Pepper",  type = FoodType.HERB,      combo = "",       discovered = false, cost = 50, modifier = 50}
 ] 
 
-var deliveryGuy
-
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 	setupFoodItems()
-	deliveryGuy = Human.new()
-	deliveryGuy.name = "Karl-Bertil"
-	deliveryGuy.status = Rank.PEASANT
-	deliveryGuy.foodType = FoodType.VEGETABLE
-	deliveryGuy.holdingBowl = false
-	deliveryGuy.holdingBox = true
-	deliveryGuy.hunger = Hunger.CONTEMPT
-	deliveryGuy.fat = false
 
 func _process(_delta):
 	pass
@@ -183,7 +182,10 @@ func setupFoodItems():
 	FoodItems.append(getFoodItem("Thyme"))
 	FoodItems.append(getFoodItem("Parsley"))
 	FoodItems.append(getFoodItem("Dill"))
-	
+
+func getTexture(itemname):
+	return "res://Assets/Soup/items/" + itemname.to_lower() + "1.png"
+
 func getFoodItem(itemName = "", stats: FoodStats = null):
 	var item = getRandomItem() if itemName == "" else getFoodFromLibrary(itemName) #TODO: can crash here if we dont find name in lib
 	var i = FoodItem.new()
@@ -236,11 +238,19 @@ func checkMoneyShop():
 
 func orderItem(foodName, cost):
 	if (Money < cost): return
-	var foodItem = getFoodItem(foodName)
 	Money -= cost
 	$/root/Main.updateLabels()
-	FoodItems.append(foodItem)
-	deliveryGuy.boxContent = []
-	deliveryGuy.boxContent.append(foodItem)
+	var deliveryGuy = Human.new()
+	deliveryGuy.name = "Karl-Bertil"
+	deliveryGuy.status = Rank.PEASANT
+	deliveryGuy.foodType = FoodType.VEGETABLE
+	deliveryGuy.holdingBowl = false
+	deliveryGuy.holdingBox = true
+	deliveryGuy.hunger = Hunger.CONTEMPT
+	deliveryGuy.fat = false
+	for i in range(rng.randi_range(1,3)):
+		var foodItem = getFoodItem(foodName)
+		FoodItems.append(foodItem)
+		deliveryGuy.boxContent.append(foodItem)
 	Orders.append(deliveryGuy)
 	checkMoneyShop()

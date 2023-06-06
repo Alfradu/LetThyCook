@@ -50,14 +50,7 @@ func _ready():
 	setupPopulation(Globals.Population)
 	Globals.Population.shuffle()
 #
-	for i in range(0, 3):
-		var item = Globals.FoodItems[i]
-		var instantiateditem = foodItem.instantiate()
-		$ItemContainer.add_child(instantiateditem)
-		item.inSoup = true
-	
-	for i in range(3, len(Globals.FoodItems)):
-		var item = Globals.FoodItems[i]
+	for item in Globals.FoodItems:
 		var instantiateditem = foodItem.instantiate()
 		$ItemContainer.add_child(instantiateditem)
 		instantiateditem.init(item)
@@ -66,22 +59,18 @@ var time = 0
 var state = Globals.TimeOfDay.MORNING
 var untilDay = 5
 var untilMorning = 10
-var delivery = 0
 var diffuculty = 1
 var chillWithHumans = 0
 var scoreAtStart = 0
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	time += delta * diffuculty
-	delivery += delta * diffuculty
-	if (delivery > 5):
-		delivery = 0
-		maybeSendInHuman(Globals.Orders)
-	elif (time > 1):
+	if (time > 1):
 		time = 0
 		chillWithHumans -= 1
 		Globals.degradeSoupItems(1)
 		Globals.calculateSoup()
+		maybeSendInHuman(Globals.Orders)
 		if (state == Globals.TimeOfDay.MORNING):
 			untilDay -= 1
 		if (state == Globals.TimeOfDay.DAY):
@@ -119,10 +108,11 @@ func maybeSendInHuman(list):
 			var instantiateditem = humanItem.instantiate()
 			$HumanContainer.add_child(instantiateditem)
 			instantiateditem.init(human)
+			if human.holdingBox: Globals.deliveryBoys += 1
 			chillWithHumans = 2
 			
 func checkRoundOver():
-	if ($HumanContainer.get_child_count() == 0 && Globals.Population.is_empty()):
+	if ($HumanContainer.get_child_count()-Globals.deliveryBoys == 0 && Globals.Population.is_empty()):
 		state = Globals.TimeOfDay.NIGHT
 		$HUD.setupMessage("Good job!")
 		$HUD.setupMessage("Money Earned Today: " + str(Globals.MoneyToday))

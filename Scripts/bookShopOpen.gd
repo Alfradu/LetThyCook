@@ -22,7 +22,7 @@ func _process(_delta):
 	pass
 	
 func _input(event):
-	if event is InputEventMouseButton && event.button_index == MOUSE_BUTTON_LEFT:
+	if event is InputEventMouseButton && event.button_index == MOUSE_BUTTON_LEFT && Globals.bookOpen && Globals.book == self:
 		if event.is_pressed() && hoveringBackBtn: 
 			closeBook()
 		elif event.is_pressed() && hoveringNextBtn: 
@@ -34,12 +34,14 @@ func _input(event):
 
 func openBook():
 		Globals.checkMoneyShop()
+		Globals.book = self
 		visible = true
 		hoveringBackBtn = false
 		hoveringNextBtn = false
 		hoveringPrevBtn = false
 		
 func closeBook():
+	print("Closed shop book")
 	$/root/Main/hand.grab()
 	self.visible = false
 	Globals.bookOpen = false
@@ -149,5 +151,5 @@ func _on_buy_area8_area_entered(_area):
 func _on_buy_area9_area_entered(_area):
 	buyBtn = ["Dill", costToInt($page1/Sprite2D9/label2.text)]
 
-func _on_buy_area_area_exited(area):
+func _on_buy_area_area_exited(_area):
 	if !ordered: buyBtn = null

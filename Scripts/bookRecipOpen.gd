@@ -17,7 +17,7 @@ func _process(_delta):
 	pass
 	
 func _input(event):
-	if event is InputEventMouseButton && event.button_index == MOUSE_BUTTON_LEFT:
+	if event is InputEventMouseButton && event.button_index == MOUSE_BUTTON_LEFT && Globals.bookOpen && Globals.book == self:
 		if event.is_pressed() && hoveringBackBtn: 
 			closeBook()
 		elif event.is_pressed() && hoveringNextBtn: 
@@ -27,6 +27,7 @@ func _input(event):
 
 func openBook():
 		visible = true
+		Globals.book = self
 		hoveringBackBtn = false
 		hoveringNextBtn = false
 		hoveringPrevBtn = false

@@ -1,10 +1,14 @@
-[gd_scene load_steps=15 format=3 uid="uid://cbisx2e3hxe1l"]
+[gd_scene load_steps=19 format=3 uid="uid://cbisx2e3hxe1l"]
 
 [ext_resource type="Script" path="res://Scripts/human.gd" id="1_3ms4j"]
 [ext_resource type="Script" path="res://Scripts/Holding.gd" id="2_4jtkn"]
+[ext_resource type="Texture2D" uid="uid://cn4vrushaceqa" path="res://Assets/People/Box.png" id="2_73tk8"]
 [ext_resource type="FontFile" uid="uid://dj2kwm3wierp1" path="res://antiquity-print.ttf" id="3_6o0w1"]
+[ext_resource type="Texture2D" uid="uid://cvgn2n0jqb7s3" path="res://Assets/Soup/items/cabbage1.png" id="4_6oiax"]
 [ext_resource type="AudioStream" uid="uid://c0fv8p7r1woth" path="res://Audio/hit.wav" id="4_v4wfl"]
 [ext_resource type="AudioStream" uid="uid://callfrbuwdtsh" path="res://Audio/he_ate.mp3" id="5_ojxvx"]
+[ext_resource type="Texture2D" uid="uid://cf75r14bg3ebu" path="res://Assets/Soup/items/carrot1.png" id="5_sgenv"]
+[ext_resource type="Texture2D" uid="uid://bloa3dwa8os5h" path="res://Assets/Soup/items/thyme1.png" id="6_l42wu"]
 [ext_resource type="AudioStream" uid="uid://col3bnp4kxsxo" path="res://Audio/slurrp.wav" id="6_uygt4"]
 [ext_resource type="AudioStream" uid="uid://b1brmxtfitmtk" path="res://Audio/walk.mp3" id="7_ud24y"]
 
@@ -194,6 +198,7 @@ script = ExtResource("1_3ms4j")
 [node name="Holding" type="Sprite2D" parent="."]
 z_index = 5
 scale = Vector2(1.4, 1.4)
+texture = ExtResource("2_73tk8")
 script = ExtResource("2_4jtkn")
 
 [node name="BowlHitBox" type="Area2D" parent="Holding"]
@@ -201,6 +206,27 @@ script = ExtResource("2_4jtkn")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Holding/BowlHitBox"]
 position = Vector2(0.15873, -19.5238)
 shape = SubResource("CircleShape2D_t1wih")
+
+[node name="item1" type="Sprite2D" parent="Holding"]
+visible = false
+show_behind_parent = true
+position = Vector2(16.5079, -35.5556)
+scale = Vector2(0.385714, 0.385714)
+texture = ExtResource("4_6oiax")
+
+[node name="item2" type="Sprite2D" parent="Holding"]
+visible = false
+show_behind_parent = true
+position = Vector2(1.26984, -39.3651)
+scale = Vector2(0.385714, 0.385714)
+texture = ExtResource("5_sgenv")
+
+[node name="item3" type="Sprite2D" parent="Holding"]
+visible = false
+show_behind_parent = true
+position = Vector2(-17.7778, -38.0952)
+scale = Vector2(0.385714, 0.385714)
+texture = ExtResource("6_l42wu")
 
 [node name="humanArea" type="Area2D" parent="."]
 collision_layer = 4
@@ -259,4 +285,3 @@ autoplay = true
 [connection signal="area_entered" from="Holding/BowlHitBox" to="Holding" method="_on_bowl_hit_box_area_entered"]
 [connection signal="area_exited" from="Holding/BowlHitBox" to="Holding" method="_on_bowl_hit_box_area_exited"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
-[connection signal="finished" from="hewalk" to="." method="_on_hewalk_finished"]

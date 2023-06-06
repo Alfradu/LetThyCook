@@ -18,7 +18,7 @@ func _ready():
 
 func init(item):
 	var rng = RandomNumberGenerator.new()
-	var texture = load(getTexture(item.name))
+	var texture = load(Globals.getTexture(item.name))
 	sprite.texture = texture
 	shadow.texture = texture
 	var spawn
@@ -33,9 +33,6 @@ func init(item):
 #	var randRotation = rng.randf_range(0,360)
 #	sprite.rotation = randRotation messes up shadow xd
 	foodItem = item
-	
-func getTexture(itemname):
-	return "res://Assets/Soup/items/" + itemname.to_lower() + "1.png"
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
@@ -44,11 +41,11 @@ func _process(_delta):
 		self.position = Vector2(mousepos.x, mousepos.y)
 
 func _input(event):
-	if event is InputEventMouseButton && event.button_index == MOUSE_BUTTON_LEFT && !$AnimationPlayer.is_playing():
-		if event.is_pressed() && hand.pickedItem == self: 
+	if event is InputEventMouseButton && event.button_index == MOUSE_BUTTON_LEFT && !$AnimationPlayer.is_playing() && !Globals.bookOpen:
+		if event.is_pressed() && hand.pickedItem == self && !Globals.bookOpen: 
 			dragging = true;
 			$gotGrabbed.play()
-		elif hand.state == Globals.handState.OPEN:
+		elif hand.state == Globals.handState.OPEN && !Globals.bookOpen:
 			dragging = false;
 			if overCauldron:
 				$AnimationPlayer.play("plums");
@@ -81,7 +78,7 @@ func _on_got_splashed_finished():
 func spawnToolTip():
 	var instantiateditem = toolTip.instantiate()
 	$/root/Main/cauldron/ItemToolTips.add_child(instantiateditem)
-	instantiateditem.init(foodItem, load(getTexture(foodItem.name)))
+	instantiateditem.init(foodItem, load(Globals.getTexture(foodItem.name)))
 
 func _plums():
 	if Globals.soupLevel > 1:

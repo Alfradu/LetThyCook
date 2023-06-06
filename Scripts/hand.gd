@@ -74,6 +74,7 @@ func clearText(text):
 
 func point():
 	pointing = true
+	pickedItem = null
 	$wrist.visible = false
 	$armhand.visible = false
 	$handhand.visible = false
@@ -81,6 +82,7 @@ func point():
 	
 func grab():
 	pointing = false
+	pickedItem = null
 	$wrist.visible = true
 	$armhand.visible = true
 	$handhand.visible = true

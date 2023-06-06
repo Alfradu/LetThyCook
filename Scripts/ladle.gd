@@ -38,7 +38,7 @@ func _process(delta):
 		self.position = self.position.lerp(startingPos, delta)
 	
 func _input(event):
-	if event is InputEventMouseButton && event.button_index == MOUSE_BUTTON_LEFT:
+	if event is InputEventMouseButton && event.button_index == MOUSE_BUTTON_LEFT && !Globals.bookOpen:
 		if event.is_pressed() && hand.pickedItem == self: 
 			dragging = true;
 		elif hand.state == Globals.handState.OPEN:
