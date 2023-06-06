@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://64q1xapxe1i8"]
+[gd_scene load_steps=25 format=3 uid="uid://64q1xapxe1i8"]
 
 [ext_resource type="PackedScene" uid="uid://b46fycpu36fr4" path="res://Scenes/hand.tscn" id="1_ib6nh"]
 [ext_resource type="Script" path="res://Scripts/main.gd" id="1_r782s"]
@@ -57,6 +57,12 @@ corner_radius_top_left = 5
 corner_radius_top_right = 5
 corner_radius_bottom_right = 5
 corner_radius_bottom_left = 5
+
+[sub_resource type="LabelSettings" id="LabelSettings_w4p2d"]
+font_size = 59
+shadow_size = 2
+shadow_color = Color(0.329412, 0.329412, 0.329412, 0.537255)
+shadow_offset = Vector2(2, 2)
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_r782s")
@@ -309,6 +315,7 @@ offset_bottom = 50.0
 theme_override_fonts/font = ExtResource("9_lgflv")
 theme_override_font_sizes/font_size = 60
 text = "Score: 000000"
+label_settings = SubResource("LabelSettings_w4p2d")
 
 [node name="AlertContainer" type="Control" parent="HUD"]
 anchors_preset = 0
