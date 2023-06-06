@@ -64,8 +64,8 @@ func _ready():
 
 var time = 0
 var state = Globals.TimeOfDay.MORNING
-var untilDay = 2
-var untilMorning = 2
+var untilDay = 5
+var untilMorning = 10
 var delivery = 0
 var diffuculty = 1
 var chillWithHumans = 0
@@ -158,3 +158,7 @@ func showGreenBook():
 	$hand.point()
 	Globals.bookOpen = true
 	$bookBuyOpen.openBook()
+
+
+func _on_audio_stream_player_2d_finished():
+	$AudioStreamPlayer2D.play()

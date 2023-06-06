@@ -1,8 +1,12 @@
-[gd_scene load_steps=11 format=3 uid="uid://cbisx2e3hxe1l"]
+[gd_scene load_steps=15 format=3 uid="uid://cbisx2e3hxe1l"]
 
 [ext_resource type="Script" path="res://Scripts/human.gd" id="1_3ms4j"]
 [ext_resource type="Script" path="res://Scripts/Holding.gd" id="2_4jtkn"]
 [ext_resource type="FontFile" uid="uid://dj2kwm3wierp1" path="res://antiquity-print.ttf" id="3_6o0w1"]
+[ext_resource type="AudioStream" uid="uid://c0fv8p7r1woth" path="res://Audio/hit.wav" id="4_v4wfl"]
+[ext_resource type="AudioStream" uid="uid://callfrbuwdtsh" path="res://Audio/he_ate.mp3" id="5_ojxvx"]
+[ext_resource type="AudioStream" uid="uid://col3bnp4kxsxo" path="res://Audio/slurrp.wav" id="6_uygt4"]
+[ext_resource type="AudioStream" uid="uid://b1brmxtfitmtk" path="res://Audio/walk.mp3" id="7_ud24y"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_t1wih"]
 radius = 30.9626
@@ -235,7 +239,24 @@ offset_bottom = 42.0819
 theme_override_colors/font_color = Color(0.321569, 0.654902, 0.423529, 1)
 theme_override_fonts/font = ExtResource("3_6o0w1")
 
+[node name="hepunch" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_v4wfl")
+
+[node name="heate" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_ojxvx")
+volume_db = 15.0
+
+[node name="hefill" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("6_uygt4")
+volume_db = 5.371
+
+[node name="hewalk" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("7_ud24y")
+volume_db = 13.481
+autoplay = true
+
 [connection signal="area_entered" from="Holding/BowlHitBox" to="." method="_on_bowl_hit_box_area_entered"]
 [connection signal="area_entered" from="Holding/BowlHitBox" to="Holding" method="_on_bowl_hit_box_area_entered"]
 [connection signal="area_exited" from="Holding/BowlHitBox" to="Holding" method="_on_bowl_hit_box_area_exited"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
+[connection signal="finished" from="hewalk" to="." method="_on_hewalk_finished"]

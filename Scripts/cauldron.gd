@@ -57,7 +57,7 @@ func _process(delta):
 		if $AudioStreamPlayer2D.volume_db == soundLevel:
 			isChangingSound = false
 	timeSinceBubble += delta
-	if level != Globals.cauldronLevels.EMPTY && timeSinceBubble > 3.5 - state:
+	if level != Globals.cauldronLevels.EMPTY && timeSinceBubble > 1:
 		spawnBubble()
 		timeSinceBubble = 0
 

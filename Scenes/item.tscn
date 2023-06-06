@@ -1,8 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://bx8cooddov1t0"]
+[gd_scene load_steps=10 format=3 uid="uid://bx8cooddov1t0"]
 
 [ext_resource type="Script" path="res://Scripts/item.gd" id="1_3hfuy"]
 [ext_resource type="Texture2D" uid="uid://cgdvbaypq8rs7" path="res://Assets/Soup/items/carrot2.png" id="2_r004l"]
 [ext_resource type="PackedScene" uid="uid://cs655rh3twb2k" path="res://Scenes/plums.tscn" id="3_yloxl"]
+[ext_resource type="AudioStream" uid="uid://d4an5v87r0rbn" path="res://Audio/grab.wav" id="4_abjjj"]
+[ext_resource type="AudioStream" uid="uid://21madhbte166" path="res://Audio/splash1.wav" id="5_3s6q2"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_36syf"]
 
@@ -128,5 +130,13 @@ libraries = {
 [node name="plums" parent="." instance=ExtResource("3_yloxl")]
 visible = false
 
+[node name="gotGrabbed" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_abjjj")
+
+[node name="gotSplashed" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_3s6q2")
+volume_db = 2.568
+
 [connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
 [connection signal="area_exited" from="Area2D" to="." method="_on_area_2d_area_exited"]
+[connection signal="finished" from="gotSplashed" to="." method="_on_got_splashed_finished"]

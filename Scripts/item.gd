@@ -47,6 +47,7 @@ func _input(event):
 	if event is InputEventMouseButton && event.button_index == MOUSE_BUTTON_LEFT && !$AnimationPlayer.is_playing():
 		if event.is_pressed() && hand.pickedItem == self: 
 			dragging = true;
+			$gotGrabbed.play()
 		elif hand.state == Globals.handState.OPEN:
 			dragging = false;
 			if overCauldron:
@@ -71,7 +72,10 @@ func _on_area_2d_area_exited(area):
 func _souped():
 	#add stats n point to soup
 	self.visible = false
+	$gotSplashed.play()
 	spawnToolTip()
+
+func _on_got_splashed_finished():
 	queue_free();
 
 func spawnToolTip():

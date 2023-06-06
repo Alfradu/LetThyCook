@@ -44,6 +44,7 @@ func _input(event):
 		elif hand.state == Globals.handState.OPEN:
 			if pourable && state == ActionType.FULL:
 				state = ActionType.POURING
+				$hePoured.play()
 			dragging = false;
 
 func _on_area_2d_area_entered(area):

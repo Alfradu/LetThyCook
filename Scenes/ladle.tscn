@@ -1,7 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://blsuuk4guurtt"]
+[gd_scene load_steps=9 format=3 uid="uid://blsuuk4guurtt"]
 
 [ext_resource type="Script" path="res://Scripts/ladle.gd" id="1_n0bmp"]
 [ext_resource type="Texture2D" uid="uid://dkvmaa0q7oth8" path="res://Assets/Barrel/ladle.png" id="1_rnic0"]
+[ext_resource type="AudioStream" uid="uid://bok70hxpiaxli" path="res://Audio/splash2.wav" id="3_4154o"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ukadq"]
 height = 80.0
@@ -109,6 +110,9 @@ shape = SubResource("CircleShape2D_icfup")
 libraries = {
 "": SubResource("AnimationLibrary_kpl4w")
 }
+
+[node name="hePoured" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_4154o")
 
 [connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
 [connection signal="area_exited" from="Area2D" to="." method="_on_area_2d_area_exited"]

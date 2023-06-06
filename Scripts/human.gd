@@ -85,8 +85,9 @@ func _process(delta):
 func _input(event):
 	if event is InputEventMouseButton && event.button_index == MOUSE_BUTTON_LEFT:
 		if event.is_pressed() && isHovered && state == Globals.HumanState.TAKING && !hasEaten:
+			$AnimationPlayer.speed_scale = 2			
 			$AnimationPlayer.play_backwards("dipbowl");
-
+			$hepunch.play()
 
 func _on_animation_player_animation_finished(anim_name):
 	if (anim_name == "dipbowl" or anim_name == "leaveCrate"):
@@ -99,6 +100,8 @@ func _on_animation_player_animation_finished(anim_name):
 			self.get_node("foodEffect/ScoreEarned").text = str(score)
 			self.get_node("foodEffect/MoneyEarned").text = ("$" + str(money)) if money != 0 else ""
 			$AnimationPlayer.play("react")
+			$heate.play()
+			$hewalk.play()
 			Globals.Score += score
 			Globals.Money += money
 			Globals.MoneyToday += money
@@ -114,6 +117,7 @@ func getEffectTexture(satisfaction):
 
 func eat():
 	human.humandideat()
+	$hefill.play()
 	if Globals.soupLevel != Globals.cauldronLevels.EMPTY: holding.texture = bowlFull
 	hasEaten = true
 	
@@ -129,3 +133,4 @@ func _on_bowl_hit_box_area_entered(area):
 		if $/root/Main/hand.state == Globals.handState.CLOSED && state == Globals.HumanState.TAKING && !hasEaten && human.holdingBowl && !human.holdingBox:
 			$AnimationPlayer.speed_scale = 2
 			$AnimationPlayer.play_backwards("dipbowl")
+			$hepunch.play()
