@@ -17,15 +17,15 @@ func _process(_delta):
 func _input(event):
 	if event is InputEventMouseButton && event.button_index == MOUSE_BUTTON_LEFT && onTable && hovering:
 		for item in items:
-			Globals.FoodItems.append(item)
 			var instantiateditem = foodItem.instantiate()
 			$/root/Main/ItemContainer.add_child(instantiateditem)
 			instantiateditem.init(item)
 		onTable = false
+		$/root/Main/hand.clearText("Unpack")
 		queue_free()
 
 func _on_bowl_hit_box_area_entered(area):
-	if area.name == "HandCollision":
+	if area.name == "HandCollision" && !Globals.bookOpen:
 		hovering = true
 		if onTable: area.get_parent().setText("Unpack")
 

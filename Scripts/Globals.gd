@@ -85,8 +85,11 @@ class Human:
 			if self.satisfaction > 80 && rng.randf_range(0, 10) > 7:
 				self.holdingBowl = false
 				self.holdingBox = true
+				self.boxContent = []
 				for i in range(rng.randi_range(1,3)):
-					self.boxContent.append(Globals.getFoodItem())
+					var item = Globals.getFoodItem()
+					Globals.FoodItems.append(item)
+					self.boxContent.append(item)
 				Globals.Orders.append(self)
 	
 	func degradehuman():
@@ -114,9 +117,19 @@ var foodLibrary = [
 #	{ name = "Pepper",  type = FoodType.HERB,      combo = "",       discovered = false, cost = 50, modifier = 50}
 ] 
 
+var deliveryGuy
+
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 	setupFoodItems()
+	deliveryGuy = Human.new()
+	deliveryGuy.name = "Karl-Bertil"
+	deliveryGuy.status = Rank.PEASANT
+	deliveryGuy.foodType = FoodType.VEGETABLE
+	deliveryGuy.holdingBowl = false
+	deliveryGuy.holdingBox = true
+	deliveryGuy.hunger = Hunger.CONTEMPT
+	deliveryGuy.fat = false
 
 func _process(_delta):
 	pass
@@ -126,7 +139,7 @@ func degradeSoupItems(damage):
 		if (foodItem.inSoup):
 			foodItem.ttl -= damage
 		if (foodItem.ttl <= 0):
-			foodItem.inSoup = false
+			FoodItems.erase(foodItem)
 
 func calculateSoup():
 	var cur_filling = 0
@@ -155,7 +168,6 @@ func calculateSoup():
 
 func updateCauldronLevel(nr):
 	$/root/Main/cauldron.updateLevel(nr)
-	
 
 func setupFoodItems():
 	FoodItems.append(getFoodItem("Carrot"))
@@ -179,12 +191,11 @@ func getFoodItem(itemName = "", stats: FoodStats = null):
 	i.type = item.type
 	i.ttl = rng.randf_range(60, 120)
 	i.hiddenCombo = item.combo
-	
+	i.inSoup = false
 	var itemStats = FoodStats.new()
 	itemStats.filling = stats.filling if stats != null else getFilling(item)
 	itemStats.power = stats.power if stats != null else getPower(item)
 	itemStats.taste = stats.taste if stats != null else getTaste(item)
-	
 	i.stats = itemStats
 	return i
 	
@@ -219,3 +230,17 @@ func getTaste(item):
 		return rng.randi_range(0, 5)
 	if (item.type == FoodType.HERB):
 		return rng.randi_range(15, 30)
+
+func checkMoneyShop():
+	$/root/Main/bookBuyOpen.checkMoney()
+
+func orderItem(foodName, cost):
+	if (Money < cost): return
+	var foodItem = getFoodItem(foodName)
+	Money -= cost
+	$/root/Main.updateLabels()
+	FoodItems.append(foodItem)
+	deliveryGuy.boxContent = []
+	deliveryGuy.boxContent.append(foodItem)
+	Orders.append(deliveryGuy)
+	checkMoneyShop()

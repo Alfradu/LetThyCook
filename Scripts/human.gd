@@ -75,12 +75,13 @@ func _process(delta):
 		if abs(self.position.x - targetPos.x) < 40 && abs(self.position.y - targetPos.y) < 40:
 			state = Globals.HumanState.DONE
 	if (state == Globals.HumanState.DONE):
-		human.degradehuman()
-		if(!human.isDead):
-			Globals.ToBePopulated.append(human)
-		else:
-			Globals.Rip.append(human)
-		queue_free()
+		if (human.holdingBowl):
+			human.degradehuman()
+			if(!human.isDead):
+				Globals.ToBePopulated.append(human)
+			queue_free()
+		if (human.holdingBox):
+			queue_free()
 
 func _input(event):
 	if event is InputEventMouseButton && event.button_index == MOUSE_BUTTON_LEFT:
@@ -97,6 +98,7 @@ func _on_animation_player_animation_finished(anim_name):
 			foodEffect.texture = getEffectTexture(human.satisfaction)
 			var score = 100 * (human.status + 1) + human.satisfaction
 			var money = (50 + human.satisfaction) * human.status
+			Globals.checkMoneyShop()
 			self.get_node("foodEffect/ScoreEarned").text = str(score)
 			self.get_node("foodEffect/MoneyEarned").text = ("$" + str(money)) if money != 0 else ""
 			$AnimationPlayer.play("react")

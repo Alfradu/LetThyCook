@@ -1,6 +1,6 @@
 [gd_scene load_steps=22 format=3 uid="uid://5iwr6ovp0oo2"]
 
-[ext_resource type="Script" path="res://Scripts/bookRecipOpen.gd" id="1_l3uqm"]
+[ext_resource type="Script" path="res://Scripts/bookShopOpen.gd" id="1_glivo"]
 [ext_resource type="PackedScene" uid="uid://d4hyeu1c3co4" path="res://Scenes/bookOpen.tscn" id="2_3f5ny"]
 [ext_resource type="FontFile" uid="uid://dj2kwm3wierp1" path="res://antiquity-print.ttf" id="3_how32"]
 [ext_resource type="Texture2D" uid="uid://dr4fd8eh7ypbi" path="res://Assets/books/woodframe.png" id="4_v7w6d"]
@@ -38,7 +38,7 @@ size = Vector2(236, 60.5)
 
 [node name="bookBuyOpen" type="Node2D"]
 position = Vector2(0, 90)
-script = ExtResource("1_l3uqm")
+script = ExtResource("1_glivo")
 
 [node name="BookOpen" parent="." instance=ExtResource("2_3f5ny")]
 cover = 1
@@ -97,7 +97,7 @@ autowrap_mode = 2
 clip_text = true
 metadata/_edit_use_anchors_ = true
 
-[node name="buybtn" type="Node2D" parent="page1/Sprite2D"]
+[node name="buybtn" type="Node2D" parent="page1/Sprite2D" groups=["shopBtns"]]
 position = Vector2(488, -24)
 
 [node name="Sprite2D" type="Sprite2D" parent="page1/Sprite2D/buybtn"]
@@ -118,10 +118,10 @@ clip_text = true
 uppercase = true
 metadata/_edit_lock_ = true
 
-[node name="backArea" type="Area2D" parent="page1/Sprite2D/buybtn"]
+[node name="buyArea" type="Area2D" parent="page1/Sprite2D/buybtn"]
 metadata/_edit_lock_ = true
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="page1/Sprite2D/buybtn/backArea"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="page1/Sprite2D/buybtn/buyArea"]
 position = Vector2(113, 35.75)
 shape = SubResource("RectangleShape2D_edgx2")
 metadata/_edit_lock_ = true
@@ -151,7 +151,7 @@ autowrap_mode = 2
 clip_text = true
 metadata/_edit_use_anchors_ = true
 
-[node name="label3" type="Label" parent="page1/Sprite2D2"]
+[node name="label2" type="Label" parent="page1/Sprite2D2"]
 anchors_preset = -1
 anchor_left = -8.32812
 anchor_right = -8.32812
@@ -167,7 +167,7 @@ autowrap_mode = 2
 clip_text = true
 metadata/_edit_use_anchors_ = true
 
-[node name="buybtn" type="Node2D" parent="page1/Sprite2D2"]
+[node name="buybtn" type="Node2D" parent="page1/Sprite2D2" groups=["shopBtns"]]
 position = Vector2(488, -24)
 
 [node name="Sprite2D" type="Sprite2D" parent="page1/Sprite2D2/buybtn"]
@@ -188,10 +188,10 @@ clip_text = true
 uppercase = true
 metadata/_edit_lock_ = true
 
-[node name="backArea" type="Area2D" parent="page1/Sprite2D2/buybtn"]
+[node name="buyArea" type="Area2D" parent="page1/Sprite2D2/buybtn"]
 metadata/_edit_lock_ = true
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="page1/Sprite2D2/buybtn/backArea"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="page1/Sprite2D2/buybtn/buyArea"]
 position = Vector2(113, 35.75)
 shape = SubResource("RectangleShape2D_edgx2")
 metadata/_edit_lock_ = true
@@ -221,7 +221,7 @@ autowrap_mode = 2
 clip_text = true
 metadata/_edit_use_anchors_ = true
 
-[node name="label4" type="Label" parent="page1/Sprite2D3"]
+[node name="label2" type="Label" parent="page1/Sprite2D3"]
 anchors_preset = -1
 anchor_left = -8.32812
 anchor_right = -8.32812
@@ -237,7 +237,7 @@ autowrap_mode = 2
 clip_text = true
 metadata/_edit_use_anchors_ = true
 
-[node name="buybtn" type="Node2D" parent="page1/Sprite2D3"]
+[node name="buybtn" type="Node2D" parent="page1/Sprite2D3" groups=["shopBtns"]]
 position = Vector2(488, -24)
 
 [node name="Sprite2D" type="Sprite2D" parent="page1/Sprite2D3/buybtn"]
@@ -258,10 +258,10 @@ clip_text = true
 uppercase = true
 metadata/_edit_lock_ = true
 
-[node name="backArea" type="Area2D" parent="page1/Sprite2D3/buybtn"]
+[node name="buyArea" type="Area2D" parent="page1/Sprite2D3/buybtn"]
 metadata/_edit_lock_ = true
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="page1/Sprite2D3/buybtn/backArea"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="page1/Sprite2D3/buybtn/buyArea"]
 position = Vector2(113, 35.75)
 shape = SubResource("RectangleShape2D_edgx2")
 metadata/_edit_lock_ = true
@@ -292,7 +292,7 @@ autowrap_mode = 2
 clip_text = true
 metadata/_edit_use_anchors_ = true
 
-[node name="label5" type="Label" parent="page1/Sprite2D4"]
+[node name="label2" type="Label" parent="page1/Sprite2D4"]
 anchors_preset = -1
 anchor_left = -8.32812
 anchor_right = -8.32812
@@ -308,7 +308,7 @@ autowrap_mode = 2
 clip_text = true
 metadata/_edit_use_anchors_ = true
 
-[node name="buybtn" type="Node2D" parent="page1/Sprite2D4"]
+[node name="buybtn" type="Node2D" parent="page1/Sprite2D4" groups=["shopBtns"]]
 position = Vector2(488, -24)
 
 [node name="Sprite2D" type="Sprite2D" parent="page1/Sprite2D4/buybtn"]
@@ -329,10 +329,10 @@ clip_text = true
 uppercase = true
 metadata/_edit_lock_ = true
 
-[node name="backArea" type="Area2D" parent="page1/Sprite2D4/buybtn"]
+[node name="buyArea" type="Area2D" parent="page1/Sprite2D4/buybtn"]
 metadata/_edit_lock_ = true
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="page1/Sprite2D4/buybtn/backArea"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="page1/Sprite2D4/buybtn/buyArea"]
 position = Vector2(113, 35.75)
 shape = SubResource("RectangleShape2D_edgx2")
 metadata/_edit_lock_ = true
@@ -362,7 +362,7 @@ autowrap_mode = 2
 clip_text = true
 metadata/_edit_use_anchors_ = true
 
-[node name="label6" type="Label" parent="page1/Sprite2D5"]
+[node name="label2" type="Label" parent="page1/Sprite2D5"]
 anchors_preset = -1
 anchor_left = -8.32812
 anchor_right = -8.32812
@@ -378,7 +378,7 @@ autowrap_mode = 2
 clip_text = true
 metadata/_edit_use_anchors_ = true
 
-[node name="buybtn" type="Node2D" parent="page1/Sprite2D5"]
+[node name="buybtn" type="Node2D" parent="page1/Sprite2D5" groups=["shopBtns"]]
 position = Vector2(488, -24)
 
 [node name="Sprite2D" type="Sprite2D" parent="page1/Sprite2D5/buybtn"]
@@ -399,10 +399,10 @@ clip_text = true
 uppercase = true
 metadata/_edit_lock_ = true
 
-[node name="backArea" type="Area2D" parent="page1/Sprite2D5/buybtn"]
+[node name="buyArea" type="Area2D" parent="page1/Sprite2D5/buybtn"]
 metadata/_edit_lock_ = true
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="page1/Sprite2D5/buybtn/backArea"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="page1/Sprite2D5/buybtn/buyArea"]
 position = Vector2(113, 35.75)
 shape = SubResource("RectangleShape2D_edgx2")
 metadata/_edit_lock_ = true
@@ -433,7 +433,7 @@ autowrap_mode = 2
 clip_text = true
 metadata/_edit_use_anchors_ = true
 
-[node name="label7" type="Label" parent="page1/Sprite2D6"]
+[node name="label2" type="Label" parent="page1/Sprite2D6"]
 anchors_preset = -1
 anchor_left = -8.32812
 anchor_right = -8.32812
@@ -449,7 +449,7 @@ autowrap_mode = 2
 clip_text = true
 metadata/_edit_use_anchors_ = true
 
-[node name="buybtn" type="Node2D" parent="page1/Sprite2D6"]
+[node name="buybtn" type="Node2D" parent="page1/Sprite2D6" groups=["shopBtns"]]
 position = Vector2(488, -24)
 
 [node name="Sprite2D" type="Sprite2D" parent="page1/Sprite2D6/buybtn"]
@@ -470,10 +470,10 @@ clip_text = true
 uppercase = true
 metadata/_edit_lock_ = true
 
-[node name="backArea" type="Area2D" parent="page1/Sprite2D6/buybtn"]
+[node name="buyArea" type="Area2D" parent="page1/Sprite2D6/buybtn"]
 metadata/_edit_lock_ = true
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="page1/Sprite2D6/buybtn/backArea"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="page1/Sprite2D6/buybtn/buyArea"]
 position = Vector2(113, 35.75)
 shape = SubResource("RectangleShape2D_edgx2")
 metadata/_edit_lock_ = true
@@ -503,7 +503,7 @@ autowrap_mode = 2
 clip_text = true
 metadata/_edit_use_anchors_ = true
 
-[node name="label8" type="Label" parent="page1/Sprite2D7"]
+[node name="label2" type="Label" parent="page1/Sprite2D7"]
 anchors_preset = -1
 anchor_left = -8.32812
 anchor_right = -8.32812
@@ -519,7 +519,7 @@ autowrap_mode = 2
 clip_text = true
 metadata/_edit_use_anchors_ = true
 
-[node name="buybtn" type="Node2D" parent="page1/Sprite2D7"]
+[node name="buybtn" type="Node2D" parent="page1/Sprite2D7" groups=["shopBtns"]]
 position = Vector2(488, -24)
 
 [node name="Sprite2D" type="Sprite2D" parent="page1/Sprite2D7/buybtn"]
@@ -540,10 +540,10 @@ clip_text = true
 uppercase = true
 metadata/_edit_lock_ = true
 
-[node name="backArea" type="Area2D" parent="page1/Sprite2D7/buybtn"]
+[node name="buyArea" type="Area2D" parent="page1/Sprite2D7/buybtn"]
 metadata/_edit_lock_ = true
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="page1/Sprite2D7/buybtn/backArea"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="page1/Sprite2D7/buybtn/buyArea"]
 position = Vector2(113, 35.75)
 shape = SubResource("RectangleShape2D_edgx2")
 metadata/_edit_lock_ = true
@@ -573,7 +573,7 @@ autowrap_mode = 2
 clip_text = true
 metadata/_edit_use_anchors_ = true
 
-[node name="label10" type="Label" parent="page1/Sprite2D8"]
+[node name="label2" type="Label" parent="page1/Sprite2D8"]
 anchors_preset = -1
 anchor_left = -8.32812
 anchor_right = -8.32812
@@ -589,7 +589,7 @@ autowrap_mode = 2
 clip_text = true
 metadata/_edit_use_anchors_ = true
 
-[node name="buybtn" type="Node2D" parent="page1/Sprite2D8"]
+[node name="buybtn" type="Node2D" parent="page1/Sprite2D8" groups=["shopBtns"]]
 position = Vector2(488, -24)
 
 [node name="Sprite2D" type="Sprite2D" parent="page1/Sprite2D8/buybtn"]
@@ -610,10 +610,10 @@ clip_text = true
 uppercase = true
 metadata/_edit_lock_ = true
 
-[node name="backArea" type="Area2D" parent="page1/Sprite2D8/buybtn"]
+[node name="buyArea" type="Area2D" parent="page1/Sprite2D8/buybtn"]
 metadata/_edit_lock_ = true
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="page1/Sprite2D8/buybtn/backArea"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="page1/Sprite2D8/buybtn/buyArea"]
 position = Vector2(113, 35.75)
 shape = SubResource("RectangleShape2D_edgx2")
 metadata/_edit_lock_ = true
@@ -643,7 +643,7 @@ autowrap_mode = 2
 clip_text = true
 metadata/_edit_use_anchors_ = true
 
-[node name="label9" type="Label" parent="page1/Sprite2D9"]
+[node name="label2" type="Label" parent="page1/Sprite2D9"]
 anchors_preset = -1
 anchor_left = -8.32812
 anchor_right = -8.32812
@@ -659,7 +659,7 @@ autowrap_mode = 2
 clip_text = true
 metadata/_edit_use_anchors_ = true
 
-[node name="buybtn" type="Node2D" parent="page1/Sprite2D9"]
+[node name="buybtn" type="Node2D" parent="page1/Sprite2D9" groups=["shopBtns"]]
 position = Vector2(488, -24)
 
 [node name="Sprite2D" type="Sprite2D" parent="page1/Sprite2D9/buybtn"]
@@ -680,10 +680,10 @@ clip_text = true
 uppercase = true
 metadata/_edit_lock_ = true
 
-[node name="backArea" type="Area2D" parent="page1/Sprite2D9/buybtn"]
+[node name="buyArea" type="Area2D" parent="page1/Sprite2D9/buybtn"]
 metadata/_edit_lock_ = true
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="page1/Sprite2D9/buybtn/backArea"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="page1/Sprite2D9/buybtn/buyArea"]
 position = Vector2(113, 35.75)
 shape = SubResource("RectangleShape2D_edgx2")
 metadata/_edit_lock_ = true
@@ -780,6 +780,24 @@ monitoring = false
 position = Vector2(115, 39)
 shape = SubResource("RectangleShape2D_edgx2")
 
+[connection signal="area_entered" from="page1/Sprite2D/buybtn/buyArea" to="." method="_on_buy_area1_area_entered"]
+[connection signal="area_exited" from="page1/Sprite2D/buybtn/buyArea" to="." method="_on_buy_area_area_exited"]
+[connection signal="area_entered" from="page1/Sprite2D2/buybtn/buyArea" to="." method="_on_buy_area2_area_entered"]
+[connection signal="area_exited" from="page1/Sprite2D2/buybtn/buyArea" to="." method="_on_buy_area_area_exited"]
+[connection signal="area_entered" from="page1/Sprite2D3/buybtn/buyArea" to="." method="_on_buy_area3_area_entered"]
+[connection signal="area_exited" from="page1/Sprite2D3/buybtn/buyArea" to="." method="_on_buy_area_area_exited"]
+[connection signal="area_entered" from="page1/Sprite2D4/buybtn/buyArea" to="." method="_on_buy_area4_area_entered"]
+[connection signal="area_exited" from="page1/Sprite2D4/buybtn/buyArea" to="." method="_on_buy_area_area_exited"]
+[connection signal="area_entered" from="page1/Sprite2D5/buybtn/buyArea" to="." method="_on_buy_area5_area_entered"]
+[connection signal="area_exited" from="page1/Sprite2D5/buybtn/buyArea" to="." method="_on_buy_area_area_exited"]
+[connection signal="area_entered" from="page1/Sprite2D6/buybtn/buyArea" to="." method="_on_buy_area6_area_entered"]
+[connection signal="area_exited" from="page1/Sprite2D6/buybtn/buyArea" to="." method="_on_buy_area_area_exited"]
+[connection signal="area_entered" from="page1/Sprite2D7/buybtn/buyArea" to="." method="_on_buy_area7_area_entered"]
+[connection signal="area_exited" from="page1/Sprite2D7/buybtn/buyArea" to="." method="_on_buy_area_area_exited"]
+[connection signal="area_entered" from="page1/Sprite2D8/buybtn/buyArea" to="." method="_on_buy_area8_area_entered"]
+[connection signal="area_exited" from="page1/Sprite2D8/buybtn/buyArea" to="." method="_on_buy_area_area_exited"]
+[connection signal="area_entered" from="page1/Sprite2D9/buybtn/buyArea" to="." method="_on_buy_area9_area_entered"]
+[connection signal="area_exited" from="page1/Sprite2D9/buybtn/buyArea" to="." method="_on_buy_area_area_exited"]
 [connection signal="area_entered" from="backbtn/backArea" to="." method="_on_back_area_area_entered"]
 [connection signal="area_exited" from="backbtn/backArea" to="." method="_on_back_area_area_exited"]
 [connection signal="area_entered" from="nextbtn/nextArea" to="." method="_on_next_area_area_entered"]
