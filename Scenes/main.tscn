@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://64q1xapxe1i8"]
+[gd_scene load_steps=31 format=3 uid="uid://64q1xapxe1i8"]
 
 [ext_resource type="PackedScene" uid="uid://b46fycpu36fr4" path="res://Scenes/hand.tscn" id="1_ib6nh"]
 [ext_resource type="Script" path="res://Scripts/main.gd" id="1_r782s"]
@@ -67,9 +67,9 @@ shadow_offset = Vector2(2, 2)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_0ggq3"]
 shader = ExtResource("16_s772k")
-shader_parameter/start_frame = 0
-shader_parameter/current_frame = 0
-shader_parameter/mix_ratio = 1.0
+shader_parameter/strength = 0.486
+shader_parameter/speed = 1.0
+shader_parameter/angle = 0.0
 
 [sub_resource type="LabelSettings" id="LabelSettings_n5cgn"]
 font = ExtResource("9_lgflv")
@@ -77,23 +77,6 @@ font_size = 68
 shadow_size = 2
 shadow_color = Color(0.458824, 0.458824, 0.458824, 0.486275)
 shadow_offset = Vector2(2, 2)
-
-[sub_resource type="Animation" id="Animation_6huc3"]
-resource_name = "pulse"
-length = 1.2
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:material:shader_parameter/current_frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8, 1),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [0, 1, 2, 3, 4, 5]
-}
 
 [sub_resource type="Animation" id="Animation_t5fi4"]
 length = 0.001
@@ -144,8 +127,8 @@ tracks/3/keys = {
 }
 
 [sub_resource type="Animation" id="Animation_jnmh8"]
-resource_name = "pulse2"
-length = 1.6
+resource_name = "pulse"
+length = 2.0
 loop_mode = 1
 tracks/0/type = "bezier"
 tracks/0/imported = false
@@ -155,8 +138,8 @@ tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "handle_modes": PackedInt32Array(0, 0, 0),
-"points": PackedFloat32Array(0.8, -0.25, 0, 0.25, 0, 1.2, -0.25, 0, 0.25, 0, 0.8, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0, 0.9, 1.6)
+"points": PackedFloat32Array(1.2, -0.25, 0, 0.25, 0, 0.8, -0.25, 0, 0.25, 0, 1.2, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.8, 2)
 }
 tracks/1/type = "bezier"
 tracks/1/imported = false
@@ -166,8 +149,8 @@ tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
 "handle_modes": PackedInt32Array(0, 0, 0),
-"points": PackedFloat32Array(0.8, -0.25, 0, 0.25, 0, 1.2, -0.25, 0, 0.25, 0, 0.8, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0, 0.7, 1.6)
+"points": PackedFloat32Array(1.2, -0.25, 0, 0.25, 0, 0.8, -0.25, 0, 0.25, 0, 1.2, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 1.2, 2)
 }
 tracks/2/type = "bezier"
 tracks/2/imported = false
@@ -176,16 +159,15 @@ tracks/2/path = NodePath("..:rotation")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"handle_modes": PackedInt32Array(0, 0, 0),
-"points": PackedFloat32Array(0.139626, -0.25, 0, 0.25, 0, -0.139626, -0.25, 0, 0.25, 0, 0.139626, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0, 0.8, 1.6)
+"handle_modes": PackedInt32Array(0, 0, 0, 0, 0),
+"points": PackedFloat32Array(0.139626, -0.25, 0, 0.25, 0, -0.139626, -0.25, 0, 0.25, 0, 0.139626, -0.25, 0, 0.25, 0, -0.139626, -0.25, 0, 0.25, 0, 0.139626, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.5, 1, 1.5, 2)
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_o6dkw"]
 _data = {
 "RESET": SubResource("Animation_t5fi4"),
-"pulse": SubResource("Animation_6huc3"),
-"pulse2": SubResource("Animation_jnmh8")
+"pulse": SubResource("Animation_jnmh8")
 }
 
 [node name="Main" type="Node2D"]
@@ -460,12 +442,6 @@ label_settings = SubResource("LabelSettings_n5cgn")
 metadata/_edit_lock_ = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="HUD/container"]
-root_node = NodePath("../combo")
-libraries = {
-"": SubResource("AnimationLibrary_o6dkw")
-}
-
-[node name="AnimationPlayer2" type="AnimationPlayer" parent="HUD/container"]
 root_node = NodePath("../combo")
 libraries = {
 "": SubResource("AnimationLibrary_o6dkw")

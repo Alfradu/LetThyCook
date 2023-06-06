@@ -90,12 +90,10 @@ func updateLabels():
 	$HUD/Score.text = "Score: " + formatScore(Globals.Score)
 	if Globals.combo > 1: 
 		$HUD/container/AnimationPlayer.play("pulse")
-		$HUD/container/AnimationPlayer2.play("pulse2")
 		$HUD/container.visible = true
 		$HUD/container/combo.text = "Combo! x" + str(Globals.combo)
 	else:
 		$HUD/container/AnimationPlayer.pause()
-		$HUD/container/AnimationPlayer2.pause()
 		$HUD/container.visible = false
 	
 	

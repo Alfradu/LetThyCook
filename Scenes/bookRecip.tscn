@@ -1,7 +1,15 @@
-[gd_scene load_steps=4 format=3 uid="uid://cgr2rj03h2r5"]
+[gd_scene load_steps=6 format=3 uid="uid://cgr2rj03h2r5"]
 
 [ext_resource type="Texture2D" uid="uid://chjsngqqc3kl2" path="res://Assets/books/book-recip.png" id="1_37fbt"]
 [ext_resource type="Script" path="res://Scripts/bookRecip.gd" id="1_k55fs"]
+[ext_resource type="Shader" path="res://Scenes/bookRecip.gdshader" id="2_ubbvy"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_if82h"]
+shader = ExtResource("2_ubbvy")
+shader_parameter/line_thickness = 0.603
+shader_parameter/sin_frequency = 0.264
+shader_parameter/sin_offset = 0.0
+shader_parameter/light_offset = 0.5
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_7tn2n"]
 radius = 16.43
@@ -10,6 +18,14 @@ radius = 16.43
 script = ExtResource("1_k55fs")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(5, 11)
+rotation = -0.155334
+scale = Vector2(4, 4)
+texture = ExtResource("1_37fbt")
+
+[node name="Sprite2Dshader" type="Sprite2D" parent="."]
+visible = false
+material = SubResource("ShaderMaterial_if82h")
 position = Vector2(5, 11)
 rotation = -0.155334
 scale = Vector2(4, 4)

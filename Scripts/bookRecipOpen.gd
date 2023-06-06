@@ -26,6 +26,7 @@ func _input(event):
 			prevPage()
 
 func openBook():
+		$/root/Main/bookRecip/Sprite2Dshader.visible = false
 		visible = true
 		Globals.book = self
 		hoveringBackBtn = false
@@ -72,6 +73,7 @@ func revealCombo(itemName):
 	for node in nodes:
 		if node.name == itemName && node.get_node("hidden").visible:
 			node.get_node("hidden").visible = false
+			$/root/Main/bookRecip/Sprite2Dshader.visible = true
 
 func enableButton(sprite, area):
 	sprite.self_modulate = Color(1, 1, 1, 1)
