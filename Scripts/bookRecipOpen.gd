@@ -61,7 +61,7 @@ func prevPage():
 		disableButton($nextbtn/Sprite2D, $nextbtn/nextArea)
 	else:
 		enableButton($nextbtn/Sprite2D, $nextbtn/nextArea)
-	if (page == minPage): 
+	if (page == minPage):
 		disableButton($prevbtn/Sprite2D, $prevbtn/prevArea)
 	else:
 		enableButton($prevbtn/Sprite2D, $prevbtn/prevArea)

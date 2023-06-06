@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://64q1xapxe1i8"]
+[gd_scene load_steps=23 format=3 uid="uid://64q1xapxe1i8"]
 
 [ext_resource type="PackedScene" uid="uid://b46fycpu36fr4" path="res://Scenes/hand.tscn" id="1_ib6nh"]
 [ext_resource type="Script" path="res://Scripts/main.gd" id="1_r782s"]
@@ -14,6 +14,7 @@
 [ext_resource type="FontFile" uid="uid://dj2kwm3wierp1" path="res://antiquity-print.ttf" id="9_lgflv"]
 [ext_resource type="PackedScene" uid="uid://dqf4v0mcrnydu" path="res://Scenes/bookBuy.tscn" id="10_le51f"]
 [ext_resource type="PackedScene" uid="uid://cgr2rj03h2r5" path="res://Scenes/bookRecip.tscn" id="11_2wti7"]
+[ext_resource type="PackedScene" uid="uid://5iwr6ovp0oo2" path="res://Scenes/bookShopOpen.tscn" id="13_axuml"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_btphb"]
 radius = 172.047
@@ -166,6 +167,10 @@ position = Vector2(334, 984)
 [node name="bookRecipOpen" parent="." instance=ExtResource("9_4s2pm")]
 visible = false
 z_index = 8
+
+[node name="bookBuyOpen" parent="." instance=ExtResource("13_axuml")]
+visible = false
+z_index = 7
 
 [node name="HUD" type="Control" parent="."]
 layout_mode = 3
