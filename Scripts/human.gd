@@ -78,6 +78,8 @@ func _process(delta):
 		human.degradehuman()
 		if(!human.isDead):
 			Globals.ToBePopulated.append(human)
+		else:
+			Globals.Rip.append(human)
 		queue_free()
 
 func _input(event):

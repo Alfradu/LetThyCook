@@ -1,0 +1,110 @@
+[gd_scene load_steps=8 format=3 uid="uid://drgnvtherfy13"]
+
+[ext_resource type="Texture2D" uid="uid://jql216vsf6u3" path="res://Assets/alert.png" id="1_lqkc4"]
+[ext_resource type="Script" path="res://Scripts/Alert.gd" id="1_pr2uc"]
+[ext_resource type="FontFile" uid="uid://dj2kwm3wierp1" path="res://antiquity-print.ttf" id="2_depyp"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_sukno"]
+font_size = 14
+shadow_size = 2
+shadow_color = Color(0, 0, 0, 0.521569)
+shadow_offset = Vector2(2, 2)
+
+[sub_resource type="Animation" id="Animation_we0lm"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:z_index")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [15]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_g1mm6"]
+resource_name = "begone"
+length = 2.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:z_index")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [14]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 2.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, -200)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_gh712"]
+_data = {
+"RESET": SubResource("Animation_we0lm"),
+"begone": SubResource("Animation_g1mm6")
+}
+
+[node name="Alert" type="Node2D"]
+z_index = 15
+position = Vector2(0, -60)
+scale = Vector2(1.6, 1.6)
+script = ExtResource("1_pr2uc")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(1.37159, 1.4375)
+texture = ExtResource("1_lqkc4")
+
+[node name="Message" type="Control" parent="Sprite2D"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = -0.625
+offset_top = -0.943398
+offset_right = 39.375
+offset_bottom = 39.0566
+
+[node name="Text" type="Label" parent="Sprite2D/Message"]
+layout_mode = 0
+offset_left = -152.0
+offset_top = -18.0
+offset_right = 156.0
+offset_bottom = 20.0
+theme_override_fonts/font = ExtResource("2_depyp")
+theme_override_font_sizes/font_size = 12
+label_settings = SubResource("LabelSettings_sukno")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_gh712")
+}
+
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

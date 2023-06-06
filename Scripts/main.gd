@@ -5,7 +5,7 @@ var rng = RandomNumberGenerator.new()
 @onready var spawnPoint = $RefPoints/spawnPoint
 
 func setupPopulation(Population):
-	for i in range(11):
+	for i in range(2):
 		var human = Globals.Human.new()
 		human.name = "Jörgen"
 		human.status = Globals.Rank.PEASANT
@@ -64,8 +64,8 @@ func _ready():
 
 var time = 0
 var state = Globals.TimeOfDay.MORNING
-var untilDay = 5
-var untilMorning = 15
+var untilDay = 2
+var untilMorning = 2
 var delivery = 0
 var diffuculty = 1
 var chillWithHumans = 0
@@ -133,6 +133,7 @@ func maybeChangeState():
 		state = Globals.TimeOfDay.DAY
 		untilDay = 5
 		scoreAtStart = Globals.Score
+		$HUD.setupMessage("Lets go!")
 	if (state == Globals.TimeOfDay.NIGHT && untilMorning <= 0):
 		Globals.ToBePopulated.shuffle()
 		for human in Globals.ToBePopulated:
@@ -142,8 +143,11 @@ func maybeChangeState():
 		state = Globals.TimeOfDay.MORNING
 		Globals.ToBePopulated = []
 		untilMorning = 15
-		$HUD.setupMessage("Good Morning!")
-		$HUD.setupMessage("Today There Is " + str(len(Globals.Population)) + " Person To Feed.")
+		$HUD.setupMessage("Good Morning, Prepare yourself!")
+		for human in Globals.Rip:
+			var message = "Unfortunately, " + human.name + " died"
+			$HUD.setupMessage(message)
+		Globals.Rip.clear()
 
 func showRedBook():
 	$hand.point()
