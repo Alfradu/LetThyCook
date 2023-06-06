@@ -1,0 +1,788 @@
+[gd_scene load_steps=22 format=3 uid="uid://5iwr6ovp0oo2"]
+
+[ext_resource type="Script" path="res://Scripts/bookRecipOpen.gd" id="1_l3uqm"]
+[ext_resource type="PackedScene" uid="uid://d4hyeu1c3co4" path="res://Scenes/bookOpen.tscn" id="2_3f5ny"]
+[ext_resource type="FontFile" uid="uid://dj2kwm3wierp1" path="res://antiquity-print.ttf" id="3_how32"]
+[ext_resource type="Texture2D" uid="uid://dr4fd8eh7ypbi" path="res://Assets/books/woodframe.png" id="4_v7w6d"]
+[ext_resource type="Texture2D" uid="uid://bud813akkc1tk" path="res://Assets/Soup/items/potato1.png" id="5_gu5jw"]
+[ext_resource type="Texture2D" uid="uid://crk876jqxf0fk" path="res://Assets/books/ironframe.png" id="6_1p858"]
+[ext_resource type="Texture2D" uid="uid://b4vy28gepx34i" path="res://Assets/Soup/items/pork1.png" id="7_jt4dy"]
+[ext_resource type="Texture2D" uid="uid://cgdvbaypq8rs7" path="res://Assets/Soup/items/carrot2.png" id="9_tui8q"]
+[ext_resource type="Texture2D" uid="uid://cvgn2n0jqb7s3" path="res://Assets/Soup/items/cabbage1.png" id="10_72ebv"]
+[ext_resource type="Texture2D" uid="uid://bm46phy5pn8f8" path="res://Assets/books/goldframe.png" id="12_prd5l"]
+[ext_resource type="Texture2D" uid="uid://cm2o3eank5nwg" path="res://Assets/Soup/items/beef1.png" id="13_mc87l"]
+[ext_resource type="Texture2D" uid="uid://bloa3dwa8os5h" path="res://Assets/Soup/items/thyme1.png" id="15_mdr60"]
+[ext_resource type="Texture2D" uid="uid://bbdbw54bpb7pj" path="res://Assets/Soup/items/parsley1.png" id="16_fil7m"]
+[ext_resource type="Texture2D" uid="uid://2cy1ewbowbjt" path="res://Assets/Soup/items/chicken1.png" id="17_m1dyt"]
+[ext_resource type="Texture2D" uid="uid://c8yai03u2sdn1" path="res://Assets/Soup/items/dill1.png" id="18_byej2"]
+[ext_resource type="Texture2D" uid="uid://dkhyqbnhvbx7b" path="res://Assets/books/btn.png" id="20_3ex4u"]
+[ext_resource type="Texture2D" uid="uid://rpbmj8genyqw" path="res://Assets/books/arrow.png" id="21_guc1d"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_10kq7"]
+font = ExtResource("3_how32")
+font_size = 42
+font_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_o7nn6"]
+font = ExtResource("3_how32")
+font_size = 32
+font_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_khr0f"]
+font = ExtResource("3_how32")
+font_size = 24
+font_color = Color(0, 0, 0, 1)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_edgx2"]
+size = Vector2(236, 60.5)
+
+[node name="bookBuyOpen" type="Node2D"]
+position = Vector2(0, 90)
+script = ExtResource("1_l3uqm")
+
+[node name="BookOpen" parent="." instance=ExtResource("2_3f5ny")]
+cover = 1
+metadata/_edit_lock_ = true
+
+[node name="page1" type="Node2D" parent="."]
+
+[node name="Label2" type="Label" parent="page1"]
+offset_left = 160.0
+offset_top = 92.0
+offset_right = 904.0
+offset_bottom = 159.0
+text = "Deliveries - Arrives speedily"
+label_settings = SubResource("LabelSettings_10kq7")
+autowrap_mode = 2
+clip_text = true
+
+[node name="Sprite2D" type="Sprite2D" parent="page1"]
+position = Vector2(192, 190)
+texture = ExtResource("4_v7w6d")
+
+[node name="Sprite2D" type="Sprite2D" parent="page1/Sprite2D"]
+position = Vector2(3, -2)
+scale = Vector2(0.58, 0.58)
+texture = ExtResource("5_gu5jw")
+metadata/_edit_lock_ = true
+
+[node name="label" type="Label" parent="page1/Sprite2D"]
+anchors_preset = -1
+anchor_left = -4.14062
+anchor_right = -4.14062
+offset_left = 305.0
+offset_top = -32.0
+offset_right = 853.0
+offset_bottom = 49.0
+text = "Potato"
+label_settings = SubResource("LabelSettings_o7nn6")
+vertical_alignment = 1
+autowrap_mode = 2
+clip_text = true
+metadata/_edit_use_anchors_ = true
+
+[node name="label2" type="Label" parent="page1/Sprite2D"]
+anchors_preset = -1
+anchor_left = -8.32812
+anchor_right = -8.32812
+offset_left = 461.0
+offset_top = -32.0
+offset_right = 1009.0
+offset_bottom = 49.0
+text = "$ 10"
+label_settings = SubResource("LabelSettings_o7nn6")
+horizontal_alignment = 2
+vertical_alignment = 1
+autowrap_mode = 2
+clip_text = true
+metadata/_edit_use_anchors_ = true
+
+[node name="buybtn" type="Node2D" parent="page1/Sprite2D"]
+position = Vector2(488, -24)
+
+[node name="Sprite2D" type="Sprite2D" parent="page1/Sprite2D/buybtn"]
+position = Vector2(112, 36.2469)
+scale = Vector2(4.66406, 2.61728)
+texture = ExtResource("20_3ex4u")
+metadata/_edit_lock_ = true
+
+[node name="Label2" type="Label" parent="page1/Sprite2D/buybtn"]
+offset_right = 234.0
+offset_bottom = 78.0
+text = "Purchase"
+label_settings = SubResource("LabelSettings_khr0f")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+clip_text = true
+uppercase = true
+metadata/_edit_lock_ = true
+
+[node name="backArea" type="Area2D" parent="page1/Sprite2D/buybtn"]
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="page1/Sprite2D/buybtn/backArea"]
+position = Vector2(113, 35.75)
+shape = SubResource("RectangleShape2D_edgx2")
+metadata/_edit_lock_ = true
+
+[node name="Sprite2D2" type="Sprite2D" parent="page1"]
+position = Vector2(192, 262)
+texture = ExtResource("6_1p858")
+
+[node name="Sprite2D" type="Sprite2D" parent="page1/Sprite2D2"]
+position = Vector2(3, -2)
+scale = Vector2(0.58, 0.58)
+texture = ExtResource("9_tui8q")
+metadata/_edit_lock_ = true
+
+[node name="label" type="Label" parent="page1/Sprite2D2"]
+anchors_preset = -1
+anchor_left = -4.01562
+anchor_right = -4.01562
+offset_left = 297.0
+offset_top = -32.0
+offset_right = 845.0
+offset_bottom = 49.0
+text = "Mighty Carrot"
+label_settings = SubResource("LabelSettings_o7nn6")
+vertical_alignment = 1
+autowrap_mode = 2
+clip_text = true
+metadata/_edit_use_anchors_ = true
+
+[node name="label3" type="Label" parent="page1/Sprite2D2"]
+anchors_preset = -1
+anchor_left = -8.32812
+anchor_right = -8.32812
+offset_left = 461.0
+offset_top = -32.0
+offset_right = 1009.0
+offset_bottom = 49.0
+text = "$ 15"
+label_settings = SubResource("LabelSettings_o7nn6")
+horizontal_alignment = 2
+vertical_alignment = 1
+autowrap_mode = 2
+clip_text = true
+metadata/_edit_use_anchors_ = true
+
+[node name="buybtn" type="Node2D" parent="page1/Sprite2D2"]
+position = Vector2(488, -24)
+
+[node name="Sprite2D" type="Sprite2D" parent="page1/Sprite2D2/buybtn"]
+position = Vector2(112, 36.2469)
+scale = Vector2(4.66406, 2.61728)
+texture = ExtResource("20_3ex4u")
+metadata/_edit_lock_ = true
+
+[node name="Label2" type="Label" parent="page1/Sprite2D2/buybtn"]
+offset_right = 234.0
+offset_bottom = 78.0
+text = "Purchase"
+label_settings = SubResource("LabelSettings_khr0f")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+clip_text = true
+uppercase = true
+metadata/_edit_lock_ = true
+
+[node name="backArea" type="Area2D" parent="page1/Sprite2D2/buybtn"]
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="page1/Sprite2D2/buybtn/backArea"]
+position = Vector2(113, 35.75)
+shape = SubResource("RectangleShape2D_edgx2")
+metadata/_edit_lock_ = true
+
+[node name="Sprite2D3" type="Sprite2D" parent="page1"]
+position = Vector2(192, 334)
+texture = ExtResource("4_v7w6d")
+
+[node name="Sprite2D" type="Sprite2D" parent="page1/Sprite2D3"]
+position = Vector2(1, 6)
+scale = Vector2(0.58, 0.58)
+texture = ExtResource("10_72ebv")
+metadata/_edit_lock_ = true
+
+[node name="label" type="Label" parent="page1/Sprite2D3"]
+anchors_preset = -1
+anchor_left = -4.01562
+anchor_right = -4.01562
+offset_left = 297.0
+offset_top = -32.0
+offset_right = 845.0
+offset_bottom = 49.0
+text = "Cabbage"
+label_settings = SubResource("LabelSettings_o7nn6")
+vertical_alignment = 1
+autowrap_mode = 2
+clip_text = true
+metadata/_edit_use_anchors_ = true
+
+[node name="label4" type="Label" parent="page1/Sprite2D3"]
+anchors_preset = -1
+anchor_left = -8.32812
+anchor_right = -8.32812
+offset_left = 461.0
+offset_top = -32.0
+offset_right = 1009.0
+offset_bottom = 49.0
+text = "$ 10"
+label_settings = SubResource("LabelSettings_o7nn6")
+horizontal_alignment = 2
+vertical_alignment = 1
+autowrap_mode = 2
+clip_text = true
+metadata/_edit_use_anchors_ = true
+
+[node name="buybtn" type="Node2D" parent="page1/Sprite2D3"]
+position = Vector2(488, -24)
+
+[node name="Sprite2D" type="Sprite2D" parent="page1/Sprite2D3/buybtn"]
+position = Vector2(112, 36.2469)
+scale = Vector2(4.66406, 2.61728)
+texture = ExtResource("20_3ex4u")
+metadata/_edit_lock_ = true
+
+[node name="Label2" type="Label" parent="page1/Sprite2D3/buybtn"]
+offset_right = 234.0
+offset_bottom = 78.0
+text = "Purchase"
+label_settings = SubResource("LabelSettings_khr0f")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+clip_text = true
+uppercase = true
+metadata/_edit_lock_ = true
+
+[node name="backArea" type="Area2D" parent="page1/Sprite2D3/buybtn"]
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="page1/Sprite2D3/buybtn/backArea"]
+position = Vector2(113, 35.75)
+shape = SubResource("RectangleShape2D_edgx2")
+metadata/_edit_lock_ = true
+
+[node name="Sprite2D4" type="Sprite2D" parent="page1"]
+position = Vector2(192, 406)
+texture = ExtResource("12_prd5l")
+
+[node name="Sprite2D" type="Sprite2D" parent="page1/Sprite2D4"]
+self_modulate = Color(0.780392, 0.780392, 0.780392, 1)
+position = Vector2(0, 10)
+scale = Vector2(0.595, 0.75)
+texture = ExtResource("13_mc87l")
+metadata/_edit_lock_ = true
+
+[node name="label" type="Label" parent="page1/Sprite2D4"]
+anchors_preset = -1
+anchor_left = -4.14062
+anchor_right = -4.14062
+offset_left = 305.0
+offset_top = -32.0
+offset_right = 853.0
+offset_bottom = 49.0
+text = "Royal beef"
+label_settings = SubResource("LabelSettings_o7nn6")
+vertical_alignment = 1
+autowrap_mode = 2
+clip_text = true
+metadata/_edit_use_anchors_ = true
+
+[node name="label5" type="Label" parent="page1/Sprite2D4"]
+anchors_preset = -1
+anchor_left = -8.32812
+anchor_right = -8.32812
+offset_left = 461.0
+offset_top = -32.0
+offset_right = 1009.0
+offset_bottom = 49.0
+text = "$ 100"
+label_settings = SubResource("LabelSettings_o7nn6")
+horizontal_alignment = 2
+vertical_alignment = 1
+autowrap_mode = 2
+clip_text = true
+metadata/_edit_use_anchors_ = true
+
+[node name="buybtn" type="Node2D" parent="page1/Sprite2D4"]
+position = Vector2(488, -24)
+
+[node name="Sprite2D" type="Sprite2D" parent="page1/Sprite2D4/buybtn"]
+position = Vector2(112, 36.2469)
+scale = Vector2(4.66406, 2.61728)
+texture = ExtResource("20_3ex4u")
+metadata/_edit_lock_ = true
+
+[node name="Label2" type="Label" parent="page1/Sprite2D4/buybtn"]
+offset_right = 234.0
+offset_bottom = 78.0
+text = "Purchase"
+label_settings = SubResource("LabelSettings_khr0f")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+clip_text = true
+uppercase = true
+metadata/_edit_lock_ = true
+
+[node name="backArea" type="Area2D" parent="page1/Sprite2D4/buybtn"]
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="page1/Sprite2D4/buybtn/backArea"]
+position = Vector2(113, 35.75)
+shape = SubResource("RectangleShape2D_edgx2")
+metadata/_edit_lock_ = true
+
+[node name="Sprite2D5" type="Sprite2D" parent="page1"]
+position = Vector2(192, 478)
+texture = ExtResource("6_1p858")
+
+[node name="Sprite2D" type="Sprite2D" parent="page1/Sprite2D5"]
+position = Vector2(3.99997, 3.00003)
+scale = Vector2(0.7, 0.7)
+texture = ExtResource("7_jt4dy")
+metadata/_edit_lock_ = true
+
+[node name="label" type="Label" parent="page1/Sprite2D5"]
+anchors_preset = -1
+anchor_left = -4.14062
+anchor_right = -4.14062
+offset_left = 305.0
+offset_top = -32.0
+offset_right = 853.0
+offset_bottom = 49.0
+text = "Pork"
+label_settings = SubResource("LabelSettings_o7nn6")
+vertical_alignment = 1
+autowrap_mode = 2
+clip_text = true
+metadata/_edit_use_anchors_ = true
+
+[node name="label6" type="Label" parent="page1/Sprite2D5"]
+anchors_preset = -1
+anchor_left = -8.32812
+anchor_right = -8.32812
+offset_left = 461.0
+offset_top = -32.0
+offset_right = 1009.0
+offset_bottom = 49.0
+text = "$ 50"
+label_settings = SubResource("LabelSettings_o7nn6")
+horizontal_alignment = 2
+vertical_alignment = 1
+autowrap_mode = 2
+clip_text = true
+metadata/_edit_use_anchors_ = true
+
+[node name="buybtn" type="Node2D" parent="page1/Sprite2D5"]
+position = Vector2(488, -24)
+
+[node name="Sprite2D" type="Sprite2D" parent="page1/Sprite2D5/buybtn"]
+position = Vector2(112, 36.2469)
+scale = Vector2(4.66406, 2.61728)
+texture = ExtResource("20_3ex4u")
+metadata/_edit_lock_ = true
+
+[node name="Label2" type="Label" parent="page1/Sprite2D5/buybtn"]
+offset_right = 234.0
+offset_bottom = 78.0
+text = "Purchase"
+label_settings = SubResource("LabelSettings_khr0f")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+clip_text = true
+uppercase = true
+metadata/_edit_lock_ = true
+
+[node name="backArea" type="Area2D" parent="page1/Sprite2D5/buybtn"]
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="page1/Sprite2D5/buybtn/backArea"]
+position = Vector2(113, 35.75)
+shape = SubResource("RectangleShape2D_edgx2")
+metadata/_edit_lock_ = true
+
+[node name="Sprite2D6" type="Sprite2D" parent="page1"]
+position = Vector2(192, 550)
+texture = ExtResource("6_1p858")
+
+[node name="Sprite2D" type="Sprite2D" parent="page1/Sprite2D6"]
+self_modulate = Color(0.8, 0.8, 0.8, 1)
+position = Vector2(-4, -1.52588e-05)
+scale = Vector2(0.745, 0.745)
+texture = ExtResource("17_m1dyt")
+metadata/_edit_lock_ = true
+
+[node name="label" type="Label" parent="page1/Sprite2D6"]
+anchors_preset = -1
+anchor_left = -4.01562
+anchor_right = -4.01562
+offset_left = 297.0
+offset_top = -32.0
+offset_right = 845.0
+offset_bottom = 49.0
+text = "Chicken"
+label_settings = SubResource("LabelSettings_o7nn6")
+vertical_alignment = 1
+autowrap_mode = 2
+clip_text = true
+metadata/_edit_use_anchors_ = true
+
+[node name="label7" type="Label" parent="page1/Sprite2D6"]
+anchors_preset = -1
+anchor_left = -8.32812
+anchor_right = -8.32812
+offset_left = 461.0
+offset_top = -32.0
+offset_right = 1009.0
+offset_bottom = 49.0
+text = "$ 75"
+label_settings = SubResource("LabelSettings_o7nn6")
+horizontal_alignment = 2
+vertical_alignment = 1
+autowrap_mode = 2
+clip_text = true
+metadata/_edit_use_anchors_ = true
+
+[node name="buybtn" type="Node2D" parent="page1/Sprite2D6"]
+position = Vector2(488, -24)
+
+[node name="Sprite2D" type="Sprite2D" parent="page1/Sprite2D6/buybtn"]
+position = Vector2(112, 36.2469)
+scale = Vector2(4.66406, 2.61728)
+texture = ExtResource("20_3ex4u")
+metadata/_edit_lock_ = true
+
+[node name="Label2" type="Label" parent="page1/Sprite2D6/buybtn"]
+offset_right = 234.0
+offset_bottom = 78.0
+text = "Purchase"
+label_settings = SubResource("LabelSettings_khr0f")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+clip_text = true
+uppercase = true
+metadata/_edit_lock_ = true
+
+[node name="backArea" type="Area2D" parent="page1/Sprite2D6/buybtn"]
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="page1/Sprite2D6/buybtn/backArea"]
+position = Vector2(113, 35.75)
+shape = SubResource("RectangleShape2D_edgx2")
+metadata/_edit_lock_ = true
+
+[node name="Sprite2D7" type="Sprite2D" parent="page1"]
+position = Vector2(192, 622)
+texture = ExtResource("12_prd5l")
+
+[node name="Sprite2D" type="Sprite2D" parent="page1/Sprite2D7"]
+position = Vector2(-1, 1.99997)
+scale = Vector2(0.61, 0.61)
+texture = ExtResource("15_mdr60")
+metadata/_edit_lock_ = true
+
+[node name="label" type="Label" parent="page1/Sprite2D7"]
+anchors_preset = -1
+anchor_left = -4.14062
+anchor_right = -4.14062
+offset_left = 305.0
+offset_top = -32.0
+offset_right = 853.0
+offset_bottom = 49.0
+text = "Thyme of time"
+label_settings = SubResource("LabelSettings_o7nn6")
+vertical_alignment = 1
+autowrap_mode = 2
+clip_text = true
+metadata/_edit_use_anchors_ = true
+
+[node name="label8" type="Label" parent="page1/Sprite2D7"]
+anchors_preset = -1
+anchor_left = -8.32812
+anchor_right = -8.32812
+offset_left = 461.0
+offset_top = -32.0
+offset_right = 1009.0
+offset_bottom = 49.0
+text = "$ 150"
+label_settings = SubResource("LabelSettings_o7nn6")
+horizontal_alignment = 2
+vertical_alignment = 1
+autowrap_mode = 2
+clip_text = true
+metadata/_edit_use_anchors_ = true
+
+[node name="buybtn" type="Node2D" parent="page1/Sprite2D7"]
+position = Vector2(488, -24)
+
+[node name="Sprite2D" type="Sprite2D" parent="page1/Sprite2D7/buybtn"]
+position = Vector2(112, 36.2469)
+scale = Vector2(4.66406, 2.61728)
+texture = ExtResource("20_3ex4u")
+metadata/_edit_lock_ = true
+
+[node name="Label2" type="Label" parent="page1/Sprite2D7/buybtn"]
+offset_right = 234.0
+offset_bottom = 78.0
+text = "Purchase"
+label_settings = SubResource("LabelSettings_khr0f")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+clip_text = true
+uppercase = true
+metadata/_edit_lock_ = true
+
+[node name="backArea" type="Area2D" parent="page1/Sprite2D7/buybtn"]
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="page1/Sprite2D7/buybtn/backArea"]
+position = Vector2(113, 35.75)
+shape = SubResource("RectangleShape2D_edgx2")
+metadata/_edit_lock_ = true
+
+[node name="Sprite2D8" type="Sprite2D" parent="page1"]
+position = Vector2(192, 694)
+texture = ExtResource("12_prd5l")
+
+[node name="Sprite2D" type="Sprite2D" parent="page1/Sprite2D8"]
+position = Vector2(-1, 1.99997)
+scale = Vector2(0.61, 0.61)
+texture = ExtResource("16_fil7m")
+metadata/_edit_lock_ = true
+
+[node name="label" type="Label" parent="page1/Sprite2D8"]
+anchors_preset = -1
+anchor_left = -4.26562
+anchor_right = -4.26562
+offset_left = 313.0
+offset_top = -32.0
+offset_right = 861.0
+offset_bottom = 49.0
+text = "Parsley"
+label_settings = SubResource("LabelSettings_o7nn6")
+vertical_alignment = 1
+autowrap_mode = 2
+clip_text = true
+metadata/_edit_use_anchors_ = true
+
+[node name="label10" type="Label" parent="page1/Sprite2D8"]
+anchors_preset = -1
+anchor_left = -8.32812
+anchor_right = -8.32812
+offset_left = 461.0
+offset_top = -32.0
+offset_right = 1009.0
+offset_bottom = 49.0
+text = "$ 175"
+label_settings = SubResource("LabelSettings_o7nn6")
+horizontal_alignment = 2
+vertical_alignment = 1
+autowrap_mode = 2
+clip_text = true
+metadata/_edit_use_anchors_ = true
+
+[node name="buybtn" type="Node2D" parent="page1/Sprite2D8"]
+position = Vector2(488, -24)
+
+[node name="Sprite2D" type="Sprite2D" parent="page1/Sprite2D8/buybtn"]
+position = Vector2(112, 36.2469)
+scale = Vector2(4.66406, 2.61728)
+texture = ExtResource("20_3ex4u")
+metadata/_edit_lock_ = true
+
+[node name="Label2" type="Label" parent="page1/Sprite2D8/buybtn"]
+offset_right = 234.0
+offset_bottom = 78.0
+text = "Purchase"
+label_settings = SubResource("LabelSettings_khr0f")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+clip_text = true
+uppercase = true
+metadata/_edit_lock_ = true
+
+[node name="backArea" type="Area2D" parent="page1/Sprite2D8/buybtn"]
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="page1/Sprite2D8/buybtn/backArea"]
+position = Vector2(113, 35.75)
+shape = SubResource("RectangleShape2D_edgx2")
+metadata/_edit_lock_ = true
+
+[node name="Sprite2D9" type="Sprite2D" parent="page1"]
+position = Vector2(192, 766)
+texture = ExtResource("12_prd5l")
+
+[node name="Sprite2D" type="Sprite2D" parent="page1/Sprite2D9"]
+position = Vector2(-1, 1.99997)
+scale = Vector2(0.61, 0.61)
+texture = ExtResource("18_byej2")
+metadata/_edit_lock_ = true
+
+[node name="label" type="Label" parent="page1/Sprite2D9"]
+anchors_preset = -1
+anchor_left = -4.14062
+anchor_right = -4.14062
+offset_left = 305.0
+offset_top = -32.0
+offset_right = 853.0
+offset_bottom = 49.0
+text = "Dill"
+label_settings = SubResource("LabelSettings_o7nn6")
+vertical_alignment = 1
+autowrap_mode = 2
+clip_text = true
+metadata/_edit_use_anchors_ = true
+
+[node name="label9" type="Label" parent="page1/Sprite2D9"]
+anchors_preset = -1
+anchor_left = -8.32812
+anchor_right = -8.32812
+offset_left = 461.0
+offset_top = -32.0
+offset_right = 1009.0
+offset_bottom = 49.0
+text = "$ 200"
+label_settings = SubResource("LabelSettings_o7nn6")
+horizontal_alignment = 2
+vertical_alignment = 1
+autowrap_mode = 2
+clip_text = true
+metadata/_edit_use_anchors_ = true
+
+[node name="buybtn" type="Node2D" parent="page1/Sprite2D9"]
+position = Vector2(488, -24)
+
+[node name="Sprite2D" type="Sprite2D" parent="page1/Sprite2D9/buybtn"]
+position = Vector2(112, 36.2469)
+scale = Vector2(4.66406, 2.61728)
+texture = ExtResource("20_3ex4u")
+metadata/_edit_lock_ = true
+
+[node name="Label2" type="Label" parent="page1/Sprite2D9/buybtn"]
+offset_right = 234.0
+offset_bottom = 78.0
+text = "Purchase"
+label_settings = SubResource("LabelSettings_khr0f")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+clip_text = true
+uppercase = true
+metadata/_edit_lock_ = true
+
+[node name="backArea" type="Area2D" parent="page1/Sprite2D9/buybtn"]
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="page1/Sprite2D9/buybtn/backArea"]
+position = Vector2(113, 35.75)
+shape = SubResource("RectangleShape2D_edgx2")
+metadata/_edit_lock_ = true
+
+[node name="page2" type="Node2D" parent="."]
+visible = false
+
+[node name="backbtn" type="Node2D" parent="."]
+position = Vector2(842, 835)
+
+[node name="Sprite2D" type="Sprite2D" parent="backbtn"]
+position = Vector2(114.75, 39.8962)
+scale = Vector2(4.66406, 3.21589)
+texture = ExtResource("20_3ex4u")
+metadata/_edit_lock_ = true
+
+[node name="Label2" type="Label" parent="backbtn"]
+offset_right = 234.0
+offset_bottom = 78.0
+text = "Close"
+label_settings = SubResource("LabelSettings_khr0f")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+clip_text = true
+uppercase = true
+metadata/_edit_lock_ = true
+
+[node name="backArea" type="Area2D" parent="backbtn"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="backbtn/backArea"]
+position = Vector2(117.5, 39.5)
+shape = SubResource("RectangleShape2D_edgx2")
+
+[node name="nextbtn" type="Node2D" parent="."]
+position = Vector2(1086, 833)
+
+[node name="Sprite2D" type="Sprite2D" parent="nextbtn"]
+self_modulate = Color(0.5, 0.5, 0.5, 0.5)
+position = Vector2(136, 40)
+scale = Vector2(5.41602, 3.34613)
+texture = ExtResource("21_guc1d")
+metadata/_edit_lock_ = true
+
+[node name="Label2" type="Label" parent="nextbtn"]
+offset_right = 240.0
+offset_bottom = 80.0
+text = "Next"
+label_settings = SubResource("LabelSettings_khr0f")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+clip_text = true
+uppercase = true
+metadata/_edit_lock_ = true
+
+[node name="nextArea" type="Area2D" parent="nextbtn"]
+position = Vector2(6, -1)
+monitoring = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="nextbtn/nextArea"]
+position = Vector2(117.5, 39.5)
+shape = SubResource("RectangleShape2D_edgx2")
+
+[node name="prevbtn" type="Node2D" parent="."]
+position = Vector2(560, 834)
+
+[node name="Sprite2D" type="Sprite2D" parent="prevbtn"]
+self_modulate = Color(0.497474, 0.497474, 0.497474, 0.5)
+position = Vector2(136, 40)
+scale = Vector2(5.41602, 3.34613)
+texture = ExtResource("21_guc1d")
+flip_h = true
+flip_v = true
+metadata/_edit_lock_ = true
+
+[node name="Label2" type="Label" parent="prevbtn"]
+offset_right = 267.0
+offset_bottom = 80.0
+text = "  Previous"
+label_settings = SubResource("LabelSettings_khr0f")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+clip_text = true
+uppercase = true
+metadata/_edit_lock_ = true
+
+[node name="prevArea" type="Area2D" parent="prevbtn"]
+position = Vector2(34, 1)
+monitoring = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="prevbtn/prevArea"]
+position = Vector2(115, 39)
+shape = SubResource("RectangleShape2D_edgx2")
+
+[connection signal="area_entered" from="backbtn/backArea" to="." method="_on_back_area_area_entered"]
+[connection signal="area_exited" from="backbtn/backArea" to="." method="_on_back_area_area_exited"]
+[connection signal="area_entered" from="nextbtn/nextArea" to="." method="_on_next_area_area_entered"]
+[connection signal="area_exited" from="nextbtn/nextArea" to="." method="_on_next_area_area_exited"]
+[connection signal="area_entered" from="prevbtn/prevArea" to="." method="_on_prev_area_area_entered"]
+[connection signal="area_exited" from="prevbtn/prevArea" to="." method="_on_prev_area_area_exited"]

@@ -153,4 +153,4 @@ func showRedBook():
 func showGreenBook():
 	$hand.point()
 	Globals.bookOpen = true
-	$bookRecipOpen.openBook()
+	$bookBuyOpen.openBook()
