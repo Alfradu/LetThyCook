@@ -93,12 +93,14 @@ func _on_animation_player_animation_finished(anim_name):
 		if (anim_name == "dipbowl"):
 			foodEffect.texture = getEffectTexture(human.satisfaction)
 			var score = 100 * (human.status + 1) + human.satisfaction
-			var money = 10 * (human.status + 1) + human.satisfaction
+			var money = (50 + human.satisfaction) * human.status
 			self.get_node("foodEffect/ScoreEarned").text = str(score)
-			self.get_node("foodEffect/MoneyEarned").text = "$" + str(money)
+			self.get_node("foodEffect/MoneyEarned").text = ("$" + str(money)) if money != 0 else ""
 			$AnimationPlayer.play("react")
 			Globals.Score += score
 			Globals.Money += money
+			Globals.MoneyToday += money
+			
 		
 func getEffectTexture(satisfaction):
 	if satisfaction > 100:

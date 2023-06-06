@@ -25,6 +25,7 @@ var ToBePopulated = []
 
 var Score = 0
 var Money = 0
+var MoneyToday = 0
 
 var soupLevel
 var soupedPeople = 0

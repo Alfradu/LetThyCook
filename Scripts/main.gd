@@ -48,6 +48,7 @@ func setupPopulation(Population):
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	setupPopulation(Globals.Population)
+	Globals.Population.shuffle()
 #
 	for i in range(0, 3):
 		var item = Globals.FoodItems[i]
@@ -63,11 +64,12 @@ func _ready():
 
 var time = 0
 var state = Globals.TimeOfDay.MORNING
-var untilDay = 2
-var untilMorning = 4
+var untilDay = 5
+var untilMorning = 15
 var delivery = 0
 var diffuculty = 1
 var chillWithHumans = 0
+var scoreAtStart = 0
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	time += delta * diffuculty
@@ -122,19 +124,26 @@ func maybeSendInHuman(list):
 func checkRoundOver():
 	if ($HumanContainer.get_child_count() == 0 && Globals.Population.is_empty()):
 		state = Globals.TimeOfDay.NIGHT
+		$HUD.setupMessage("Good job!")
+		$HUD.setupMessage("Money Earned Today: " + str(Globals.MoneyToday))
+		$HUD.setupMessage("Score Earned Today: " + str(Globals.Score - scoreAtStart))
 
 func maybeChangeState():
 	if (state == Globals.TimeOfDay.MORNING && untilDay <= 0):
+		state = Globals.TimeOfDay.DAY
+		untilDay = 5
+		scoreAtStart = Globals.Score
+	if (state == Globals.TimeOfDay.NIGHT && untilMorning <= 0):
 		Globals.ToBePopulated.shuffle()
 		for human in Globals.ToBePopulated:
 			Globals.Population.append(human)
 			human.satisfaction = 0
-		state = Globals.TimeOfDay.DAY
-		Globals.ToBePopulated = []
-		untilDay = 5
-	if (state == Globals.TimeOfDay.NIGHT && untilMorning <= 0):
+		Globals.MoneyToday = 0
 		state = Globals.TimeOfDay.MORNING
-		untilMorning = 10
+		Globals.ToBePopulated = []
+		untilMorning = 15
+		$HUD.setupMessage("Good Morning!")
+		$HUD.setupMessage("Today There Is " + str(len(Globals.Population)) + " Person To Feed.")
 
 func showRedBook():
 	$hand.point()
