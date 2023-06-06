@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://bicnfoxqw07ai"]
+[gd_scene load_steps=33 format=3 uid="uid://bicnfoxqw07ai"]
 
 [ext_resource type="PackedScene" uid="uid://d4hyeu1c3co4" path="res://Scenes/bookOpen.tscn" id="1_farj3"]
 [ext_resource type="Script" path="res://Scripts/bookRecipOpen.gd" id="1_grxif"]
@@ -21,6 +21,7 @@
 [ext_resource type="Texture2D" uid="uid://cpj4cksepqpwk" path="res://Assets/Soup/items/potato3.png" id="18_a46n3"]
 [ext_resource type="Texture2D" uid="uid://rpbmj8genyqw" path="res://Assets/books/arrow.png" id="20_18mhk"]
 [ext_resource type="Texture2D" uid="uid://dkhyqbnhvbx7b" path="res://Assets/books/btn.png" id="20_sew1q"]
+[ext_resource type="Texture2D" uid="uid://bkdeag438ttma" path="res://Assets/books/woodframeDark.png" id="20_xd0uw"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_10kq7"]
 font = ExtResource("2_spdyk")
@@ -30,6 +31,34 @@ font_color = Color(0, 0, 0, 1)
 [sub_resource type="LabelSettings" id="LabelSettings_o7nn6"]
 font = ExtResource("2_spdyk")
 font_size = 32
+font_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_ofn0k"]
+font = ExtResource("2_spdyk")
+font_size = 174
+font_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_y1vjt"]
+font = ExtResource("2_spdyk")
+font_size = 87
+font_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_2pfcb"]
+font = ExtResource("2_spdyk")
+font_size = 34
+font_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_alv65"]
+font = ExtResource("2_spdyk")
+font_size = 48
+font_color = Color(0, 0, 0, 1)
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_c7vf5"]
+diffuse_texture = ExtResource("20_sew1q")
+
+[sub_resource type="LabelSettings" id="LabelSettings_8nofx"]
+font = ExtResource("2_spdyk")
+font_size = 46
 font_color = Color(0, 0, 0, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_khr0f"]
@@ -48,6 +77,7 @@ script = ExtResource("1_grxif")
 metadata/_edit_lock_ = true
 
 [node name="page1" type="Node2D" parent="."]
+visible = false
 
 [node name="Label" type="Label" parent="page1"]
 offset_left = 1077.0
@@ -847,6 +877,110 @@ metadata/_edit_use_anchors_ = true
 [node name="page2" type="Node2D" parent="."]
 visible = false
 
+[node name="Label" type="Label" parent="page2"]
+offset_left = 151.0
+offset_top = 96.0
+offset_right = 847.0
+offset_bottom = 270.0
+text = "test"
+label_settings = SubResource("LabelSettings_ofn0k")
+uppercase = true
+
+[node name="page3" type="Node2D" parent="."]
+
+[node name="Label" type="Label" parent="page3"]
+offset_left = 151.0
+offset_top = 88.0
+offset_right = 422.0
+offset_bottom = 375.0
+text = "L"
+label_settings = SubResource("LabelSettings_ofn0k")
+uppercase = true
+
+[node name="Label2" type="Label" parent="page3"]
+offset_left = 144.0
+offset_top = 180.0
+offset_right = 881.0
+offset_bottom = 444.0
+text = "        et Thy Cooketh"
+label_settings = SubResource("LabelSettings_y1vjt")
+autowrap_mode = 2
+uppercase = true
+
+[node name="Label3" type="Label" parent="page3"]
+offset_left = 1036.0
+offset_top = 83.0
+offset_right = 1770.0
+offset_bottom = 562.0
+text = "As the new Tender of the village perpetual stew it will be your job to make sure it stays tasty and keeps the folk around fed! 
+
+Use this cookbook belonging to the old Stew Tender to familiarize yourself with your ingreedients and the locals. 
+
+Good luck!"
+label_settings = SubResource("LabelSettings_2pfcb")
+autowrap_mode = 2
+
+[node name="Label4" type="Label" parent="page3"]
+offset_left = 230.0
+offset_top = 508.0
+offset_right = 782.0
+offset_bottom = 588.0
+text = "Highscore: 0000000"
+label_settings = SubResource("LabelSettings_alv65")
+
+[node name="Label5" type="Label" parent="page3"]
+offset_left = 1393.0
+offset_top = 765.0
+offset_right = 1774.0
+offset_bottom = 871.0
+text = "Made by Viktor & Alfred"
+label_settings = SubResource("LabelSettings_2pfcb")
+horizontal_alignment = 2
+autowrap_mode = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="page3"]
+position = Vector2(511.75, 652.5)
+scale = Vector2(11.3516, 6.07812)
+texture = ExtResource("20_xd0uw")
+
+[node name="TextureButton" type="TextureButton" parent="page3"]
+offset_left = 188.0
+offset_top = 513.0
+offset_right = 529.0
+offset_bottom = 808.0
+texture_normal = SubResource("CanvasTexture_c7vf5")
+stretch_mode = 0
+
+[node name="Label" type="Label" parent="page3/TextureButton"]
+layout_mode = 0
+offset_left = 49.0
+offset_top = 118.0
+offset_right = 304.0
+offset_bottom = 193.0
+text = "Play"
+label_settings = SubResource("LabelSettings_8nofx")
+horizontal_alignment = 1
+uppercase = true
+
+[node name="TextureButton2" type="TextureButton" parent="page3"]
+offset_left = 491.0
+offset_top = 513.0
+offset_right = 827.0
+offset_bottom = 808.0
+texture_normal = SubResource("CanvasTexture_c7vf5")
+stretch_mode = 0
+
+[node name="Label" type="Label" parent="page3/TextureButton2"]
+layout_mode = 0
+offset_left = 45.0
+offset_top = 116.0
+offset_right = 300.0
+offset_bottom = 191.0
+text = "Quit"
+label_settings = SubResource("LabelSettings_8nofx")
+horizontal_alignment = 1
+uppercase = true
+
 [node name="backbtn" type="Node2D" parent="."]
 position = Vector2(842, 835)
 
@@ -906,7 +1040,6 @@ shape = SubResource("RectangleShape2D_edgx2")
 position = Vector2(560, 834)
 
 [node name="Sprite2D" type="Sprite2D" parent="prevbtn"]
-self_modulate = Color(0.497474, 0.497474, 0.497474, 0.5)
 position = Vector2(136, 40)
 scale = Vector2(5.41602, 3.34613)
 texture = ExtResource("20_18mhk")
@@ -928,7 +1061,6 @@ metadata/_edit_lock_ = true
 
 [node name="prevArea" type="Area2D" parent="prevbtn"]
 position = Vector2(34, 1)
-monitoring = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="prevbtn/prevArea"]
 position = Vector2(115, 39)

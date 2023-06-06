@@ -64,6 +64,8 @@ var chillWithHumans = 0
 var scoreAtStart = 0
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
+	if Globals.gameState == Globals.gameStateType.MENU: return 
+	if Globals.gameState == Globals.gameStateType.END: return 
 	time += delta * diffuculty
 	if (time > 1):
 		time = 0

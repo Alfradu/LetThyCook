@@ -4,13 +4,14 @@ var hoveringBackBtn = false
 var hoveringNextBtn = false
 var hoveringPrevBtn = false
 
-var page = 1
-var maxPage = 2
+var page = 3
+var maxPage = 3
 var minPage = 1
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass
+	disableButton($backbtn/Sprite2D, $backbtn/backArea)
+	openBook()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
@@ -28,6 +29,7 @@ func _input(event):
 func openBook():
 		$/root/Main/bookRecip/Sprite2Dshader.visible = false
 		visible = true
+		Globals.bookOpen = true
 		Globals.book = self
 		hoveringBackBtn = false
 		hoveringNextBtn = false
@@ -40,33 +42,33 @@ func closeBook():
 
 func nextPage():
 	var prevNode = get_node("page"+str(page))
-	page += 1
+	page = minPage if page == maxPage else page + 1
 	var nextNode = get_node("page"+str(page))
 	prevNode.visible = false
 	nextNode.visible = true
-	if (page == maxPage): 
-		disableButton($nextbtn/Sprite2D, $nextbtn/nextArea)
-	else:
-		enableButton($nextbtn/Sprite2D, $nextbtn/nextArea)
-	if (page == minPage): 
-		disableButton($prevbtn/Sprite2D, $prevbtn/prevArea)
-	else:
-		enableButton($prevbtn/Sprite2D, $prevbtn/prevArea)
+#	if (page == maxPage): 
+#		disableButton($nextbtn/Sprite2D, $nextbtn/nextArea)
+#	else:
+#		enableButton($nextbtn/Sprite2D, $nextbtn/nextArea)
+#	if (page == minPage): 
+#		disableButton($prevbtn/Sprite2D, $prevbtn/prevArea)
+#	else:
+#		enableButton($prevbtn/Sprite2D, $prevbtn/prevArea)
 	
 func prevPage():
 	var prevNode = get_node("page"+str(page))
-	page -= 1
+	page = maxPage if page == minPage else page - 1
 	var nextNode = get_node("page"+str(page))
 	prevNode.visible = false
 	nextNode.visible = true
-	if (page == maxPage): 
-		disableButton($nextbtn/Sprite2D, $nextbtn/nextArea)
-	else:
-		enableButton($nextbtn/Sprite2D, $nextbtn/nextArea)
-	if (page == minPage):
-		disableButton($prevbtn/Sprite2D, $prevbtn/prevArea)
-	else:
-		enableButton($prevbtn/Sprite2D, $prevbtn/prevArea)
+#	if (page == maxPage): 
+#		disableButton($nextbtn/Sprite2D, $nextbtn/nextArea)
+#	else:
+#		enableButton($nextbtn/Sprite2D, $nextbtn/nextArea)
+#	if (page == minPage):
+#		disableButton($prevbtn/Sprite2D, $prevbtn/prevArea)
+#	else:
+#		enableButton($prevbtn/Sprite2D, $prevbtn/prevArea)
 
 func revealCombo(itemName):
 	var nodes = get_tree().get_nodes_in_group("comboNodes")

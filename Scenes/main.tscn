@@ -277,7 +277,6 @@ position = Vector2(115, 974)
 position = Vector2(334, 984)
 
 [node name="bookRecipOpen" parent="." instance=ExtResource("9_4s2pm")]
-visible = false
 z_index = 8
 
 [node name="bookBuyOpen" parent="." instance=ExtResource("13_axuml")]
@@ -285,6 +284,7 @@ visible = false
 z_index = 7
 
 [node name="HUD" type="Control" parent="."]
+visible = false
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
@@ -429,7 +429,8 @@ offset_right = 40.0
 offset_bottom = 40.0
 
 [node name="container" type="Node2D" parent="HUD"]
-position = Vector2(920, 840)
+visible = false
+position = Vector2(936, 840)
 
 [node name="combo" type="Label" parent="HUD/container"]
 material = SubResource("ShaderMaterial_0ggq3")

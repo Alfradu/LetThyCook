@@ -1,7 +1,8 @@
 extends Node
 
 var rng = RandomNumberGenerator.new()
-	
+
+enum gameStateType { MENU, START, END}
 enum handState { OPEN, CLOSED }
 enum FoodType { VEGETABLE = 0, PROTEIN = 1, HERB = 2 }
 enum Rank { PEASANT = 0, SOLDIER = 1, NOBLE = 2 }
@@ -33,6 +34,8 @@ var soupedPeople = 0
 var bookOpen = false
 var book = null
 var deliveryBoys = 0
+
+var gameState = gameStateType.MENU
 
 class FoodStats:
 	var filling: int
@@ -157,7 +160,9 @@ func combofy(foodItem):
 
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
-	setupFoodItems()
+#	setupFoodItems()
+	$/root/Main/HUD.visible = false
+#	enableHUD
 
 func _process(_delta):
 	pass
