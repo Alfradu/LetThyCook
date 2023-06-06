@@ -215,8 +215,11 @@ func combofy(foodItem):
 	return foodItem
 
 func _ready():
+	$/root/Main/bookRecipOpen/page3/Gameover.visible = true
+	$/root/Main/HUD.visible = false
+	$/root/Main/bookRecipOpen.endGame()
+	$/root/Main/bookRecipOpen.setPageMenu()
 	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
-	$/root/Main/HUD.visible = false	
 
 func startGame():
 	#clear values
