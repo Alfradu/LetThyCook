@@ -19,9 +19,9 @@ enum cauldronLevels { EMPTY = 0, ALMOSTEMPTY = 1, PRETTYFULL = 2, FULL = 3}
 	umami = 0
 }
 
-@export var FoodItems = []
-@export var Population = []
-@export var Orders = []
+var FoodItems = []
+var Population = []
+var Orders = []
 var ToBePopulated = []
 var Rip = []
 
@@ -109,7 +109,44 @@ class Human:
 		if hunger <= 0:
 			isDead = true
 
-var time = 0
+func setupPopulation(Population):
+	for i in range(2):
+		var human = Human.new()
+		human.name = "Jörgen"
+		human.status = Rank.PEASANT
+		human.foodType = FoodType.VEGETABLE
+		human.holdingBowl = true
+		human.hunger = Globals.Hunger.HUNGRY
+		human.fat = false
+		Population.append(human)
+	for i in range(2):
+		var human = Human.new()
+		human.name = "Jörgen"
+		human.status = Rank.PEASANT
+		human.foodType = FoodType.VEGETABLE
+		human.holdingBowl = true
+		human.hunger = Hunger.HUNGRY
+		human.fat = true
+		Population.append(human)
+	for i in range(3):
+		var human = Human.new()
+		human.name = "Bengt"
+		human.status = Rank.SOLDIER
+		human.foodType = FoodType.PROTEIN
+		human.holdingBowl = true
+		human.fat = false
+		human.hunger = Globals.Hunger.CONTEMPT
+		Population.append(human)
+	for i in range(1):
+		var human = Human.new()
+		human.name = "Gaylord"
+		human.status = Rank.NOBLE
+		human.foodType = FoodType.HERB
+		human.holdingBowl = true
+		human.fat = false
+		human.hunger = Globals.Hunger.FULL
+		Population.append(human)
+
 var foodLibrary = [
 	{ name = "Potato",  type = FoodType.VEGETABLE, combo = "Pork",   discovered = false, cost = 5,  modifier = 0},
 	{ name = "Carrot",  type = FoodType.VEGETABLE, combo = "Cabbage", discovered = false, cost = 5,  modifier = 0},
@@ -127,7 +164,7 @@ var foodLibrary = [
 	{ name = "Dill",    type = FoodType.HERB,      combo = "Fish",   discovered = false, cost = 55, modifier = 30},
 #	{ name = "Salt",    type = FoodType.HERB,      combo = "",       discovered = false, cost = 50, modifier = 50},
 #	{ name = "Pepper",  type = FoodType.HERB,      combo = "",       discovered = false, cost = 50, modifier = 50}
-] 
+]
 var comboPrev = ""
 var combo = 1
 func calculateCombo(itemName):
@@ -160,9 +197,35 @@ func combofy(foodItem):
 
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
-#	setupFoodItems()
 	$/root/Main/HUD.visible = false
-#	enableHUD
+
+func startGame():
+	#clear values
+	Score = 0
+	Money = 0
+	MoneyToday = 0
+	FoodItems.clear()
+	Population.clear()
+	Orders.clear()
+	ToBePopulated.clear()
+	Rip.clear()
+	#init game
+	setupFoodItems()
+	setupPopulation(Population)
+	Population.shuffle()
+	$/root/Main.updateLabels()
+	$/root/Main/HUD.visible = true
+	$/root/Main/bookRecipOpen.startGame()
+	gameState = gameStateType.START
+
+func endGame():
+	$/root/Main/HUD.visible = false
+	$/root/Main/bookRecipOpen.endGame()
+	updateHighscore()
+	gameState = gameStateType.END
+	
+func updateHighscore():
+	pass
 
 func _process(_delta):
 	pass

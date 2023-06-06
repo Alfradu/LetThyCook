@@ -10,8 +10,7 @@ var minPage = 1
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	disableButton($backbtn/Sprite2D, $backbtn/backArea)
-	openBook()
+	endGame()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
@@ -26,15 +25,24 @@ func _input(event):
 		elif event.is_pressed() && hoveringPrevBtn: 
 			prevPage()
 
+func startGame():
+	enableButton($backbtn/Sprite2D, $backbtn/backArea)
+	closeBook()
+
+func endGame():
+	disableButton($backbtn/Sprite2D, $backbtn/backArea)
+	openBook()
+
 func openBook():
-		$/root/Main/bookRecip/Sprite2Dshader.visible = false
-		visible = true
-		Globals.bookOpen = true
-		Globals.book = self
-		hoveringBackBtn = false
-		hoveringNextBtn = false
-		hoveringPrevBtn = false
-		
+	$/root/Main/hand.point()
+	$/root/Main/bookRecip/Sprite2Dshader.visible = false
+	visible = true
+	Globals.bookOpen = true
+	Globals.book = self
+	hoveringBackBtn = false
+	hoveringNextBtn = false
+	hoveringPrevBtn = false
+	
 func closeBook():
 	$/root/Main/hand.grab()
 	self.visible = false

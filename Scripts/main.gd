@@ -1,59 +1,9 @@
 extends Node2D
 
 var rng = RandomNumberGenerator.new()
-
 @onready var spawnPoint = $RefPoints/spawnPoint
-
-func setupPopulation(Population):
-	for i in range(2):
-		var human = Globals.Human.new()
-		human.name = "Jörgen"
-		human.status = Globals.Rank.PEASANT
-		human.foodType = Globals.FoodType.VEGETABLE
-		human.holdingBowl = true
-		human.hunger = Globals.Hunger.HUNGRY
-		human.fat = false
-		Population.append(human)
-	for i in range(2):
-		var human = Globals.Human.new()
-		human.name = "Jörgen"
-		human.status = Globals.Rank.PEASANT
-		human.foodType = Globals.FoodType.VEGETABLE
-		human.holdingBowl = true
-		human.hunger = Globals.Hunger.HUNGRY
-		human.fat = true
-		Population.append(human)
-	for i in range(3):
-		var human = Globals.Human.new()
-		human.name = "Bengt"
-		human.status = Globals.Rank.SOLDIER
-		human.foodType = Globals.FoodType.PROTEIN
-		human.holdingBowl = true
-		human.fat = false
-		human.hunger = Globals.Hunger.CONTEMPT
-		Population.append(human)
-	for i in range(1):
-		var human = Globals.Human.new()
-		human.name = "Gaylord"
-		human.status = Globals.Rank.NOBLE
-		human.foodType = Globals.FoodType.HERB
-		human.holdingBowl = true
-		human.fat = false
-		human.hunger = Globals.Hunger.FULL
-		Population.append(human)
-	
 @onready var foodItem = load("res://Scenes/item.tscn")
 @onready var humanItem = load("res://Scenes/human.tscn")
-
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	setupPopulation(Globals.Population)
-	Globals.Population.shuffle()
-#
-	for item in Globals.FoodItems:
-		var instantiateditem = foodItem.instantiate()
-		$ItemContainer.add_child(instantiateditem)
-		instantiateditem.init(item)
 
 var time = 0
 var state = Globals.TimeOfDay.MORNING
@@ -62,7 +12,13 @@ var untilMorning = 10
 var diffuculty = 1
 var chillWithHumans = 0
 var scoreAtStart = 0
-# Called every frame. 'delta' is the elapsed time since the previous frame.
+
+func _ready():
+	for item in Globals.FoodItems:
+		var instantiateditem = foodItem.instantiate()
+		$ItemContainer.add_child(instantiateditem)
+		instantiateditem.init(item)
+
 func _process(delta):
 	if Globals.gameState == Globals.gameStateType.MENU: return 
 	if Globals.gameState == Globals.gameStateType.END: return 
@@ -97,8 +53,7 @@ func updateLabels():
 	else:
 		$HUD/container/AnimationPlayer.pause()
 		$HUD/container.visible = false
-	
-	
+
 func formatScore(num):
 	return "%06d" % num
 
@@ -120,7 +75,7 @@ func maybeSendInHuman(list):
 			instantiateditem.init(human)
 			if human.holdingBox: Globals.deliveryBoys += 1
 			chillWithHumans = 2
-			
+
 func checkRoundOver():
 	if ($HumanContainer.get_child_count()-Globals.deliveryBoys == 0 && Globals.Population.is_empty()):
 		state = Globals.TimeOfDay.NIGHT
@@ -158,7 +113,6 @@ func showGreenBook():
 	$hand.point()
 	Globals.bookOpen = true
 	$bookBuyOpen.openBook()
-
 
 func _on_audio_stream_player_2d_finished():
 	$AudioStreamPlayer2D.play()

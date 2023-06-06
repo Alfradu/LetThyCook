@@ -920,7 +920,7 @@ Good luck!"
 label_settings = SubResource("LabelSettings_2pfcb")
 autowrap_mode = 2
 
-[node name="Label4" type="Label" parent="page3"]
+[node name="Highscore" type="Label" parent="page3"]
 offset_left = 230.0
 offset_top = 508.0
 offset_right = 782.0

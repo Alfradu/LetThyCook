@@ -21,7 +21,6 @@ var pointing = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	point()
 	armScaleY = arm.scale.y
 	armScaleX = arm.scale.x
 	armPointScaleY = arm2.scale.y
