@@ -88,26 +88,28 @@ class Human:
 				Globals.updateCauldronLevel(-1)
 				
 			if self.satisfaction > 80 && rng.randf_range(0, 10) > 7:
-				var deliveryGuy = Human.new()
-				deliveryGuy.name = "Karl-Bertil"
-				deliveryGuy.status = Rank.PEASANT
-				deliveryGuy.foodType = FoodType.VEGETABLE
-				deliveryGuy.holdingBowl = false
-				deliveryGuy.holdingBox = true
-				deliveryGuy.hunger = Hunger.CONTEMPT
-				deliveryGuy.fat = false
+				var batchOrder = []
 				for i in range(rng.randi_range(1,3)):
 					var item = Globals.getFoodItem()
-					deliveryGuy.boxContent.append(item)
+					batchOrder.append(item)
 					Globals.FoodItems.append(item)
-					self.boxContent.append(item)
-				
-				Globals.Orders.append(deliveryGuy)
+				Globals.Orders.append(batchOrder)
 	
 	func degradehuman():
 		self.hunger = self.hunger - 1 as Globals.Hunger if self.hunger-1 > Globals.Hunger.ALMOSTDEAD else Globals.Hunger.ALMOSTDEAD
 		if hunger <= 0:
 			isDead = true
+
+func callDeliveryGuy():
+	var deliveryGuy = Human.new()
+	deliveryGuy.name = "Karl-Bertil"
+	deliveryGuy.status = Rank.PEASANT
+	deliveryGuy.foodType = FoodType.VEGETABLE
+	deliveryGuy.holdingBowl = false
+	deliveryGuy.holdingBox = true
+	deliveryGuy.hunger = Hunger.CONTEMPT
+	deliveryGuy.fat = false
+	return deliveryGuy
 
 func setupPopulation(pop):
 	for i in range(2):
@@ -148,20 +150,20 @@ func setupPopulation(pop):
 		pop.append(human)
 
 var foodLibrary = [
-	{ name = "Potato",  type = FoodType.VEGETABLE, combo = "Pork",   discovered = false, cost = 5,  modifier = 0},
-	{ name = "Carrot",  type = FoodType.VEGETABLE, combo = "Cabbage", discovered = false, cost = 5,  modifier = 0},
-	{ name = "Cabbage", type = FoodType.VEGETABLE, combo = "Beef",   discovered = false, cost = 5,  modifier = 0},
+	{ name = "Potato",  type = FoodType.VEGETABLE, combo = "Pork",   discovered = false, cost = 10,  modifier = 0},
+	{ name = "Carrot",  type = FoodType.VEGETABLE, combo = "Cabbage", discovered = false, cost = 15,  modifier = 0},
+	{ name = "Cabbage", type = FoodType.VEGETABLE, combo = "Beef",   discovered = false, cost = 10,  modifier = 0},
 #	{ name = "Onion",   type = FoodType.VEGETABLE, combo = "Fish",   discovered = false, cost = 15, modifier = 10},
 #	{ name = "Garlic",  type = FoodType.VEGETABLE, combo = "Chicken",discovered = false, cost = 15, modifier = 10},
 #	{ name = "Turnip",  type = FoodType.VEGETABLE, combo = "Thyme",  discovered = false, cost = 10, modifier = 5},
 #	{ name = "Beans",   type = FoodType.VEGETABLE, combo = "Onion",  discovered = false, cost = 20, modifier = 15},
-	{ name = "Beef",    type = FoodType.PROTEIN,   combo = "Thyme",  discovered = false, cost = 25, modifier = 20},
-	{ name = "Pork",    type = FoodType.PROTEIN,   combo = "Parsley",discovered = false, cost = 30, modifier = 20},
-	{ name = "Chicken", type = FoodType.PROTEIN,   combo = "Carrot", discovered = false, cost = 35, modifier = 20},
+	{ name = "Beef",    type = FoodType.PROTEIN,   combo = "Thyme",  discovered = false, cost = 100, modifier = 20},
+	{ name = "Pork",    type = FoodType.PROTEIN,   combo = "Parsley",discovered = false, cost = 50, modifier = 20},
+	{ name = "Chicken", type = FoodType.PROTEIN,   combo = "Carrot", discovered = false, cost = 75, modifier = 20},
 #	{ name = "Fish",    type = FoodType.PROTEIN,   combo = "Dill",   discovered = false, cost = 55, modifier = 20},
-	{ name = "Thyme",   type = FoodType.HERB,      combo = "Chicken",discovered = false, cost = 50, modifier = 20},
-	{ name = "Parsley", type = FoodType.HERB,      combo = "Beef", discovered = false, cost = 60, modifier = 40},
-	{ name = "Dill",    type = FoodType.HERB,      combo = "Fish",   discovered = false, cost = 55, modifier = 30},
+	{ name = "Thyme",   type = FoodType.HERB,      combo = "Chicken",discovered = false, cost = 150, modifier = 20},
+	{ name = "Parsley", type = FoodType.HERB,      combo = "Beef", discovered = false, cost = 175, modifier = 40},
+	{ name = "Dill",    type = FoodType.HERB,      combo = "Fish",   discovered = false, cost = 200, modifier = 30},
 #	{ name = "Salt",    type = FoodType.HERB,      combo = "",       discovered = false, cost = 50, modifier = 50},
 #	{ name = "Pepper",  type = FoodType.HERB,      combo = "",       discovered = false, cost = 50, modifier = 50}
 ]
@@ -371,17 +373,10 @@ func orderItem(foodName, cost):
 	if (Money < cost): return
 	Money -= cost
 	$/root/Main.updateLabels()
-	var deliveryGuy = Human.new()
-	deliveryGuy.name = "Karl-Bertil"
-	deliveryGuy.status = Rank.PEASANT
-	deliveryGuy.foodType = FoodType.VEGETABLE
-	deliveryGuy.holdingBowl = false
-	deliveryGuy.holdingBox = true
-	deliveryGuy.hunger = Hunger.CONTEMPT
-	deliveryGuy.fat = false
+	var batchOrder = []
 	for i in range(rng.randi_range(1,3)):
 		var foodItem = getFoodItem(foodName)
 		FoodItems.append(foodItem)
-		deliveryGuy.boxContent.append(foodItem)
-	Orders.append(deliveryGuy)
+		batchOrder.append(foodItem)
+	Orders.append(batchOrder)
 	checkMoneyShop()

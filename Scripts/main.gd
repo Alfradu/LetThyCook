@@ -31,7 +31,7 @@ func _process(delta):
 		chillWithHumans -= 1
 		Globals.degradeSoupItems(1)
 		Globals.calculateSoup()
-		maybeSendInHuman(Globals.Orders)
+		maybeSendInOrders(Globals.Orders)
 		if (state == Globals.TimeOfDay.MORNING):
 			untilDay -= 1
 		if (state == Globals.TimeOfDay.DAY):
@@ -78,6 +78,21 @@ func maybeSendInHuman(list):
 			instantiateditem.init(human)
 			if human.holdingBox: Globals.deliveryBoys += 1
 			chillWithHumans = 2
+
+func maybeSendInOrders(orders):
+	if chillWithHumans > 0:
+		return
+	if (!spawnPoint.isOccupied && !orders.is_empty()):
+		var deliveryGuy = Globals.callDeliveryGuy();
+		for order in orders:
+			for item in order:
+				deliveryGuy.boxContent.append(item)
+		var instantiateditem = humanItem.instantiate()
+		$HumanContainer.add_child(instantiateditem)
+		instantiateditem.init(deliveryGuy)
+		Globals.deliveryBoys += 1
+		Globals.Orders = []
+		chillWithHumans = 2
 
 func checkRoundOver():
 	if ($HumanContainer.get_child_count()-Globals.deliveryBoys == 0 && Globals.Population.is_empty()):
