@@ -79,6 +79,7 @@ func maybeSendInHuman(list):
 func checkRoundOver():
 	if ($HumanContainer.get_child_count()-Globals.deliveryBoys == 0 && Globals.Population.is_empty()):
 		state = Globals.TimeOfDay.NIGHT
+		$AnimationPlayer.play("set")
 		$HUD.setupMessage("Good job!")
 		$HUD.setupMessage("Money Earned Today: " + str(Globals.MoneyToday))
 		$HUD.setupMessage("Score Earned Today: " + str(Globals.Score - scoreAtStart))
@@ -89,6 +90,7 @@ func maybeChangeState():
 		untilDay = 5
 		scoreAtStart = Globals.Score
 		$HUD.setupMessage("Lets go!")
+		$AnimationPlayer.play("rise")
 	if (state == Globals.TimeOfDay.NIGHT && untilMorning <= 0):
 		Globals.ToBePopulated.shuffle()
 		for human in Globals.ToBePopulated:
@@ -97,12 +99,13 @@ func maybeChangeState():
 		Globals.MoneyToday = 0
 		state = Globals.TimeOfDay.MORNING
 		Globals.ToBePopulated = []
-		untilMorning = 15
+		untilMorning = 10
 		$HUD.setupMessage("Good Morning, Prepare yourself!")
 		for human in Globals.Rip:
 			var message = "Unfortunately, " + human.name + " died"
 			$HUD.setupMessage(message)
 		Globals.Rip.clear()
+		diffuculty += 0.5
 
 func showRedBook():
 	$hand.point()
@@ -116,3 +119,8 @@ func showGreenBook():
 
 func _on_audio_stream_player_2d_finished():
 	$AudioStreamPlayer2D.play()
+
+
+func _on_animation_player_animation_finished(anim_name):
+	if (anim_name == "set"):
+		$AnimationPlayer.play("night_passing")

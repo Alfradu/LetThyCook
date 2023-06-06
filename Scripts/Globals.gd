@@ -196,8 +196,9 @@ func combofy(foodItem):
 	return foodItem
 
 func _ready():
+	startGame()
 	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
-	$/root/Main/HUD.visible = false
+#	$/root/Main/HUD.visible = false	
 
 func startGame():
 	#clear values
