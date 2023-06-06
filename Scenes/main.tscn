@@ -14,7 +14,7 @@
 [ext_resource type="FontFile" uid="uid://dj2kwm3wierp1" path="res://antiquity-print.ttf" id="9_lgflv"]
 [ext_resource type="PackedScene" uid="uid://dqf4v0mcrnydu" path="res://Scenes/bookBuy.tscn" id="10_le51f"]
 [ext_resource type="PackedScene" uid="uid://cgr2rj03h2r5" path="res://Scenes/bookRecip.tscn" id="11_2wti7"]
-[ext_resource type="PackedScene" path="res://Scenes/bookShopOpen.tscn" id="13_axuml"]
+[ext_resource type="PackedScene" uid="uid://5iwr6ovp0oo2" path="res://Scenes/bookShopOpen.tscn" id="13_axuml"]
 [ext_resource type="AudioStream" uid="uid://ka1ja63xbq3l" path="res://Audio/the-virgin-medieval-music-4238.mp3" id="16_t1v2j"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_btphb"]
@@ -121,7 +121,8 @@ texture = ExtResource("4_xpdd1")
 centered = false
 
 [node name="ItemContainer" type="Node2D" parent="."]
-position = Vector2(0, 1)
+visible = false
+position = Vector2(-512, 0)
 
 [node name="barrel" parent="." instance=ExtResource("4_184di")]
 position = Vector2(1744, 983)
@@ -259,13 +260,13 @@ text = "Waiting in queue "
 
 [node name="Label2" type="Label" parent="HUD/PeopleLeft"]
 layout_mode = 0
-offset_left = 16.0
-offset_top = -7.0
-offset_right = 97.0
-offset_bottom = 84.0
+offset_top = -5.0
+offset_right = 89.0
+offset_bottom = 86.0
 theme_override_fonts/font = ExtResource("9_lgflv")
 theme_override_font_sizes/font_size = 50
 text = "6"
+horizontal_alignment = 1
 
 [node name="Money" type="Panel" parent="HUD"]
 z_index = 50
